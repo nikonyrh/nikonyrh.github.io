@@ -1,0 +1,9 @@
+*
+!*.html
+!*.jpg
+!*.png
+!*.js
+!*.css
+!*.gif
+!*.ico
+!.gitignore
