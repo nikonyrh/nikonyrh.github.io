@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Niko's Project Corner
+        Niko's Project Corner - Automatic map stitching
     </title>
     <meta name="description" content="Niko Nyrhil&auml;'s blog">
     <meta name="author" content="Niko Nyrhil&auml;">
@@ -178,220 +178,247 @@
     <div class="two-thirds column">
 
 
+<div style='padding-left: 25px; padding-top: 24px'>
+    <div style='width: 96%'>
+        <table border=0 cellspacing=0 cellpadding=0 width='98%'>
+            <tr><td><h2 style="margin-bottom: 20px">Automatic map stitching</h2></td>
+            <td align=right valign=top rowspan=2>
+                    <div style='position: relative; right: -24px'>
+                        <a alt='Download PDF' title='Download PDF' href='https://cdn.nikonyrh.org/blog/MapStitcher.pdf'>
+                            <img alt='PDF' src='pdf.png' class='pdf'/>
+                        </a>
+                    </div>
+            </td></tr>
+            <tr><td>
+                <table border=0 cellspacing=0 cellpadding=4>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Description</span></td>
+                            <td>
+                                Identifying, cropping and stitching a map from screenshots
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Languages</span></td>
+                            <td>
+                                
+                                    <a href='language_matlab.html'>Matlab</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Tags</span></td>
+                            <td>
+                                
+                                    <a href='tag_computer_vision.html'>Com&shy;puter Vi&shy;sion</a><br/>
+                                    <a href='tag_rendering.html'>Ren&shy;der&shy;ing</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Duration</span></td>
+                            <td>
+                                Fall 2014
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Modified</span></td>
+                            <td>
+                                10th September 2014
+                            </td>
+                        </tr>
+                </table>
+            </td></tr>
+        </table>
 
-    <table border=0 cellspacing=0 cellpadding=3 width='98%'>
-            <tr>
-                <td valign=top colspan=2>
-                    <h3><a href='omnirender.html' alt='Rendering omnidirectional images' tooltip='Rendering omnidirectional images'>Rendering omnidirectional images</a></h3>
-                    <span style='color: gray'>(</span>7th July 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>As I men&shy;tioned in the pre&shy;vi&shy;ous ar&shy;ti&shy;cle about <a href='tag_omnidirectional_camera.html'>om&shy;ni&shy;di&shy;rec&shy;tional cam&shy;eras</a>, my Mas&shy;ters of Sci&shy;ence The&shy;sis in&shy;volved the us&shy;age of this spe&shy;cial kind of imag&shy;ing sys&shy;tem which con&shy;sists of a tra&shy;di&shy;tional cam&shy;era lens and a con&shy;cave mir&shy;ror, which pro&shy;vided 360&deg; &times; 90&deg; <a href='tag_field_of_view.html'>Field of View</a>. It was or&shy;dered from Japan and there was some de&shy;lay in the de&shy;liv&shy;ery, so mean&shy;while I wrote an all-Mat&shy;lab script to sim&shy;ulate this sys&shy;tem's prop&shy;er&shy;ties, cal&shy;ibra&shy;tion and panorama gen&shy;er&shy;ation in prac&shy;tice.</p>
-                    <p>
-                        <table style='margin-left: 32px' border=0 cellspacing=0 cellpadding=0>
-                            <tr>
-                                <td><b>Tags:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='tag_rendering.html'>Rendering</a></span>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td><b>Languages:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='language_matlab.html'>Matlab</a></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                </td>
-                <td align=right valign=top>
-                    <a href='omnirender.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='omnirender_thumbnail.jpg' alt='' width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td valign=top colspan=2>
-                    <h3><a href='omnicamera.html' alt='Omnidirectional cameras' tooltip='Omnidirectional cameras'>Omnidirectional cameras</a></h3>
-                    <span style='color: gray'>(</span>6th July 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>My <a href='tag_master_s_thesis.html'>Mas&shy;ters of Sci&shy;ence The&shy;sis</a> in&shy;volved the us&shy;age of a so-called "<a href='tag_omnidirectional_camera.html'>om&shy;ni&shy;di&shy;rec&shy;tional cam&shy;era</a>". There are vari&shy;ous ways of achiev&shy;ing 180&deg; or even 360&deg; view, with their dis&shy;tinct pros and cons. The gen&shy;eral ben&shy;efit of these al&shy;ter&shy;na&shy;tive cam&shy;era sys&shy;tems is that ob&shy;jects don't need to be tracked, be&shy;cause gen&shy;er&shy;ally they stay with&shy;ing the ex&shy;tremely broad <a href='tag_field_of_view.html'>Field of View</a> (FoV) of the cam&shy;era. This is also very ben&shy;efi&shy;cial in <a href='tag_visual_odometry.html'>vi&shy;sual odom&shy;etry</a> tasks, be&shy;cause land&shy;marks can be tracked for longer pe&shy;ri&shy;ods of time.</p>
-                    <p>
-                        <table style='margin-left: 32px' border=0 cellspacing=0 cellpadding=0>
-                            <tr>
-                                <td><b>Tags:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='tag_computer_vision.html'>Computer Vision</a></span>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td><b>Languages:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='language_matlab.html'>Matlab</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='language_cpp.html'>C++</a></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                </td>
-                <td align=right valign=top>
-                    <a href='omnicamera.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='omnicamera_thumbnail.jpg' alt='' width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td valign=top colspan=2>
-                    <h3><a href='blogplatform.html' alt='Blogging platform &amp;#8212; What Would &lt;span class=&quot;tex&quot;&gt;T&lt;sub&gt;e&lt;/sub&gt;X&lt;/span&gt; Do?' tooltip='Blogging platform &amp;#8212; What Would &lt;span class=&quot;tex&quot;&gt;T&lt;sub&gt;e&lt;/sub&gt;X&lt;/span&gt; Do?'>Blogging platform &#8212; What Would <span class="tex">T<sub>e</sub>X</span> Do?</a></h3>
-                    <span style='color: gray'>(</span>6th July 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>I wrote this blog en&shy;gine to en&shy;able the cre&shy;ation of new ar&shy;ti&shy;cles in <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> for&shy;mat and ef&shy;fort&shy;lessly pub&shy;lish them in Web. As a by-pro&shy;duct it en&shy;ables triv&shy;ial PDF gen&shy;er&shy;ation of each ar&shy;ti&shy;cle, or even a com&shy;bined PDF with all the ar&shy;ti&shy;cles con&shy;cate&shy;nated with a in&shy;ter&shy;ac&shy;tive table of con&shy;tents, au&shy;to&shy;mat&shy;ically nu&shy;mer&shy;ated fig&shy;ures with ref&shy;er&shy;ences from the text, and many other fea&shy;tures that <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> users take for granted.</p>
-                    <p>
-                        <table style='margin-left: 32px' border=0 cellspacing=0 cellpadding=0>
-                            <tr>
-                                <td><b>Tags:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='tag_blog.html'>Blog</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='tag_git.html'>Git</a></span>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td><b>Languages:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='language_php.html'>PHP</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='language_latex.html'><span class="latex">L<sup>a</sup>T<sub>e</sub>X</span></a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='language_mustache.html'>Mustache</a></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                </td>
-                <td align=right valign=top>
-                    <a href='blogplatform.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='blogplatform_thumbnail.jpg' alt='' width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td valign=top colspan=2>
-                    <h3><a href='coinrecognition.html' alt='Coin recognition algorithm' tooltip='Coin recognition algorithm'>Coin recognition algorithm</a></h3>
-                    <span style='color: gray'>(</span>26th June 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>I de&shy;vel&shy;oped a coin recog&shy;ni&shy;tion sys&shy;tem which can rec&shy;og&shy;nize eight dif&shy;fer&shy;ent groups of coins. The used set is all five coins of Sin&shy;ga&shy;pore, but a few cat&shy;egories can&shy;not be dis&shy;tin&shy;guished from each other with&shy;out knowl&shy;edge of the coin's size in re&shy;la&shy;tion to oth&shy;ers.</p>
-                    <p>
-                        <table style='margin-left: 32px' border=0 cellspacing=0 cellpadding=0>
-                            <tr>
-                                <td><b>Tags:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='tag_computer_vision.html'>Computer Vision</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='tag_machine_learning.html'>Machine Learning</a></span>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td><b>Languages:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='language_matlab.html'>Matlab</a></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                </td>
-                <td align=right valign=top>
-                    <a href='coinrecognition.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='coinrecognition_thumbnail.jpg' alt='' width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td valign=top colspan=2>
-                    <h3><a href='fingerprints.html' alt='Fingerprint matching algorithm' tooltip='Fingerprint matching algorithm'>Fingerprint matching algorithm</a></h3>
-                    <span style='color: gray'>(</span>25th June 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>For my Bach&shy;elor of Sci&shy;ence de&shy;gree I de&shy;vel&shy;oped a novel fin&shy;ger&shy;print match&shy;ing al&shy;go&shy;rithm, which ended up beat&shy;ing many al&shy;ter&shy;na&shy;tive meth&shy;ods which were de&shy;vel&shy;oped by re&shy;search groups around the world. The used dataset the same which was used for FVC 2000 (<a href='http://bias.csr.unibo.it/fvc2000/' class='external' target='_blank'>Fin&shy;ger&shy;print Ver&shy;ifi&shy;ca&shy;tion Com&shy;pe&shy;ti&shy;tion</a>).</p>
-                    <p>
-                        <table style='margin-left: 32px' border=0 cellspacing=0 cellpadding=0>
-                            <tr>
-                                <td><b>Tags:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='tag_computer_vision.html'>Computer Vision</a></span>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td><b>Languages:</b></td>
-                                <td>
-                                    <span style='margin-left: 8px'><a href='language_matlab.html'>Matlab</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='language_cpp.html'>C++</a></span>
-                                
-                                    <span style='margin-left: 8px'><a href='language_sdl.html'>SDL</a></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                </td>
-                <td align=right valign=top>
-                    <a href='fingerprints.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='fingerprints_thumbnail.jpg' alt='' width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-    </table>
+            <div style='position: relative; height: 1px'>
+                <img src='mapstitcher_thumbnail.jpg' width=80 height=80 style='
+                    box-shadow:  3px 4px 8px #224;
+                    position:   absolute;
+                    bottom:     8px;
+                    right:      0px;
+                    z-index:    50
+                '/>
+            </div>
+    </div>
+    <hr width='96%' align='left'/>
+</div>
 
-        <center>[
-                
-                
-                <a href='index.html'>1</a>
-                |
-                
-                <a href='index_2.html'>2</a>
-                |
-                3
-                
-        ]</center>
+<div id='content'>
+
+            <p>Nowa&shy;days there are many map-based HTML5 ser&shy;vices, which sup&shy;port zoom&shy;ing and pan&shy;ning within the
+browser. But typ&shy;ically they don't of&shy;fer any ex&shy;port func&shy;tion&shy;al&shy;ity, so the only op&shy;tion
+is to ei&shy;ther zoom out (and lose map de&shy;tails) or to take screen&shy;shots of dif&shy;fer&shy;ent map
+lo&shy;ca&shy;tions and man&shy;ually stitch them to&shy;gether. This pro&shy;ject can au&shy;to&shy;mat&shy;ically load
+all stored screen&shy;shots, de&shy;tect the map, crop rel&shy;evant re&shy;gions, de&shy;ter&shy;mine im&shy;ages
+rel&shy;ative off&shy;sets and gen&shy;er&shy;ate the high-res out&shy;put with zero con&shy;fig&shy;ura&shy;tion from
+any map ser&shy;vice.</p>
+
+
+            <p>The first step is to de&shy;ter&shy;mine which re&shy;gion of the im&shy;age is the map and which parts should be
+ig&shy;nored. This is achieved by as&shy;sum&shy;ing that the only mov&shy;ing part of the page is the map it&shy;self
+(no scrolling of the page, no ads, ...). Un&shy;der these as&shy;sump&shy;tions it is triv&shy;ial to cre&shy;ate a mask
+sim&shy;ilar to the one at Fig&shy;ure 1. Rel&shy;evant rows and columns (and thus the rect&shy;an&shy;gu&shy;lar
+crop&shy;ping re&shy;gion) can be de&shy;ter&shy;mined based on it.</p>
+
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='MapStitcher_mask_d.jpg' class='lightbox'>
+                    <img class='figure' align='center' width='97%' src='MapStitcher_mask_d.jpg' alt='mask'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 1</b>: One of the in&shy;put screen&shy;shots on the left and the re&shy;sult&shy;ing change-mask on the right. Bright pix&shy;els vary be&shy;tween im&shy;ages, and thus can be as&shy;sumed to be part of the map.
+                </div>
+            </div>
+
+            <p>Once map re&shy;gions have been ex&shy;tracted, their rel&shy;ative po&shy;si&shy;tions need to be de&shy;ter&shy;mined
+be&shy;fore stitch&shy;ing is pos&shy;si&shy;ble. This is a spe&shy;cial case of a panoramic im&shy;age
+gen&shy;er&shy;ation, which is typ&shy;ically solved by <a
+href='http://en.wikipedia.org/wiki/Feature_detection_(computer_vision)' class='external' target='_blank'>Fea&shy;ture
+de&shy;tec&shy;tion</a> and ro&shy;bust <a href='http://en.wikipedia.org/wiki/RANSAC' class='external'
+target='_blank'>RANSAC</a> based match&shy;ing pro&shy;ce&shy;dure. How&shy;ever in this map case we only need to
+es&shy;ti&shy;mate the trans&shy;la&shy;tion in x- and y-di&shy;rec&shy;tions, and no ro&shy;ta&shy;tion or scal&shy;ing
+should have oc&shy;curred. We can also as&shy;sume that the im&shy;age i should have sig&shy;nif&shy;icant over&shy;lap
+with im&shy;ages i-1 and i+1, per&shy;haps even with i-2 and i+2. Fourier trans&shy;form base <a
+href='http://en.wikipedia.org/wiki/Phase_correlation' class='external' target='_blank'>Phase
+cor&shy;re&shy;la&shy;tion</a> is a per&shy;fect so&shy;lu&shy;tion this task, be&shy;cause it isn't
+com&shy;pu&shy;ta&shy;tion&shy;ally too heavy, is very ro&shy;bust, al&shy;ways finds the "best" an&shy;swer and is very
+easy to im&shy;ple&shy;ment. It is based on cal&shy;cu&shy;lat&shy;ing 2D Fourier trans&shy;forms G<sub>a</sub> and
+G<sub>b</sub> of im&shy;ages a and b and cal&shy;cu&shy;lat&shy;ing the in&shy;verse Fourier trans&shy;form
+F<sup>-1</sup>((G<sub>a</sub> &middot; G<sub>b<sup>*</sup></sub> ) / | G<sub>a</sub> &middot; G<sub>b<sup>*</sup></sub>
+|) where element-wise multiplication is used. This should result in a single bright spot, and its mid-point indicates
+the translation which maximizes the pixel-wise correlation metric.</p>
+
+
+            <p>It is im&shy;por&shy;tant to ap&shy;ply suf&shy;fi&shy;ciently large zero padding when Fourier trans&shy;forms are
+be&shy;ing cal&shy;cu&shy;lated. Oth&shy;er&shy;wise for an im&shy;age of 1000 &times; 1000 res&shy;olu&shy;tion the
+move&shy;ment of 500 pix&shy;els up&shy;wards looks sim&shy;ilar to 500 pix&shy;els down&shy;wards, and this
+am&shy;bi&shy;gu&shy;ity would need to be re&shy;solved via other means.</p>
+
+
+            <p>If im&shy;age i's lo&shy;ca&shy;tion is only cal&shy;cu&shy;lated rel&shy;ative to i-1 and not to i-2, a sim&shy;ple
+chain of po&shy;si&shy;tion con&shy;strains is cre&shy;ated which is suf&shy;fi&shy;cient to de&shy;ter&shy;mine each
+im&shy;age's lo&shy;ca&shy;tion rel&shy;ative to each other. If sig&shy;nif&shy;icant cor&shy;re&shy;la&shy;tion was
+found also with i-2, then an over-con&shy;strained lin&shy;ear equa&shy;tion sys&shy;tem is con&shy;structed, but it has
+an unique least squares so&shy;lu&shy;tion.</p>
+
+
+            <p>Once im&shy;age po&shy;si&shy;tions have been de&shy;ter&shy;mined they need to be com&shy;posed to&shy;gether. They are
+pro&shy;cessed se&shy;quen&shy;tially one-by-one, and the pixel vari&shy;ation map (see Fig&shy;ure 1) is used to
+pri&shy;or&shy;itize over&shy;lap&shy;ping pix&shy;els. This re&shy;moves UI el&shy;ements such as nav&shy;iga&shy;tion
+from the fi&shy;nal out&shy;put when pos&shy;si&shy;ble. The al&shy;go&shy;rithm have been tested with var&shy;ious
+screen&shy;shot se&shy;quences, but al&shy;ways us&shy;ing the same con&shy;fig&shy;ura&shy;tion and thresh&shy;olds.
+Re&shy;sults can be seen in fig&shy;ures 2 to 5, and they all worked out with&shy;out any prob&shy;lems. The im&shy;age
+top shows in&shy;di&shy;vid&shy;ual cap&shy;tured maps and the bot&shy;tom shows the ren&shy;dered fi&shy;nal
+out&shy;put (with en&shy;hanced im&shy;age bor&shy;ders for bet&shy;ter vi&shy;su&shy;al&shy;iza&shy;tion).</p>
+
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='MapStitcher_result_d.jpg' class='lightbox'>
+                    <img class='figure' align='center' width='97%' src='MapStitcher_result_d.jpg' alt='result_d'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 2</b>: Map parts and the fi&shy;nal out&shy;put from Re&shy;it&shy;tiopas.fi.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='MapStitcher_result_e.jpg' class='lightbox'>
+                    <img class='figure' align='center' width='97%' src='MapStitcher_result_e.jpg' alt='result_e'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 3</b>: Map parts and the fi&shy;nal out&shy;put from GoThere.sg.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='MapStitcher_result_f.jpg' class='lightbox'>
+                    <img class='figure' align='center' width='97%' src='MapStitcher_result_f.jpg' alt='result_f'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 4</b>: Map parts and the fi&shy;nal out&shy;put from Goole Maps (map view).
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='MapStitcher_result_h.jpg' class='lightbox'>
+                    <img class='figure' align='center' width='97%' src='MapStitcher_result_h.jpg' alt='result_h'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 5</b>: Map parts and the fi&shy;nal out&shy;put from Goole Maps (satel&shy;lite view).
+                </div>
+            </div>
+
+            <p>The only re&shy;main&shy;ing part would be to re-im&shy;ple&shy;ment all this in C++ (by uti&shy;liz&shy;ing FFTW and
+FastCGI again) and pub&shy;lish it as a web ser&shy;vice. Users would ei&shy;ther use a browser plugin to cap&shy;ture
+screen&shy;shots or man&shy;ually save them on the disk and up&shy;load from there. This would be a fairly sim&shy;ple
+sys&shy;tem to do and host it on my home server, but it has a few prob&shy;lems. One is the sys&shy;tem
+sta&shy;bil&shy;ity, up&shy;time and mon&shy;itor&shy;ing as&shy;pect, be&shy;cause if the FastCGI pro&shy;cess crashes
+for any rea&shy;son then the site would be ef&shy;fec&shy;tively down.</p>
+
+
+            <p>The other pos&shy;si&shy;ble prob&shy;lem is the band&shy;width us&shy;age. Ei&shy;ther al&shy;most no&shy;body uses the
+ser&shy;vice which wouldn't be too mo&shy;ti&shy;vat&shy;ing, or too many peo&shy;ple would try to use it
+si&shy;mul&shy;ta&shy;ne&shy;ously and it would be too slow or un&shy;sta&shy;ble. I might do this one day, but now I'm
+al&shy;ready hav&shy;ing new pro&shy;jects in mind.</p>
+
+    
+    
+    
+
+        <hr/>
+        <h4>Related blog posts:</h4>
+        <table border=0 style="margin-left: 5%; width: 95%; margin-bottom: 20px">
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="receiptundistort.html">Image distortion estimation and compensation</a>, 2014 Aug<br/>
+                                (Matching: Computer Vision, Matlab)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="receiptundistort.html"><img src="receiptundistort_thumbnail.jpg" alt="ReceiptUndistort" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="cartracking.html">Real-time car tracking and counting</a>, 2014 Jun<br/>
+                                (Matching: Computer Vision, Matlab)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="cartracking.html"><img src="cartracking_thumbnail.jpg" alt="CarTracking" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="lasermap.html">Visualizing laser scanned geography</a>, 2013 Jul<br/>
+                                (Matching: Matlab, Rendering)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="lasermap.html"><img src="lasermap_thumbnail.jpg" alt="LaserMap" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="omnirender.html">Rendering omnidirectional images</a>, 2013 Jul<br/>
+                                (Matching: Matlab, Rendering)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="omnirender.html"><img src="omnirender_thumbnail.jpg" alt="OmniRender" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="omnicamera.html">Omnidirectional cameras</a>, 2013 Jul<br/>
+                                (Matching: Computer Vision, Matlab)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="omnicamera.html"><img src="omnicamera_thumbnail.jpg" alt="OmniCamera" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+        </table>
+</div>
+
 
     </div>
     
@@ -1681,7 +1708,7 @@
             </table>
     </div>
 </div>
-<img src="https://counter.nikonyrh.org/blog/index.html.gif"/>
+<img src="https://counter.nikonyrh.org/blog/mapstitcher.html.gif"/>
 </body>
 </html>
 
