@@ -157,7 +157,7 @@ work&shy;ers via const point&shy;ers.</p>
             <p>The pro&shy;gram sup&shy;ports quite flex&shy;ible route def&shy;ini&shy;tions, most im&shy;por&shy;tantly ran&shy;dom
 pa&shy;ram&shy;eter gen&shy;er&shy;ation. The syn&shy;tax re&shy;sem&shy;bles reg&shy;ular ex&shy;pres&shy;sions, where
 you can de&shy;fine a range of char&shy;ac&shy;ters to use and the to&shy;ken length. For ex&shy;am&shy;ple
-"/?search=[a-z]{4}" would gen&shy;er&shy;ate routes such as "/?search=jiec_568", "/?search=bbdw_968" and
+"/?search=[a-z]{4}_[0-9]{3}" would gen&shy;er&shy;ate routes such as "/?search=jiec_568", "/?search=bbdw_968" and
 "/?search=coux_937". Clearly the route has a fixed pat&shy;tern, with four ran&shy;dom char&shy;ac&shy;ters a - z and
 three char&shy;ac&shy;ters 0 - 9. This avoids in&shy;cor&shy;rect mea&shy;sure&shy;ments due to caching ef&shy;fects.</p>
 
@@ -165,26 +165,26 @@ three char&shy;ac&shy;ters 0 - 9. This avoids in&shy;cor&shy;rect mea&shy;sure&s
             <p>An other sim&shy;ulated case is when a user is typ&shy;ing in a search term, in which case the API sees
 in&shy;cre&shy;men&shy;tally length&shy;en&shy;ing query terms. This is achieved by set&shy;ting =true and adding a
 spe&shy;cial to&shy;ken (ver&shy;ti&shy;cal pipe |) to the route def&shy;ini&shy;tion. For ex&shy;am&shy;ple
-"/?q=|[a-z]{2}". This may gen&shy;er&shy;ate the fol&shy;low&shy;ing HTTP GET se&shy;quence: "/?q=d", "/?q=dl",
+"/?q=|[a-z]{2}_[0-9]". This may gen&shy;er&shy;ate the fol&shy;low&shy;ing HTTP GET se&shy;quence: "/?q=d", "/?q=dl",
 "/?q=dl_", "/?q=dl_5", "/?q=g", "/?q=gq", "/?q=gq_", "/?q=gq_6". The ran&shy;domly gen&shy;er&shy;ated parts are dl_5
 and gq_6, but they are in&shy;cre&shy;men&shy;tally con&shy;structed and queried.</p>
 
 
-            <p>This is an ex&shy;am&shy;ple sum&shy;mary of the per&shy;centiles for two work&shy;ers run&shy;ning for 20 sec&shy;onds:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-\texttt{Worker   1, ex&shy;ecuted   34 re&shy;quests (50th 0.032 sec, 95th 0.063 sec, 99th 0.063 sec)<br/>
-Worker   2, ex&shy;ecuted   33 re&shy;quests (50th 0.028 sec, 95th 0.051 sec, 99th 0.051 sec)<br/>
-Fin&shy;ished af&shy;ter 19.8643 sec&shy;onds, to&shy;talled 67 suc&shy;cess and 0 fail&shy;ures.
-}\end{ad&shy;just&shy;width}</p>
+            <p>This is an ex&shy;am&shy;ple sum&shy;mary of the per&shy;centiles for two work&shy;ers run&shy;ning for 20
+sec&shy;onds:<br/>
+<span class=sourcecode>Worker   1, ex&shy;ecuted   34 re&shy;quests (50th 0.032 sec, 95th 0.063 sec, 99th 0.063
+sec)</span><br/>
+<span class=sourcecode>Worker   2, ex&shy;ecuted   33 re&shy;quests (50th 0.028 sec, 95th 0.051 sec, 99th 0.051
+sec)</span><br/>
+<span class=sourcecode>Fin&shy;ished af&shy;ter 19.8643 sec&shy;onds, to&shy;talled 67 suc&shy;cess and 0
+fail&shy;ures.</span></p>
 
-            <span class=sourcecode>To&shy;tal sum&shy;mary:</span>
-<ul style='padding-left: 60px; list-style: disc outside none'>
-\texttt{25th 0.025 sec<br/>
-50th 0.030 sec<br/>
-90th 0.040 sec<br/>
-95th 0.051 sec<br/>
-99th 0.063 sec
-}\end{ad&shy;just&shy;width}
+            <span class=sourcecode>To&shy;tal sum&shy;mary:</span><br/>
+<span class=sourcecode>25th 0.025 sec</span><br/>
+<span class=sourcecode>50th 0.030 sec</span><br/>
+<span class=sourcecode>90th 0.040 sec</span><br/>
+<span class=sourcecode>95th 0.051 sec</span><br/>
+<span class=sourcecode>99th 0.063 sec</span>
 
             <p>To make the tool more user friendly and to provide graph&shy;ing ca&shy;pa&shy;bil&shy;ities, I de&shy;cided to
 de&shy;velop a FastCGI wrap&shy;per for it. It was easy to con&shy;fig&shy;ure Ng&shy;inx HTTP server to route

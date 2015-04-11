@@ -77,7 +77,7 @@ sub {
 span.sourcecode {
     font-family: Consolas, Monaco, Lucida console, monospace;
     font-size:   10pt;
-    font-weight: bold;
+    //font-weight: bold;
 }
 
 ul.equation {
