@@ -92,10 +92,12 @@ ul.verbatim {
     border-color:    black;
     padding:         4px;
     margin-bottom:   32px;
+    font-size:       80%;
 }
 
-li.verbatim {
-    white-space:     pre-wrap;
+ul.verbatim li {
+    white-space: pre-wrap;
+    margin-bottom: 0px;
 }
 span.command {
     color: #007F00;
