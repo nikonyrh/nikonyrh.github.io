@@ -152,14 +152,13 @@ and <a href='https://hub.docker.com/r/nikonyrh/nginx_bridge/tags/' class='extern
 target='_blank'>Dock&shy;er&shy;hub</a> says it is 75 MB.</p>
 
 
-            <p>Also some ef&shy;fi&shy;ciency ex&shy;per&shy;iments were con&shy;ducted with bash scripts and cURL. It
-con&shy;si&shy;sisted of trans&shy;fer&shy;ring JPG im&shy;ages (40 - 400 kB in size), and 0.9 Gbps band&shy;width was
-achieved. Files were trans&shy;ferred from an Ubuntu server to a router, to a Win&shy;dows ma&shy;chine run&shy;ning
-Ubuntu in a Vir&shy;tu&shy;al&shy;Box, via <span class=sourcecode>curl</span> to <span
-class=sourcecode>/dev/null</span>. Re&shy;sult&shy;ing band&shy;width is shown in Fig&shy;ure 1. Par&shy;al&shy;lel
-ex&shy;ecu&shy;tion was achieved via <span class=sourcecode>xargs</span>, thus the over&shy;head of pro&shy;cess launch
-and three-way TCP hand&shy;shake was sig&shy;nif&shy;icant un&shy;less the same cURL pro&shy;cess was used to fetch
-mul&shy;ti&shy;ple im&shy;ages.</p>
+            <p>Also some ef&shy;fi&shy;ciency ex&shy;per&shy;iments were run. A few gi&shy;ga&shy;bytes of JPG im&shy;ages (40 - 400 kB
+in size) were trans&shy;ferred and at best 90% of the 1 Gbps band&shy;width was achieved. Files were trans&shy;ferred
+from an Ubuntu server to a router, to a Win&shy;dows ma&shy;chine run&shy;ning Ubuntu in a Vir&shy;tu&shy;al&shy;Box,
+via <span class=sourcecode>curl</span> to <span class=sourcecode>/dev/null</span>. Re&shy;sult&shy;ing band&shy;width is
+shown in Fig&shy;ure 1. Par&shy;al&shy;lel ex&shy;ecu&shy;tion was achieved via <span class=sourcecode>xargs</span>,
+thus the over&shy;head of three-way TCP hand&shy;shake was sig&shy;nif&shy;icant un&shy;less the cURL pro&shy;cesses
+fetched mul&shy;ti&shy;ple im&shy;ages.</p>
 
             <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
                 <a href='NginxBridge_performance.png' class='lightbox'>
@@ -173,8 +172,9 @@ mul&shy;ti&shy;ple im&shy;ages.</p>
             <p>In con&shy;clu&shy;sion this seems to be a vi&shy;able way of dis&shy;tribut&shy;ing JPG im&shy;ages to other
 ma&shy;chi&shy;nes within the LAN for fur&shy;ther pro&shy;cess&shy;ing. The first task might be
 cal&shy;cu&shy;lat&shy;ing color his&shy;tograms of we&shy;bcam im&shy;ages on dif&shy;fer&shy;ent cal&shy;en&shy;dar
-dates and times of day, dis&shy;tri&shy;bu&shy;tion will be han&shy;dled by the <a href='http://spark.apache.org/'
-class='external' target='_blank'>Spark</a> frame&shy;work.</p>
+dates and times of day. Cal&shy;cu&shy;la&shy;tion dis&shy;tri&shy;bu&shy;tion will be han&shy;dled by the <a
+href='http://spark.apache.org/' class='external' target='_blank'>Spark</a> frame&shy;work. Also it would be
+in&shy;ter&shy;est&shy;ing to mea&shy;sure this per&shy;for&shy;mance to al&shy;ter&shy;na&shy;tives such as HDFS.</p>
 
     
     
