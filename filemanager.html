@@ -132,62 +132,62 @@ can be seen be&shy;low, which moves all video files greater than 50 Mb which con
 their file name.</p>
 
             <ul class=verbatim>
-<li><code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
+<code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
 #0000BB">DirItemCommand_move_files_BigBangTheory&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span
-style="color: #0000BB">DirItemCommand_move_files</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #0000BB">DirItemCommand_move_files</span> </span> </code>
+<code><span><span></span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #FF8000">//&nbsp;Given&nbsp;a&nbsp;file&nbsp;name,&nbsp;this&nbsp;returns&nbsp;the&nbsp;target&nbsp;path&nbsp;where&nbsp;the&nbsp;file&nbsp;should&nbsp;be&nbsp;moved</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
 style="color: #0000BB">getTargetPath</span><span style="color: #007700">(</span><span style="color:
-#0000BB">$info</span><span style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">$info</span><span style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #007700">return&nbsp;</span><span style="color: #DD0000">'C:/Share/series/BBT/'&nbsp;</span><span style="color:
 #007700">.&nbsp;</span><span style="color: #0000BB">$info</span><span style="color: #007700">[</span><span style="color:
-#DD0000">'fname'</span><span style="color: #007700">];</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
-style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
+#DD0000">'fname'</span><span style="color: #007700">];</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
 #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(new&nbsp;</span><span
-style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
-#FF8000">//&nbsp;Ignore&nbsp;folders</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#FF8000">//&nbsp;Ignore&nbsp;folders</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_type</span><span style="color: #007700">(</span><span style="color:
-#0000BB">false</span><span style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
-#FF8000">//&nbsp;Ensure&nbsp;files&nbsp;are&nbsp;greater&nbsp;than&nbsp;50&nbsp;Mb</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">false</span><span style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#FF8000">//&nbsp;Ensure&nbsp;files&nbsp;are&nbsp;greater&nbsp;than&nbsp;50&nbsp;Mb</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_size'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_size</span><span style="color: #007700">(</span><span style="color:
 #DD0000">'50M'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&gt;'</span><span
-style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #FF8000">//&nbsp;_VIDEO_&nbsp;is&nbsp;a&nbsp;pre-defined&nbsp;set&nbsp;of&nbsp;file&nbsp;extensions</span> </span>
-</code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+</code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_ext'&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_extension</span><span style="color: #007700">(</span><span style="color:
-#DD0000">'_VIDEO_'</span><span style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
-#FF8000">//&nbsp;Filenames&nbsp;are&nbsp;matched&nbsp;by&nbsp;regular&nbsp;expressions</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#DD0000">'_VIDEO_'</span><span style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#FF8000">//&nbsp;Filenames&nbsp;are&nbsp;matched&nbsp;by&nbsp;regular&nbsp;expressions</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_name'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_filename</span><span style="color: #007700">(</span><span style="color:
-#DD0000">'big.+bang.+theory'</span><span style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">}</span> </span> </code></li>
+#DD0000">'big.+bang.+theory'</span><span style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span></span><span style="color: #007700">}</span> </span> </code>
 </ul>
 
             <p>An other ex&shy;am&shy;ple moves all fold&shy;ers which con&shy;tain less than 3 Mb of files into a .Trash folder. Many
@@ -196,50 +196,49 @@ files have been moved to some&shy;where else. It is clear that by lever&shy;ag&s
 classes, it is triv&shy;ial to de&shy;fine new au&shy;to&shy;matic tasks.</p>
 
             <ul class=verbatim>
-<li><code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
+<code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
 #0000BB">DirItemCommand_move_small_folders&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span
-style="color: #0000BB">DirItemCommand_move_files</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+style="color: #0000BB">DirItemCommand_move_files</span> </span> </code>
+<code><span><span></span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
 style="color: #0000BB">getTargetPath</span><span style="color: #007700">(</span><span style="color:
-#0000BB">$info</span><span style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">$info</span><span style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #FF8000">//&nbsp;Need&nbsp;to&nbsp;use&nbsp;substr&nbsp;because&nbsp;paths&nbsp;start&nbsp;with&nbsp;./</span> </span>
-</code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+</code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #007700">return&nbsp;</span><span style="color: #DD0000">'.Trash/'&nbsp;</span><span style="color:
 #007700">.&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span
 style="color: #0000BB">$info</span><span style="color: #007700">[</span><span style="color: #DD0000">'path'</span><span
 style="color: #007700">],&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
-style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
 #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(new&nbsp;</span><span
-style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
-#FF8000">//&nbsp;Match&nbsp;only&nbsp;folders</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#FF8000">//&nbsp;Match&nbsp;only&nbsp;folders</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_type</span><span style="color: #007700">(</span><span style="color:
-#0000BB">true</span><span style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
-#FF8000">//&nbsp;Process&nbsp;those&nbsp;which&nbsp;are&nbsp;smaller&nbsp;than&nbsp;3&nbsp;Mb</span> </span>
-</code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">true</span><span style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#FF8000">//&nbsp;Process&nbsp;those&nbsp;which&nbsp;are&nbsp;smaller&nbsp;than&nbsp;3&nbsp;Mb</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_size'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_size</span><span style="color: #007700">(</span><span style="color:
 #DD0000">'3M'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&lt;'</span><span
-style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">}</span> </span> </code></li>
+style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span></span><span style="color: #007700">}</span> </span> </code>
 </ul>
 
             <p>It is an in&shy;ter&shy;est&shy;ing heuris&shy;tic that usu&shy;ally movies have their re&shy;lease year listed in their
@@ -247,51 +246,51 @@ file name. I'm us&shy;ing this to au&shy;to&shy;mat&shy;ically iden&shy;tify and
 stor&shy;age folder. Thanks to reg&shy;ular ex&shy;pres&shy;sions, also this task is very easy to im&shy;ple&shy;ment.</p>
 
             <ul class=verbatim>
-<li><code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
+<code><span><span></span><span style="color: #007700">class&nbsp;</span><span style="color:
 #0000BB">DirItemCommand_move_files_movies&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span
-style="color: #0000BB">DirItemCommand_move_files</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+style="color: #0000BB">DirItemCommand_move_files</span> </span> </code>
+<code><span><span></span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
 style="color: #0000BB">getTargetPath</span><span style="color: #007700">(</span><span style="color:
-#0000BB">$info</span><span style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">$info</span><span style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #007700">return&nbsp;</span><span style="color: #DD0000">'C:/Share/long_movies/'&nbsp;</span><span style="color:
 #007700">.&nbsp;</span><span style="color: #0000BB">$info</span><span style="color: #007700">[</span><span style="color:
-#DD0000">'fname'</span><span style="color: #007700">];</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
-style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
+#DD0000">'fname'</span><span style="color: #007700">];</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span
+style="color: #0000BB">__construct</span><span style="color: #007700">()</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent</span><span style="color:
 #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(new&nbsp;</span><span
-style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #0000BB">DirItemFilterCollection</span><span style="color: #007700">(array(</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_type</span><span style="color: #007700">(</span><span style="color:
-#0000BB">false</span><span style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#0000BB">false</span><span style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_size'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_size</span><span style="color: #007700">(</span><span style="color:
 #DD0000">'600M'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&gt;'</span><span
-style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_ext'&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_extension</span><span style="color: #007700">(</span><span style="color:
-#DD0000">'_VIDEO_'</span><span style="color: #007700">),</span> </span> </code></li>
-<li><code><span><span>&nbsp;</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+#DD0000">'_VIDEO_'</span><span style="color: #007700">),</span> </span> </code>
+<code><span><span>&nbsp;</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #FF8000">//&nbsp;Use&nbsp;regular&nbsp;expressions&nbsp;to&nbsp;match&nbsp;years&nbsp;from&nbsp;1900&nbsp;to&nbsp;2099</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:
 #DD0000">'by_name'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color:
 #0000BB">DirItemFilterer_by_filename</span><span style="color: #007700">(</span><span style="color:
-#DD0000">'[^0-9](19|20)[0-9]{2}[^0-9]'</span><span style="color: #007700">)</span> </span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
-</span> </code></li>
-<li><code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code></li>
-<li><code><span><span></span><span style="color: #007700">}</span> </span> </code></li>
+#DD0000">'[^0-9](19|20)[0-9]{2}[^0-9]'</span><span style="color: #007700">)</span> </span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)));</span>
+</span> </code>
+<code><span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span> </span> </code>
+<code><span><span></span><span style="color: #007700">}</span> </span> </code>
 </ul>
     
     
@@ -421,6 +420,12 @@ style="color: #007700">),</span> </span> </code></li>
 
                 <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
                         <tr>
+                            <td><a title="Finnish Invoice Template" href="finnishinvoicetemplate.html" 
+                                    >Finnish Invoice Template</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;Aug<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Hash-based commitment schemes without a computer" href="handsonhashing.html" 
                                     >Hash-based commitment scheme...</a></td>
                                 <td style="text-align: right">
@@ -443,12 +448,6 @@ style="color: #007700">),</span> </span> </code></li>
                                     >Scalable analytics with Dock...</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2015&nbsp;Dec<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Very fuzzy searching with CUDA" href="fuzzysearchcuda.html" 
-                                    >Very fuzzy searching with CUDA</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>2015&nbsp;Nov<span style="color: gray">)</span></td>
                         </tr>
                 </table>
 
@@ -541,8 +540,8 @@ style="color: #007700">),</span> </span> </code></li>
                             &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="Python" href="language_python.html" 
-                                    >Python</a></td>
+                            <td><a title="&lt;span class=&quot;latex&quot;&gt;L&lt;sup&gt;a&lt;/sup&gt;T&lt;sub&gt;e&lt;/sub&gt;X&lt;/span&gt;" href="language_latex.html" 
+                                    ><span class="latex">L<sup>a</sup>T<sub>e</sub>X</span></a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2<span style="color: gray">)</span></td>
                         </tr>
@@ -671,14 +670,14 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a></b>
+                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -690,7 +689,7 @@ style="color: #007700">),</span> </span> </code></li>
                                 <span style="color: gray">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;CUDA&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cuda_and_tag_omnidirectional_camera.html'>1</a>
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Field Of View&quot;" href='language_cuda_and_tag_field_of_view.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -721,14 +720,14 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
+                                <b><a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -740,7 +739,7 @@ style="color: #007700">),</span> </span> </code></li>
                                 <span style="color: gray">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;CUDA&quot; and tag &quot;Field Of View&quot;" href='language_cuda_and_tag_field_of_view.html'>1</a>
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cuda_and_tag_omnidirectional_camera.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -821,31 +820,6 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;CUDA&quot; and tag &quot;Master's Thesis&quot;" href='language_cuda_and_tag_master_s_thesis.html'>1</a>
-                                
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Visual Odometry" href='tag_visual_odometry.html'>Visual</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
@@ -866,6 +840,31 @@ style="color: #007700">),</span> </span> </code></li>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;CUDA&quot; and tag &quot;Visual Odometry&quot;" href='language_cuda_and_tag_visual_odometry.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Master's Thesis&quot;" href='language_cuda_and_tag_master_s_thesis.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -1271,31 +1270,6 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="SSH" href='tag_ssh.html'>SSH</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1321,6 +1295,31 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
+                                <b><a title="SSH" href='tag_ssh.html'>SSH</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
                                 <b><a title="SQL" href='tag_sql.html'>SQL</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1329,56 +1328,6 @@ style="color: #007700">),</span> </span> </code></li>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;SQL&quot;" href='language_cpp_and_tag_sql.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="jQuery" href='tag_jquery.html'>jQuery</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1421,6 +1370,56 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
+                                <b><a title="jQuery" href='tag_jquery.html'>jQuery</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
                                 <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1446,14 +1445,14 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Happyhttp" href='tag_happyhttp.html'>Happyh</a></b>
+                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: gray">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Happyhttp&quot;" href='language_cpp_and_tag_happyhttp.html'>1</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1471,14 +1470,14 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
+                                <b><a title="Happyhttp" href='tag_happyhttp.html'>Happyh</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: gray">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Happyhttp&quot;" href='language_cpp_and_tag_happyhttp.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1671,31 +1670,6 @@ style="color: #007700">),</span> </span> </code></li>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Git" href='tag_git.html'>Git</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: gray">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Principal Component Analysis" href='tag_principal_component_analysis.html'>Princi</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
@@ -1713,6 +1687,31 @@ style="color: #007700">),</span> </span> </code></li>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Git" href='tag_git.html'>Git</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
