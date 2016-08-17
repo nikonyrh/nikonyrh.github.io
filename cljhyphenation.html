@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>
+        Niko's Project Corner - English hyphenation algorithm in Clojure
+    </title>
+    <meta name="description" content="Niko Nyrhil&auml;'s blog">
+    <meta name="author" content="Niko Nyrhil&auml;">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="layout.css">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    
+    <link rel="stylesheet" href="blog_main.css">
+
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="jquery.lightbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="lightbox.css" media="screen" />
+
+    <script type="text/javascript">
+        $(function() {
+            $('a.lightbox').lightbox({
+                containerResizeSpeed: 2000
+            });
+        });
+    </script>
+</head>
+<body>
+<img class="bg" src="background.jpg" alt="background"/>
+<div class="container" style="background-color: rgba(255, 255, 255, 0.85)">
+    <div class="sixteen columns">
+        <h1 style="margin: 20px; text-align: center">
+            <a href="index.html" style="color: black; text-decoration: none">Niko's Project Corner</a>
+        </h1>
+    </div>
+    <div class="two-thirds column">
+
+
+<div style='padding-left: 25px; padding-top: 24px'>
+    <div style='width: 96%'>
+        <table style="width: 98%" class=no_padding>
+            <tr><td><h2 style="margin-bottom: 20px">English hyphenation algorithm in Clojure</h2></td>
+            <td style="text-align: right; vertical-align: top" rowspan=2>
+                    <div style='position: relative; right: -24px'>
+                        <a title="Download PDF" href='https://cdn.nikonyrh.org/blog/CljHyphenation.pdf'>
+                            <img alt='PDF' src='pdf.png' class='pdf'/>
+                        </a>
+                    </div>
+            </td></tr>
+            <tr><td>
+                <table style="border: none; border-collapse: collapse" class="table_td_4">
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Description</span></td>
+                            <td>
+                                Implementing English hyphenation algorithm in Clojure.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Languages</span></td>
+                            <td>
+                                
+                                    <a href='language_clojure.html'>Clojure</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Tags</span></td>
+                            <td>
+                                
+                                    <a href='tag_hyphenation.html'>Hy&shy;phen&shy;ation</a><br/>
+                                    <a href='tag_blog.html'>Blog</a><br/>
+                                    <a href='tag_github.html'>GitHub</a><br/>
+                                    <a href='tag_jvm.html'>JVM</a><br/>
+                                    <a href='tag_hyphenation.html'>Hy&shy;phen&shy;ation</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Duration</span></td>
+                            <td>
+                                Summer 2016
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Modified</span></td>
+                            <td>
+                                17th August 2016
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>GitHub</span></td>
+                            <td>
+                                <a target="_blank" href="https://github.com/nikonyrh/hyphenator-clj">nikonyrh/hyphenator-clj</a>
+                            </td>
+                        </tr>
+                </table>
+            </td></tr>
+        </table>
+
+            <div style='position: relative; height: 1px'>
+                <img src='cljhyphenation_thumbnail.jpg' alt='thumbnail' style='
+                    width:      80px;
+                    height:     80px;
+                    box-shadow: 3px 4px 8px #224;
+                    position:   absolute;
+                    bottom:     8px;
+                    right:      0px;
+                    z-index:    50
+                '/>
+            </div>
+    </div>
+    <hr style="width: 96%; text-align: left"/>
+</div>
+
+<div id='content'>
+
+            <p>This is noth&shy;ing that spec&shy;tac&shy;ular (as if any&shy;thing on my blog is), but I still wanted to de&shy;scribe
+the out&shy;line of the pro&shy;ject of port&shy;ing the <a href='tag_hyphenation.html'>hy&shy;phen&shy;ation</a>
+al&shy;go&shy;rithm from PHP to Clo&shy;jure. The <a
+href='https://github.com/nikonyrh/hyphenator-clj/blob/master/src/hyphenator_clj/core.clj' class='external'
+target='_blank'>im&shy;ple&shy;men&shy;ta&shy;tion</a> is only about 80 lines of code + com&shy;ments + 20 lines of <a
+href='https://github.com/nikonyrh/hyphenator-clj/blob/master/src/hyphenator_clj/tests.clj' class='external'
+target='_blank'>unit tests</a>. For com&shy;par&shy;ison the <a
+href='https://github.com/nikonyrh/hyphenator-php/blob/master/src/NikoNyrh/Hyphenator/Hyphenator.php' class='external'
+target='_blank'>orig&shy;inal</a> PHP abom&shy;ina&shy;tion is about is about 160 LoCs, al&shy;though it is a bit
+bloated by im&shy;ple&shy;ment&shy;ing the pat&shy;terns search via a trie data struc&shy;ture in&shy;stead of
+us&shy;ing the <span class=sourcecode>str&shy;pos</span> func&shy;tion.</p>
+
+
+            <p>This is the ini&shy;tial step to&shy;wards re-writ&shy;ing and port&shy;ing this whole blog plat&shy;form to
+Clo&shy;jure, which was mo&shy;ti&shy;vated by want&shy;ing to learn new lan&shy;guage and mov&shy;ing away from PHP
+pro&shy;jects. I man&shy;aged to tol&shy;er&shy;ate it for 10 years and got my ca&shy;reer started but af&shy;ter
+work&shy;ing with Python 2 and 3 for three years it seems ob&shy;vi&shy;ous that PHP will al&shy;ways lack that
+ex&shy;pres&shy;sive&shy;ness, well-thought de&shy;sign and vi&shy;sion. The only pos&shy;itive side of PHP is the ease
+of de&shy;ploy&shy;ment via <a href='http://php-fpm.org/' class='external' target='_blank'>php-fpm</a>, it took me a
+while to un&shy;der&shy;stand dif&shy;fer&shy;ences be&shy;tween Fast&shy;GCI and WSGI, and how Ng&shy;inx + Python API
+com&shy;bi&shy;na&shy;tion had to be set up. Clo&shy;jure runs on the <a
+href='https://en.wikipedia.org/wiki/Java_virtual_machine' class='external' target='_blank'>JVM</a>, which is also widely
+used in large-scale pro&shy;jects such as <a href='https://www.elastic.co/products/elasticsearch' class='external'
+target='_blank'>Elas&shy;tic&shy;search</a>, <a href='https://neo4j.com/' class='external' target='_blank'>Neo4j</a>,
+Apache <a href='http://hadoop.apache.org/' class='external' target='_blank'>Hadoop</a> and <a
+href='http://spark.apache.org/' class='external' target='_blank'>Spark</a>.</p>
+
+
+            <p>The code starts by read&shy;ing pat&shy;terns of <a
+href='https://github.com/nikonyrh/hyphenator-clj/blob/master/english.txt' class='external'
+target='_blank'>en&shy;glish.txt</a> one-by-one, trans&shy;form&shy;ing lines like <span
+class=sourcecode>&quot;_gen3t4&quot;</span> into <span class=sourcecode>{:str &quot;_gent&quot;, :dig&shy;its {4 3, 5
+4</span>}} where <span class=sourcecode>:dig&shy;its</span> is a <span class=sourcecode>hash-map</span> map&shy;ping
+po&shy;si&shy;tions in the string to cor&shy;re&shy;spond&shy;ing in&shy;te&shy;ger val&shy;ues. As with the
+pre&shy;vi&shy;ous im&shy;ple&shy;men&shy;ta&shy;tion, words are pre- and post&shy;fixed by un&shy;der&shy;scores and
+these are used in searched pat&shy;terns as well.</p>
+
+            <span class=sourcecode>match-pat&shy;tern</span> func&shy;tion takes a word and a pat&shy;tern as its
+ar&shy;gu&shy;ments and finds all in&shy;dexes in which the pat&shy;tern oc&shy;curs in the word. It then
+ac&shy;cu&shy;mu&shy;lates the max&shy;imum ob&shy;served nu&shy;mer&shy;ical value for each "slot" (see the
+ar&shy;ti&shy;cle of orig&shy;inal im&shy;ple&shy;men&shy;ta&shy;tion for more de&shy;tails). It is
+im&shy;ple&shy;mented by tail-re&shy;curs&shy;ing an in&shy;ner anony&shy;mous func&shy;tion un&shy;til the pat&shy;tern
+is not found from the word any&shy;more, at which point it re&shy;turns the fi&shy;nal value. <span
+class=sourcecode>hy&shy;phen&shy;ate-word</span> func&shy;tion takes the hy&shy;phen and a word, calls <span
+class=sourcecode>match-pat&shy;tern</span> to find all oc&shy;cur&shy;rences of pat&shy;terns, finds in&shy;dexes of odd
+val&shy;ues and in&shy;jects hy&shy;phens on po&shy;si&shy;tions which don't vi&shy;olate the min&shy;imum
+syl&shy;la&shy;ble length of two.
+
+            <p>To split sen&shy;tences into words a <span class=sourcecode>pat&shy;tern-chars</span> set is de&shy;fined, which
+con&shy;tains all up&shy;per- and low&shy;er&shy;case char&shy;ac&shy;ters which oc&shy;curred in the pat&shy;terns. An
+other util&shy;ity is the <span class=sourcecode>count-chars</span> func&shy;tion which takes two strings as its
+ar&shy;gu&shy;ments and for each char&shy;ac&shy;ter in the first string it cal&shy;cu&shy;lates the num&shy;ber of its
+oc&shy;cur&shy;rences in the sec&shy;ond string. This is used to count the cu&shy;mu&shy;la&shy;tive num&shy;ber of
+<span class=sourcecode>&lt;</span> and <span class=sourcecode>&gt;</span> char&shy;ac&shy;ters to know if a word is
+oc&shy;cur&shy;ring in&shy;side <span class=sourcecode>&lt;a html tag&gt;or not&lt;/a&gt;</span>.</p>
+
+
+            <p>The ul&shy;ti&shy;mate func&shy;tion which brings all this to&shy;gether is the <span
+class=sourcecode>hy&shy;phen&shy;ate</span>. It starts by split&shy;ting the sen&shy;tence into "par&shy;ti&shy;tions"
+(words and word-sep&shy;ara&shy;tors) by us&shy;ing <span class=sourcecode>(par&shy;tial con&shy;tains?
+pat&shy;tern-chars)</span>, checks whether odd or even par&shy;ti&shy;tion in&shy;dexes are the ones which con&shy;tain
+words to-be hy&shy;phen&shy;ated, cal&shy;cu&shy;lates the cu&shy;mu&shy;la&shy;tive XHTML tag-bal&shy;ance, and merges
+all these into a <span class=sourcecode>should-hy&shy;phen&shy;ate?</span> func&shy;tion. Then the par&shy;ti&shy;tions
+are ei&shy;ther hy&shy;phen&shy;ated or left as-is and joined back to&shy;gether into a string which is re&shy;turned.</p>
+
+
+            <p>Writ&shy;ing unit tests was cru&shy;cial but also ex&shy;tremely in&shy;ter&shy;est&shy;ing dis&shy;cov&shy;ery
+pro&shy;cess, as <span class=sourcecode>clo&shy;jure.test</span> comes with macros which greatly re&shy;duce
+rep&shy;eti&shy;tion in test case def&shy;ini&shy;tions. With the help of self-writ&shy;ten <span
+class=sourcecode>my-are</span> and <span class=sourcecode>my-deftest</span> writ&shy;ing tests for func&shy;tions <span
+class=sourcecode>is-digit?</span> and <span class=sourcecode>elem-max</span> was just two lines of code: <span
+class=sourcecode>(my-deftest test-is-digit is-digit? \a false _ false \Z false \0 true \5 true \9 true)</span> and <span
+class=sourcecode>(my-deftest test-elem-max elem-max [[-3 1 3] [1 2 -3]] [1 2 3])</span></p>
+
+
+            <p>The con&shy;ven&shy;tion of this macro is that 1st ar&shy;gu&shy;ment is the test name, 2nd is the tested func&shy;tion,
+re&shy;main&shy;ing ar&shy;gu&shy;ments of odd in&shy;dex are in&shy;put val&shy;ues and at even in&shy;dexes are
+ex&shy;pected out&shy;comes. Other im&shy;por&shy;tant func&shy;tions are tested in a straight-for&shy;ward man&shy;ner
+as well. I hope this wall of text with&shy;out any fig&shy;ures was at least a bit in&shy;ter&shy;est&shy;ing
+doc&shy;umen&shy;ta&shy;tion, I'm re&shy;ally look&shy;ing for&shy;ward to use Clo&shy;jure in fu&shy;ture
+pro&shy;jects.</p>
+
+    
+    
+    
+
+        <hr/>
+        <h4>Related blog posts:</h4>
+        <table style="border: none; margin-left: 5%; width: 95%; margin-bottom: 20px">
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="phphyphenation.html">English hyphenation algorithm in PHP</a>, 2013 Jul<br/>
+                                (Matching: Blog, GitHub, Hyphenation)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="phphyphenation.html"><img src="phphyphenation_thumbnail.jpg" alt="PhpHyphenation" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="analyticsplatform.html">Scalable analytics with Docker, Spark and Python</a>, 2015 Dec<br/>
+                                (Matching: GitHub, JVM)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="analyticsplatform.html"><img src="analyticsplatform_thumbnail.jpg" alt="AnalyticsPlatform" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="blogplatform.html">Blogging platform &#8212; What Would <span class="tex">T<sub>e</sub>X</span> Do?</a>, 2013 Jul<br/>
+                                (Matching: Blog, Hyphenation)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="blogplatform.html"><img src="blogplatform_thumbnail.jpg" alt="BlogPlatform" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="finnishinvoicetemplate.html">Finnish Invoice Template</a>, 2016 Aug<br/>
+                                (Matching: GitHub)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="finnishinvoicetemplate.html"><img src="finnishinvoicetemplate_thumbnail.jpg" alt="FinnishInvoiceTemplate" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="nginxbridge.html">Nginx docker image for easy file access via HTTP</a>, 2016 Apr<br/>
+                                (Matching: GitHub)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="nginxbridge.html"><img src="nginxbridge_thumbnail.jpg" alt="NginxBridge" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+        </table>
+</div>
+
+
+    </div>
+    
+    <div class="one-third column" style="background-color: rgba(240, 240, 255, 0.9)">
+        
+
+
+                    <table style="margin-top: 16px; width: 100%" class=no_padding><tr><td>
+                        <h2 style="padding-left: 10px">
+                            <a title="Download all articles" href="index.html">Home</a>
+                            <a href="https://cdn.nikonyrh.org/blog/Combined.pdf" title="Download all articles">
+                                <img src="pdf.png" alt="Download all articles" style="float: right" class="pdf"/>
+                            </a>
+                        </h2>
+                    </td></tr></table>
+
+
+                <h3 class=navi>Navigation</h3>
+
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Home" href="index.html" 
+                                    >Home</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Home page<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="About" href="about.html" 
+                                    >About</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About me<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Platform" href="blogplatform.html" 
+                                    >Platform</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About this blog<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+
+
+                <h3 class=navi>External</h3>
+
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="LinkedIn" href="http://fi.linkedin.com/pub/niko-nyrhil%C3%A4/73/995/3a0?trk=shareTw" 
+                                    target="_blank" class="external" >LinkedIn</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Niko Nyrhilä<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="GitHub" href="https://github.com/nikonyrh" 
+                                    target="_blank" class="external" >GitHub</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>nikonyrh<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+
+
+                <h3 class=navi>Most recent</h3>
+
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="English hyphenation algorithm in Clojure" href="cljhyphenation.html" 
+                                    >English hyphenation algorith...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;Aug<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Finnish Invoice Template" href="finnishinvoicetemplate.html" 
+                                    >Finnish Invoice Template</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;Aug<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Hash-based commitment schemes without a computer" href="handsonhashing.html" 
+                                    >Hash-based commitment scheme...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;May<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Simulating gravitational field near a torus" href="torusgravity.html" 
+                                    >Simulating gravitational fie...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;Apr<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Nginx docker image for easy file access via HTTP" href="nginxbridge.html" 
+                                    >Nginx docker image for easy...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2016&nbsp;Apr<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+
+
+                <h3 class=navi>Most frequent <a href='all_tags.html'>tags</a></h3>
+
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="GitHub" href="tag_github.html" 
+                                    >GitHub</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>9<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Computer Vision" href="tag_computer_vision.html" 
+                                    >Computer Vision</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>7<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Rendering" href="tag_rendering.html" 
+                                    >Rendering</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Databases" href="tag_databases.html" 
+                                    >Databases</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Blog" href="tag_blog.html" 
+                                    >Blog</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Hyphenation" href="tag_hyphenation.html" 
+                                    >Hyphenation</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Encryption" href="tag_encryption.html" 
+                                    >Encryption</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+
+
+                <h3 class=navi>Most frequent <a href='all_languages.html'>languages</a></h3>
+
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="C++" href="language_cpp.html" 
+                                    >C++</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>11<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Matlab" href="language_matlab.html" 
+                                    >Matlab</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="PHP" href="language_php.html" 
+                                    >PHP</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Bash" href="language_bash.html" 
+                                    >Bash</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="CUDA" href="language_cuda.html" 
+                                    >CUDA</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="SDL" href="language_sdl.html" 
+                                    >SDL</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="&lt;span class=&quot;latex&quot;&gt;L&lt;sup&gt;a&lt;/sup&gt;T&lt;sub&gt;e&lt;/sub&gt;X&lt;/span&gt;" href="language_latex.html" 
+                                    ><span class="latex">L<sup>a</sup>T<sub>e</sub>X</span></a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+
+
+            <h3 class=navi>Co-occurrence matrix</h3>
+            <table style="margin-left: auto; margin-right: auto; width: 95%">
+                <tr>
+                    <td></td>
+                        <td style="text-align: center">
+                            <b><a title="Matlab" href='language_matlab.html'>Matl</a></b>
+                        </td>
+                        <td style="text-align: center">
+                            <b><a title="C++" href='language_cpp.html'>C++</a></b>
+                        </td>
+                        <td style="text-align: center">
+                            <b><a title="Bash" href='language_bash.html'>Bash</a></b>
+                        </td>
+                        <td style="text-align: center">
+                            <b><a title="PHP" href='language_php.html'>PHP</a></b>
+                        </td>
+                        <td style="text-align: center">
+                            <b><a title="CUDA" href='language_cuda.html'>CUDA</a></b>
+                        </td>
+                </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Computer Vision" href='tag_computer_vision.html'>Comput</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F80000">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Computer Vision&quot;" href='language_matlab_and_tag_computer_vision.html'>6</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;Computer Vision&quot;" href='language_cpp_and_tag_computer_vision.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Computer Vision&quot;" href='language_cuda_and_tag_computer_vision.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="GitHub" href='tag_github.html'>GitHub</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;GitHub&quot;" href='language_cpp_and_tag_github.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;PHP&quot; and tag &quot;GitHub&quot;" href='language_php_and_tag_github.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;GitHub&quot;" href='language_cuda_and_tag_github.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Rendering" href='tag_rendering.html'>Render</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Rendering&quot;" href='language_matlab_and_tag_rendering.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;Rendering&quot;" href='language_cpp_and_tag_rendering.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Rendering&quot;" href='language_cuda_and_tag_rendering.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="FastCGI" href='tag_fastcgi.html'>FastCG</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;FastCGI&quot;" href='language_cpp_and_tag_fastcgi.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Field Of View&quot;" href='language_cuda_and_tag_field_of_view.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Nginx" href='tag_nginx.html'>Nginx</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cuda_and_tag_omnidirectional_camera.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Data Structure" href='tag_data_structure.html'>Data S</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structure&quot;" href='language_matlab_and_tag_data_structure.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Data Structure&quot;" href='language_cpp_and_tag_data_structure.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Data Structure&quot;" href='language_php_and_tag_data_structure.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Affine Transformation" href='tag_affine_transformation.html'>Affine</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Affine Transformation&quot;" href='language_matlab_and_tag_affine_transformation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Affine Transformation&quot;" href='language_cpp_and_tag_affine_transformation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Databases" href='tag_databases.html'>Databa</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Databases&quot;" href='language_cpp_and_tag_databases.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Databases&quot;" href='language_php_and_tag_databases.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Databases&quot;" href='language_cuda_and_tag_databases.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Visual Odometry" href='tag_visual_odometry.html'>Visual</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Visual Odometry&quot;" href='language_matlab_and_tag_visual_odometry.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Visual Odometry&quot;" href='language_cuda_and_tag_visual_odometry.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Master's Thesis&quot;" href='language_cuda_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Blog" href='tag_blog.html'>Blog</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Blog&quot;" href='language_php_and_tag_blog.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Hyphenation" href='tag_hyphenation.html'>Hyphen</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Hyphenation&quot;" href='language_php_and_tag_hyphenation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Applied mathematics" href='tag_applied_mathematics.html'>Applie</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Applied mathematics&quot;" href='language_matlab_and_tag_applied_mathematics.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Docker" href='tag_docker.html'>Docker</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Spark" href='tag_spark.html'>Spark</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Regular Expressions" href='tag_regular_expressions.html'>Regula</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Regular Expressions&quot;" href='language_php_and_tag_regular_expressions.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Encryption" href='tag_encryption.html'>Encryp</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Encryption&quot;" href='language_php_and_tag_encryption.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Stack Overflow&quot;" href='language_cuda_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Thrust" href='tag_thrust.html'>Thrust</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Thrust&quot;" href='language_cpp_and_tag_thrust.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;Thrust&quot;" href='language_cuda_and_tag_thrust.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SIFT" href='tag_sift.html'>SIFT</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SIFT&quot;" href='language_cpp_and_tag_sift.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;SIFT&quot;" href='language_cuda_and_tag_sift.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SURF" href='tag_surf.html'>SURF</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;CUDA&quot; and tag &quot;SURF&quot;" href='language_cuda_and_tag_surf.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Quadtree" href='tag_quadtree.html'>Quadtr</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Quadtree&quot;" href='language_matlab_and_tag_quadtree.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Quadtree&quot;" href='language_cpp_and_tag_quadtree.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="K-d Tree" href='tag_k-d_tree.html'>K-d Tr</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;K-d Tree&quot;" href='language_matlab_and_tag_k-d_tree.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;K-d Tree&quot;" href='language_cpp_and_tag_k-d_tree.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Delaynay Triangulation" href='tag_delaynay_triangulation.html'>Delayn</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_matlab_and_tag_delaynay_triangulation.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_cpp_and_tag_delaynay_triangulation.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="JVM" href='tag_jvm.html'>JVM</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Elasticsearch" href='tag_elasticsearch.html'>Elasti</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Elasticsearch&quot;" href='language_php_and_tag_elasticsearch.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Astronomy" href='tag_astronomy.html'>Astron</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SSH" href='tag_ssh.html'>SSH</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SQL" href='tag_sql.html'>SQL</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SQL&quot;" href='language_cpp_and_tag_sql.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Backups" href='tag_backups.html'>Backup</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="jQuery" href='tag_jquery.html'>jQuery</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Happyhttp" href='tag_happyhttp.html'>Happyh</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Happyhttp&quot;" href='language_cpp_and_tag_happyhttp.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Conjugate Gradient Method" href='tag_conjugate_gradient_method.html'>Conjug</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Conjugate Gradient Method&quot;" href='language_cpp_and_tag_conjugate_gradient_method.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Robotics" href='tag_robotics.html'>Roboti</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Robotics&quot;" href='language_cpp_and_tag_robotics.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Gradient Descent" href='tag_gradient_descent.html'>Gradie</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Gradient Descent&quot;" href='language_cpp_and_tag_gradient_descent.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Kalman Filter" href='tag_kalman_filter.html'>Kalman</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Kalman Filter&quot;" href='language_cpp_and_tag_kalman_filter.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Simultaneous Localization And Mapping" href='tag_simultaneous_localization_and_mapping.html'>Simult</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Simultaneous Localization And Mapping&quot;" href='language_cpp_and_tag_simultaneous_localization_and_mapping.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Particle Filter" href='tag_particle_filter.html'>Partic</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Particle Filter&quot;" href='language_cpp_and_tag_particle_filter.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Trie" href='tag_trie.html'>Trie</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Trie&quot;" href='language_php_and_tag_trie.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Principal Component Analysis" href='tag_principal_component_analysis.html'>Princi</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Principal Component Analysis&quot;" href='language_matlab_and_tag_principal_component_analysis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Git" href='tag_git.html'>Git</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Receiver Operating Characteristics" href='tag_receiver_operating_characteristics.html'>Receiv</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Receiver Operating Characteristics&quot;" href='language_matlab_and_tag_receiver_operating_characteristics.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Machine Learning" href='tag_machine_learning.html'>Machin</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Linear Discriminant Analysis" href='tag_linear_discriminant_analysis.html'>Linear</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Linear Discriminant Analysis&quot;" href='language_matlab_and_tag_linear_discriminant_analysis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: gray">0</span>
+                            </td>
+                    </tr>
+            </table>
+    </div>
+</div>
+<img src="https://counter.nikonyrh.org/blog/cljhyphenation.html.gif" alt=""/>
+</body>
+</html>
+
+
