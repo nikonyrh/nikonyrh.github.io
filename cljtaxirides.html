@@ -158,15 +158,10 @@ nor&shy;mal lev&shy;els and I did not have to run ZFS on top of EXT4.</p>
 
 
             <p>CSV files are stored in a Gzipped for&shy;mat, from which they are lazily read as Clo&shy;jure strings by <span
-class=sourcecode>java.util.zip.GZIP&shy;In&shy;put&shy;Stream</span>. An&shy;noy&shy;ingly <span
-class=sourcecode>clo&shy;jure.data.csv/read-csv</span> does not (in my un&shy;der&shy;stand&shy;ing) di&shy;rectly
-sup&shy;port lazy load&shy;ing, so in&shy;stead I had to im&shy;ple&shy;ment it as <span class=sourcecode>(-&gt;&gt; in
-io/reader line-seq (map (comp first csv/read-csv)))</span> mon&shy;stros&shy;ity. Ear&shy;lier code would <span
-class=sourcecode>slurp</span> the whole CSV string and pass it to <span class=sourcecode>read-csv</span>, but this at
-too much RAM when mul&shy;ti&shy;ple large files are be&shy;ing pro&shy;cessed in par&shy;al&shy;lel.</p>
-
-
-            <p>The pro&shy;cess of con&shy;vert&shy;ing CSV rows in to Elas&shy;tic&shy;search doc&shy;uments is quite
+class=sourcecode>java.util.zip.GZIP&shy;In&shy;put&shy;Stream</span>. Ini&shy;tial im&shy;ple&shy;men&shy;ta&shy;tion
+would <span class=sourcecode>slurp</span> the whole CSV string and pass it to <span class=sourcecode>read-csv</span>,
+but this at too much RAM when mul&shy;ti&shy;ple large files are be&shy;ing pro&shy;cessed in par&shy;al&shy;lel. The
+pro&shy;cess of con&shy;vert&shy;ing CSV rows in to Elas&shy;tic&shy;search doc&shy;uments is quite
 straight-for&shy;ward. The code has a lookup dic&shy;tio&shy;nary to map CSV columns into JSON fields of speci&shy;fic
 types. In to&shy;tal there are 36 fields. Yel&shy;low and Green taxi&shy;cab datasets had some dif&shy;fer&shy;ences on
 column nam&shy;ing but at least their mean&shy;ing was easy to rec&shy;og&shy;nize. The code also gen&shy;er&shy;ates
@@ -198,10 +193,13 @@ di&shy;min&shy;ished un&shy;til the larger file was fin&shy;ished and then new f
 This was re&shy;solved by us&shy;ing <a href='https://github.com/TheClimateCorporation/claypoole' class='external'
 target='_blank'>Clay&shy;poole's</a> mag&shy;nif&shy;icent <span class=sourcecode>up&shy;for</span>, which will
 ex&shy;ecute the jobs in N par&shy;al&shy;lel threads and re&shy;turn the fastest re&shy;sults first. Doc&shy;uments
-were bulk-up&shy;loaded in chunks of  1000. I had one in&shy;dex / year / com&shy;pany, and each in&shy;dex had only ten
-shards. I started with only one shard / in&shy;dex but it caused merge throt&shy;tling in the long run as in&shy;dexes
-grow to tens of gi&shy;ga&shy;bytes. For ex&shy;am&shy;ple the in&shy;dex <span
-class=sourcecode>taxi&shy;cab-yel&shy;low-2014</span> has 164.2 mil&shy;lion docs and takes 48.5 GB of stor&shy;age.</p>
+were bulk-up&shy;loaded in chunks of  1000.</p>
+
+
+            <p>I had one in&shy;dex / year / com&shy;pany, and each in&shy;dex had only ten shards. I started with only one shard /
+in&shy;dex but it caused merge throt&shy;tling in the long run as in&shy;dexes grow to tens of gi&shy;ga&shy;bytes. For
+ex&shy;am&shy;ple the in&shy;dex <span class=sourcecode>taxi&shy;cab-yel&shy;low-2014</span> has 164.2 mil&shy;lion docs
+and takes 48.5 GB of stor&shy;age.</p>
 
 
             <p>In&shy;dex&shy;ing from A to B was con&shy;strained by A's CPU power to trans&shy;form CSV rows to JSON,
@@ -218,11 +216,11 @@ ma&shy;chine B, to&shy;tal&shy;ing at 14.3 mil&shy;lion docs, or at av&shy;er&sh
 at this speed in&shy;dex&shy;ing 1 bil&shy;lion doc&shy;uments would take about 11.6 hours.</p>
 
 
-            <p>In the end I used just ma&shy;chine B to in&shy;dex all doc&shy;umentsin a sin&shy;gle go, which took 910 min&shy;utes
+            <p>In the end I used just ma&shy;chine B to in&shy;dex all doc&shy;uments in a sin&shy;gle go, which took 910 min&shy;utes
 and stored 942.1 mil&shy;lion doc&shy;uments. Then I "force merged" in&shy;dexes to have at most 8 seg&shy;ments each,
 this took 44 min&shy;utes. Fi&shy;nally merg&shy;ing them down to 1 seg&shy;ment took 302 min&shy;utes, al&shy;though
 CPU and disk IO us&shy;age was very low. It seems to have build-in throt&shy;tling as well, but I couldn't find
-de&shy;tailed doc&shy;umen&shy;ta&shy;tion.</p>
+de&shy;tailed doc&shy;umen&shy;ta&shy;tion. The fi&shy;nal size on disk was 309 GB.</p>
 
 
             <p>Once the data is stored to ES there are end&shy;less pos&shy;si&shy;bil&shy;ities for in&shy;ter&shy;est&shy;ing
