@@ -149,8 +149,8 @@ of PHP to get the basic stuff working such as tag-based browsing of articles and
 figures. The current architecture can be seen in Figure 1. All three subsystems (<span
 class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, PHP and Mustache) are stored in a Git repository, and the logic to
 bring everything together is implemented in PHP. Actually this resembles a lot of the <a
-href='http://en.wikipedia.org/wiki/Model–view–controller' class='external' target='_blank'>MVC</a> pattern.
-The ar&shy;ti&shy;cle (model) is stored in .tex files, for which two dif&shy;fer&shy;ent views (PDF and HTML) can be
+href='http://en.wikipedia.org/wiki/Model–view–controller' class='external' target='_blank'>MVC</a> pattern.The
+ar&shy;ti&shy;cle (model) is stored in .tex files, for which two dif&shy;fer&shy;ent views (PDF and HTML) can be
 pro&shy;duced. In this case the user can&shy;not al&shy;ter any of the views, so there is no need to de&shy;ploy the
 ac&shy;tual model or con&shy;troller com&shy;po&shy;nents. In&shy;stead only static HTML, PDF etc. files need to be
 copied to the web server (or Drop&shy;box's pub&shy;lic folder).</p>
@@ -169,30 +169,23 @@ tem&shy;plate which pro&shy;duces HTML and CSS. PHP also has the logic to gen&sh
 find out most pop&shy;ular tags and lan&shy;guages, and to ex&shy;ecute other use&shy;ful tasks.</p>
 
 
-            <p>Cur&shy;rently the plat&shy;form sup&shy;ports fol&shy;low&shy;ing fea&shy;tures (in PDF and/or HTML): 
-<ul style='padding-left: 60px; list-style: disc outside none'>
-    <li>Au&shy;to&shy;mat&shy;ically num&shy;bered fig&shy;ures with named ref&shy;er&shy;enc&shy;ing from the main
-text</li>
-    <li>Writ&shy;ing ar&shy;ti&shy;cles us&shy;ing any text ed&shy;itor, but IDEs such as TeX&shy;works have their
-ben&shy;efits</li>
-    <li>Ar&shy;ti&shy;cle brows&shy;ing by pro&shy;ject lan&shy;guage or tag (in HTML)</li>
-    <li>Links to ex&shy;ter&shy;nal sites (with an in&shy;di&shy;cat&shy;ing icon in HTML)</li>
-    <li>So&shy;phis&shy;ti&shy;cated sym&shy;bol an&shy;no&shy;ta&shy;tion, such as &alpha; = 360&deg; and <span
-class="latex">L<sup>a</sup>T<sub>e</sub>X</span></li>
-    <li>Sort&shy;ing the ar&shy;ti&shy;cles by last mod&shy;ifi&shy;ca&shy;tion date (us&shy;ing Git blame to
-ig&shy;nore mi&shy;nor changes)</li>
-    <li>Iden&shy;ti&shy;fy&shy;ing the mod&shy;ifi&shy;ca&shy;tion date of each line in the ar&shy;ti&shy;cle
-(us&shy;ing Git blame)</li>
-    <li>PDF down&shy;load of any ar&shy;ti&shy;cle, or all ar&shy;ti&shy;cles in a chrono&shy;log&shy;ical
-or&shy;der</li>
-    <li>Easy de&shy;ploy&shy;ment (just a sin&shy;gle folder to be copied, which con&shy;tains all static
-gen&shy;er&shy;ated con&shy;tent)</li>
-    <li><span class="bibtex">B<sup>ib</sup>T<sub>e</sub>X</span> style article reference management</li>
-    <li>Im&shy;age mag&shy;ni&shy;fi&shy;ca&shy;tion on click (easy with jQuery)</li>
-    <li>Ar&shy;ti&shy;cles' lan&shy;guage and tag co-oc&shy;cur&shy;rence ma&shy;trix</li>
-    <li>Au&shy;to&shy;matic <a href='tag_hyphenation.html'>hy&shy;phen&shy;ation</a> in PHP to avoid sparse line when
-us&shy;ing jus&shy;ti&shy;fied text in HTML</li>
-</ul></p>
+            <p>Cur&shy;rently the plat&shy;form sup&shy;ports fol&shy;low&shy;ing fea&shy;tures (in PDF and/or HTML): <ul
+style='padding-left: 60px; list-style: disc outside none'>    <li>Au&shy;to&shy;mat&shy;ically num&shy;bered
+fig&shy;ures with named ref&shy;er&shy;enc&shy;ing from the main text</li>    <li>Writ&shy;ing ar&shy;ti&shy;cles
+us&shy;ing any text ed&shy;itor, but IDEs such as TeX&shy;works have their ben&shy;efits</li>    <li>Ar&shy;ti&shy;cle
+brows&shy;ing by pro&shy;ject lan&shy;guage or tag (in HTML)</li>    <li>Links to ex&shy;ter&shy;nal sites (with an
+in&shy;di&shy;cat&shy;ing icon in HTML)</li>    <li>So&shy;phis&shy;ti&shy;cated sym&shy;bol an&shy;no&shy;ta&shy;tion,
+such as &alpha; = 360&deg; and <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span></li>    <li>Sort&shy;ing the
+ar&shy;ti&shy;cles by last mod&shy;ifi&shy;ca&shy;tion date (us&shy;ing Git blame to ig&shy;nore mi&shy;nor
+changes)</li>    <li>Iden&shy;ti&shy;fy&shy;ing the mod&shy;ifi&shy;ca&shy;tion date of each line in the
+ar&shy;ti&shy;cle (us&shy;ing Git blame)</li>    <li>PDF down&shy;load of any ar&shy;ti&shy;cle, or all
+ar&shy;ti&shy;cles in a chrono&shy;log&shy;ical or&shy;der</li>    <li>Easy de&shy;ploy&shy;ment (just a sin&shy;gle
+folder to be copied, which con&shy;tains all static gen&shy;er&shy;ated con&shy;tent)</li>    <li><span
+class="bibtex">B<sup>ib</sup>T<sub>e</sub>X</span> style article reference management</li>    <li>Im&shy;age
+mag&shy;ni&shy;fi&shy;ca&shy;tion on click (easy with jQuery)</li>    <li>Ar&shy;ti&shy;cles' lan&shy;guage and tag
+co-oc&shy;cur&shy;rence ma&shy;trix</li>    <li>Au&shy;to&shy;matic <a
+href='tag_hyphenation.html'>hy&shy;phen&shy;ation</a> in PHP to avoid sparse line when us&shy;ing jus&shy;ti&shy;fied
+text in HTML</li></ul></p>
 
 
             <p>At the file sys&shy;tem &amp; Git level, each ar&shy;ti&shy;cle is stored un&shy;der its own folder. This also
@@ -217,63 +210,49 @@ im&shy;ple&shy;ment. My nor&shy;mal de&shy;vel&shy;op&shy;ment hours seem to be 
                 </div>
             </div>
 
-            <p>These are some of the next fea&shy;tures to be im&shy;ple&shy;mented (stroked out are done): 
-<ul style='padding-left: 60px; list-style: disc outside none'>
-    <li>Im&shy;prove <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> to&shy;keniza&shy;tion, cur&shy;rent
-reg&shy;ular ex&shy;pres&shy;sions based im&shy;ple&shy;men&shy;ta&shy;tion is lim&shy;ited</li>
-    <li>Have a more scal&shy;able method of han&shy;dling im&shy;ages, cur&shy;rently they are part of the Git
-repos&shy;itory</li>
-    <li>Sup&shy;port for equa&shy;tions (pos&shy;si&shy;bly in MathML)</li>
-    <li><strike>Better graphical design with better support for IE9</strike></li>
-    <li><strike>Support for embedded source code (at least <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>,
-Matlab and PHP) with syntax highlight</strike></li>
-    <li><strike>Support for data in a table format</strike></li>
-    <li><strike>Free text search engine (it is possible to use PHP to generate a static JavaScript file for
-this)</strike></li>
-    <li><strike>Ability to comment on posts (using Disqus or something similar)</strike></li>
-	
-	
-</ul></p>
+            <p>These are some of the next fea&shy;tures to be im&shy;ple&shy;mented (stroked out are done): <ul style='padding-left:
+60px; list-style: disc outside none'>    <li>Im&shy;prove <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>
+to&shy;keniza&shy;tion, cur&shy;rent reg&shy;ular ex&shy;pres&shy;sions based im&shy;ple&shy;men&shy;ta&shy;tion is
+lim&shy;ited</li>    <li>Have a more scal&shy;able method of han&shy;dling im&shy;ages, cur&shy;rently they are part of
+the Git repos&shy;itory</li>    <li>Sup&shy;port for equa&shy;tions (pos&shy;si&shy;bly in MathML)</li>   
+<li><strike>Better graphical design with better support for IE9</strike></li>    <li><strike>Support for embedded source
+code (at least <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, Matlab and PHP) with syntax
+highlight</strike></li>    <li><strike>Support for data in a table format</strike></li>    <li><strike>Free text search
+engine (it is possible to use PHP to generate a static JavaScript file for this)</strike></li>    <li><strike>Ability to
+comment on posts (using Disqus or something similar)</strike></li>		</ul></p>
 
 
             <p>Writ&shy;ing a new ar&shy;ti&shy;cle is a fairly triv&shy;ial pro&shy;cess. There are four .tex files which are shared
-among all ar&shy;ti&shy;cles:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-    <li>com&shy;mands.tex: De&shy;fines com&shy;mands for de&shy;scrib&shy;ing ar&shy;ti&shy;cle's meta&shy;data, and
-for in&shy;sert&shy;ing the header, footer, fig&shy;ures, ref&shy;er&shy;ences etc.</li>
-    <li>header.tex: Has all the <span class=sourcecode>\usep&shy;ack&shy;age</span> com&shy;mands, spec&shy;ifies page
-mar&shy;gins and starts the doc&shy;ument.</li>
-    <li>sec&shy;tion&shy;Header.tex: Af&shy;ter the ar&shy;ti&shy;cle's meta&shy;data has been spec&shy;ified, this
-in&shy;serts the pro&shy;ject's ti&shy;tle, thumb&shy;nail and dis&shy;plays the meta&shy;data.</li>
-    <li>footer.tex: This only has <span class=sourcecode>\end{doc&shy;ument}</span></li>
-</ul></p>
+among all ar&shy;ti&shy;cles:<ul style='padding-left: 60px; list-style: disc outside none'>    <li>com&shy;mands.tex:
+De&shy;fines com&shy;mands for de&shy;scrib&shy;ing ar&shy;ti&shy;cle's meta&shy;data, and for in&shy;sert&shy;ing the
+header, footer, fig&shy;ures, ref&shy;er&shy;ences etc.</li>    <li>header.tex: Has all the <span
+class=sourcecode>\usep&shy;ack&shy;age</span> com&shy;mands, spec&shy;ifies page mar&shy;gins and starts the
+doc&shy;ument.</li>    <li>sec&shy;tion&shy;Header.tex: Af&shy;ter the ar&shy;ti&shy;cle's meta&shy;data has been
+spec&shy;ified, this in&shy;serts the pro&shy;ject's ti&shy;tle, thumb&shy;nail and dis&shy;plays the
+meta&shy;data.</li>    <li>footer.tex: This only has <span class=sourcecode>\end{doc&shy;ument}</span></li></ul></p>
 
 
-            <p>The be&shy;gin&shy;ning of this blog ar&shy;ti&shy;cle looks like this:
-<ul class=verbatim>
-	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../_latexCommon/commands.tex</span>}</li>
-	<li class=verbatim><span class=command>\myInput</span>{<span class=parameter>../_latexCommon/header.tex</span>}</li>
- 
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\basepath</span>}{<span
-class=parameter>BlogPlatform</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectTitle</span>}{<span
-class=parameter>Blogging platform &#8212; What Would <span class="tex">T<sub>e</sub>X</span> Do?</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectStart</span>}{<span
-class=parameter>Summer 2013</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectEnd</span>}{<span
-class=parameter>Summer 2013</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectLanguages</span>}{<span
-class=parameter>PHP, <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, Mustache</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectDescription</span>}{<span
-class=parameter>PHP, <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> and Git based blogging engine.</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectTags</span>}{<span
-class=parameter>\tagBlog, \tagGit</span>}</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectChallenges</span>}{<span
-class=parameter>To develop and maintain a fully functional blog.</span>}</li>
- 
-	<li class=verbatim><span class=command>\input</span>{<span
-class=parameter>../_latexCommon/sectionHeader.tex</span>}</li>
-</ul></p>
+            <p>The be&shy;gin&shy;ning of this blog ar&shy;ti&shy;cle looks like this:<ul class=verbatim><li class=verbatim>	<li
+class=verbatim><span class=command>\input</span>{<span class=parameter>../_latexCommon/commands.tex</span>}</li></li><li
+class=verbatim>	<li class=verbatim><span class=command>\myInput</span>{<span
+class=parameter>../_latexCommon/header.tex</span>}</li></li> <li class=verbatim>	<li class=verbatim><span
+class=command>\renewcommand</span>{<span class=parameter>\basepath</span>}{<span
+class=parameter>BlogPlatform</span>}</li></li><li class=verbatim>	<li class=verbatim><span
+class=command>\renewcommand</span>{<span class=parameter>\projectTitle</span>}{<span class=parameter>Blogging platform
+&#8212; What Would <span class="tex">T<sub>e</sub>X</span> Do?</span>}</li></li><li class=verbatim>	<li
+class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectStart</span>}{<span
+class=parameter>Summer 2013</span>}</li></li><li class=verbatim>	<li class=verbatim><span
+class=command>\renewcommand</span>{<span class=parameter>\projectEnd</span>}{<span class=parameter>Summer
+2013</span>}</li></li><li class=verbatim>	<li class=verbatim><span class=command>\renewcommand</span>{<span
+class=parameter>\projectLanguages</span>}{<span class=parameter>PHP, <span
+class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, Mustache</span>}</li></li><li class=verbatim>	<li class=verbatim><span
+class=command>\renewcommand</span>{<span class=parameter>\projectDescription</span>}{<span class=parameter>PHP, <span
+class="latex">L<sup>a</sup>T<sub>e</sub>X</span> and Git based blogging engine.</span>}</li></li><li class=verbatim>	<li
+class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectTags</span>}{<span
+class=parameter>\tagBlog, \tagGit</span>}</li></li><li class=verbatim>	<li class=verbatim><span
+class=command>\renewcommand</span>{<span class=parameter>\projectChallenges</span>}{<span class=parameter>To develop and
+maintain a fully functional blog.</span>}</li></li> <li class=verbatim>	<li class=verbatim><span
+class=command>\input</span>{<span class=parameter>../_latexCommon/sectionHeader.tex</span>}</li></li></ul></p>
 
 
             <p>In the blog&shy;ging plat&shy;form all ''non-ar&shy;ti&shy;cles'' are in fold&shy;ers which are pre&shy;fixed with an
@@ -284,9 +263,8 @@ class=sourcecode>\my&shy;Footer</span>.</p>
 
             <p>Fig&shy;ures are in&shy;serted by us&shy;ing a cus&shy;tom com&shy;mand: <span
 class=sourcecode>\in&shy;sert&shy;Fig&shy;ure{git_log.png}{A snap&shy;shot of the de&shy;vel&shy;op&shy;ment Git
-log.}{git_log}}</span>
-Pa&shy;ram&shy;eters are file&shy;name, cap&shy;tion and fig&shy;ure name. This has two ben&shy;efits:
-stan&shy;dard&shy;ized im&shy;age set&shy;tings across all ar&shy;ti&shy;cles, and eas&shy;ier <span
+log.}{git_log}}</span>Pa&shy;ram&shy;eters are file&shy;name, cap&shy;tion and fig&shy;ure name. This has two
+ben&shy;efits: stan&shy;dard&shy;ized im&shy;age set&shy;tings across all ar&shy;ti&shy;cles, and eas&shy;ier <span
 class="tex">T<sub>e</sub>X</span></p>
 
 
@@ -321,10 +299,8 @@ times&shy;tamp into a file in&shy;side each ar&shy;ti&shy;cle's folder.</p>
 	<li class=verbatim>&nbsp;</li>
 	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\setFigureNumbering</span>}{</li>
 	<li class=verbatim>	<span class=command>\usepackage</span>{<span class=parameter>chngcntr</span>}</li>
-	<li class=verbatim>	<span class=command>\counterwithin</span>{<span class=parameter>figure</span>}{<span
-class=parameter>section</span>}</li>
-	<li class=verbatim>	<span class=command>\counterwithin</span>{<span class=parameter>table</span>}{<span
-class=parameter>section</span>}</li>
+	<li class=verbatim>	<span class=command>\counterwithin</span>{<span class=parameter>figure</span>}{<span class=parameter>section</span>}</li>
+	<li class=verbatim>	<span class=command>\counterwithin</span>{<span class=parameter>table</span>}{<span class=parameter>section</span>}</li>
 	<li class=verbatim>}</li>
 	<li class=verbatim>&nbsp;</li>
 	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\Section</span>}[1]{</li>
@@ -334,8 +310,7 @@ class=parameter>section</span>}</li>
 	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../_latexCommon/header.tex</span>}</li>
 	<li class=verbatim>&nbsp;</li>
 	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\myInput</span>}[1] </li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\myFooter</span>}{<span
-class=parameter>\clearpage</span>}</li>
+	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\myFooter</span>}{<span class=parameter>\clearpage</span>}</li>
 	<li class=verbatim>&nbsp;</li>
 	<li class=verbatim><span class=command>\vspace</span>{<span class=parameter>2cm</span>}</li>
 	<li class=verbatim>&nbsp;</li>
@@ -356,30 +331,10 @@ class=parameter>\clearpage</span>}</li>
 	<li class=verbatim>&nbsp;</li>
 	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../_latexCommon/footer.tex</span>}</li></ul>
 
-            <p>Cur&shy;rently the five first items of _com&shy;bined.tex looks like this:
-<ul class=verbatim>
+            <p>Cur&shy;rently the five first items of _com&shy;bined.tex looks like this:<ul class=verbatim>
 	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectModified</span>}{<span
-class=parameter>\textbf{Modified} & 10th May 2021 \\</span>}</li>
-	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../Satellites/satellites.tex</span>}</li>
-	<li class=verbatim>&nbsp;</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectModified</span>}{<span
-class=parameter>\textbf{Modified} & 2nd April 2018 \\</span>}</li>
-	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../JGitBlame/jgitblame.tex</span>}</li>
-	<li class=verbatim>&nbsp;</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectModified</span>}{<span
-class=parameter>\textbf{Modified} & 7th May 2017 \\</span>}</li>
-	<li class=verbatim><span class=command>\input</span>{<span
-class=parameter>../BenchmarkTaxiridesEsSql/benchmarktaxiridesessql.tex</span>}</li>
-	<li class=verbatim>&nbsp;</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectModified</span>}{<span
-class=parameter>\textbf{Modified} & 19th March 2017 \\</span>}</li>
-	<li class=verbatim><span class=command>\input</span>{<span
-class=parameter>../CljTaxirides/cljtaxirides.tex</span>}</li>
-	<li class=verbatim>&nbsp;</li>
-	<li class=verbatim><span class=command>\renewcommand</span>{<span class=parameter>\projectModified</span>}{<span
-class=parameter>\textbf{Modified} & 25th January 2017 \\</span>}</li>
-	<li class=verbatim><span class=command>\input</span>{<span
-class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
+class=parameter>\textbf{Modified} & 13th June 2021 \\</span>}</li>
+	<li class=verbatim><span class=command>\input</span>{<span class=parameter>../Agadmator/agadmator.tex</span>}</li></ul></p>
 
     
     
@@ -515,6 +470,12 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
             
                 <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
                         <tr>
+                            <td><a title="Chess video search engine" href="agadmator.html" 
+                                    >Chess video search engine</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2021&nbsp;Jun<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Satellite crash course" href="satellites.html" 
                                     >Satellite crash course</a></td>
                                 <td style="text-align: right">
@@ -538,12 +499,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2017&nbsp;Mar<span style="color: gray">)</span></td>
                         </tr>
-                        <tr>
-                            <td><a title="Mustache templates in Clojure" href="cljmustache.html" 
-                                    >Mustache templates in Clojure</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>2017&nbsp;Jan<span style="color: gray">)</span></td>
-                        </tr>
                 </table>
             
             
@@ -566,7 +521,7 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             <td><a title="Computer Vision" href="tag_computer_vision.html" 
                                     >Computer Vision</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>7<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>8<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Elasticsearch" href="tag_elasticsearch.html" 
@@ -581,14 +536,14 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="JVM" href="tag_jvm.html" 
-                                    >JVM</a></td>
+                            <td><a title="Data Structures" href="tag_data_structures.html" 
+                                    >Data Structures</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="Blog" href="tag_blog.html" 
-                                    >Blog</a></td>
+                            <td><a title="JVM" href="tag_jvm.html" 
+                                    >JVM</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
                         </tr>
@@ -611,6 +566,18 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
+                            <td><a title="Python" href="language_python.html" 
+                                    >Python</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Clojure" href="language_clojure.html" 
+                                    >Clojure</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Bash" href="language_bash.html" 
                                     >Bash</a></td>
                                 <td style="text-align: right">
@@ -621,18 +588,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                     >PHP</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Python" href="language_python.html" 
-                                    >Python</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Clojure" href="language_clojure.html" 
-                                    >Clojure</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="CUDA" href="language_cuda.html" 
@@ -660,10 +615,10 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             <b><a title="Bash" href='language_bash.html'>Bash</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="PHP" href='language_php.html'>PHP</a></b>
+                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
+                            <b><a title="PHP" href='language_php.html'>PHP</a></b>
                         </td>
                 </tr>
                     <tr>
@@ -678,17 +633,17 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;C++&quot; and tag &quot;Computer Vision&quot;" href='language_cpp_and_tag_computer_vision.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Computer Vision&quot;" href='language_clojure_and_tag_computer_vision.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -715,12 +670,12 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F86868">
-                                <a title="Language &quot;PHP&quot; and tag &quot;GitHub&quot;" href='language_php_and_tag_github.html'>3</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;Python&quot; and tag &quot;GitHub&quot;" href='language_python_and_tag_github.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;PHP&quot; and tag &quot;GitHub&quot;" href='language_php_and_tag_github.html'>3</a>
                                 
                             </td>
                     </tr>
@@ -744,12 +699,12 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Databases&quot;" href='language_bash_and_tag_databases.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Databases&quot;" href='language_php_and_tag_databases.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F86868">
                                 <a title="Language &quot;Python&quot; and tag &quot;Databases&quot;" href='language_python_and_tag_databases.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Databases&quot;" href='language_php_and_tag_databases.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -802,13 +757,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>4</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Nginx&quot;" href='language_python_and_tag_nginx.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -831,12 +786,41 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
+                                
+                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Elasticsearch&quot;" href='language_php_and_tag_elasticsearch.html'>1</a>
                                 
                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Data Structures" href='tag_data_structures.html'>Data S</a></b>
+                        </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structures&quot;" href='language_matlab_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Data Structures&quot;" href='language_cpp_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Data Structures&quot;" href='language_clojure_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Data Structures&quot;" href='language_python_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Data Structures&quot;" href='language_php_and_tag_data_structures.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -860,13 +844,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;JVM&quot;" href='language_python_and_tag_jvm.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -889,13 +873,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Docker&quot;" href='language_python_and_tag_docker.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -929,35 +913,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Data Structure" href='tag_data_structure.html'>Data S</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structure&quot;" href='language_matlab_and_tag_data_structure.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Data Structure&quot;" href='language_cpp_and_tag_data_structure.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Data Structure&quot;" href='language_php_and_tag_data_structure.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Blog" href='tag_blog.html'>Blog</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -976,13 +931,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Blog&quot;" href='language_php_and_tag_blog.html'>2</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Blog&quot;" href='language_php_and_tag_blog.html'>2</a>
+                                
                             </td>
                     </tr>
                     <tr>
@@ -1005,9 +960,38 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Hyphenation&quot;" href='language_php_and_tag_hyphenation.html'>2</a>
                                 
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1024,35 +1008,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1121,13 +1076,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Applied mathematics&quot;" href='language_python_and_tag_applied_mathematics.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -1140,6 +1095,35 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1179,38 +1163,9 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Architecture&quot;" href='language_bash_and_tag_architecture.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Architecture&quot;" href='language_python_and_tag_architecture.html'>1</a>
                                 
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1237,13 +1192,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Spark&quot;" href='language_python_and_tag_spark.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -1266,8 +1221,37 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Regular Expressions&quot;" href='language_php_and_tag_regular_expressions.html'>2</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1295,41 +1279,12 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
                                 
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Encryption&quot;" href='language_php_and_tag_encryption.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -1382,13 +1337,13 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
+                                
                             </td>
                     </tr>
                     <tr>
@@ -1411,39 +1366,10 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Business Intelligence&quot;" href='language_python_and_tag_business_intelligence.html'>1</a>
                                 
                             </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Quadtree" href='tag_quadtree.html'>Quadtr</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Quadtree&quot;" href='language_matlab_and_tag_quadtree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Quadtree&quot;" href='language_cpp_and_tag_quadtree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
@@ -1451,16 +1377,8 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="K-d Tree" href='tag_k-d_tree.html'>K-d Tr</a></b>
+                                <b><a title="Autoencoder" href='tag_autoencoder.html'>Autoen</a></b>
                         </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;K-d Tree&quot;" href='language_matlab_and_tag_k-d_tree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;K-d Tree&quot;" href='language_cpp_and_tag_k-d_tree.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
@@ -1468,39 +1386,18 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Delaynay Triangulation" href='tag_delaynay_triangulation.html'>Delayn</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_matlab_and_tag_delaynay_triangulation.html'>1</a>
-                                
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_cpp_and_tag_delaynay_triangulation.html'>1</a>
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Autoencoder&quot;" href='language_clojure_and_tag_autoencoder.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Autoencoder&quot;" href='language_python_and_tag_autoencoder.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1518,64 +1415,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;Thrust&quot;" href='language_cpp_and_tag_thrust.html'>1</a>
                                 
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
-                                
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Astronomy" href='tag_astronomy.html'>Astron</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1625,7 +1464,7 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
+                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1639,9 +1478,67 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
+                            <td style="text-align: center; background-color: #F8F8F8">
                                 
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Astronomy" href='tag_astronomy.html'>Astron</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1683,7 +1580,7 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                                <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1698,7 +1595,7 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                                 <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1720,93 +1617,6 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Backups" href='tag_backups.html'>Backup</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1857,14 +1667,72 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="SURF" href='tag_surf.html'>SURF</a></b>
+                                <b><a title="Backups" href='tag_backups.html'>Backup</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1894,6 +1762,35 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;SIFT&quot;" href='language_cpp_and_tag_sift.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SURF" href='tag_surf.html'>SURF</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2118,68 +2015,10 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Trie" href='tag_trie.html'>Trie</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Trie&quot;" href='language_php_and_tag_trie.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Receiver Operating Characteristics" href='tag_receiver_operating_characteristics.html'>Receiv</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Matlab&quot; and tag &quot;Receiver Operating Characteristics&quot;" href='language_matlab_and_tag_receiver_operating_characteristics.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Machine Learning" href='tag_machine_learning.html'>Machin</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2234,10 +2073,10 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a></b>
+                                <b><a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2263,10 +2102,39 @@ class=parameter>../CljMustache/cljmustache.tex</span>}</li></ul></p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a></b>
+                                <b><a title="Machine Learning" href='tag_machine_learning.html'>Machin</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">

@@ -137,49 +137,40 @@ doc&shy;umented prob&shy;lem, so I could take some short&shy;cuts.</p>
 target='_blank'>Ke&shy;pler's equa&shy;tion</a> does not have an an&shy;alyt&shy;ical so&shy;lu&shy;tion, but it is easy
 ap&shy;ply in the "op&shy;po&shy;site" di&shy;rec&shy;tion. Here an ap&shy;prox&shy;imate so&shy;lu&shy;tion is
 cre&shy;ated. First an even sam&shy;pling of true anoma&shy;lies is gen&shy;er&shy;ated, cov&shy;er&shy;ing the whole
-360&deg; or&shy;bit ro&shy;ta&shy;tion:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	&theta; = 0 ... 2 &pi;
-<span style='float: right; margin-right: 10px'>(1)</span></ul>
+360&deg; or&shy;bit ro&shy;ta&shy;tion:<ul style='padding-left: 60px; list-style: disc outside none'>	&theta; = 0 ... 2
+&pi;<span style='float: right; margin-right: 10px'>(1)</span></ul>
 
             <p>Next cor&shy;re&shy;spond&shy;ing ec&shy;cen&shy;tric anomaly E is cal&shy;cu&shy;lated from &theta; and the
-or&shy;bit's ec&shy;cen&shy;tric&shy;ity e:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	E = atan2(&radic;<span style="text-decoration:overline;">1 - e&nbsp;</span> &middot; sin(&theta; / 2), &radic;<span
-style="text-decoration:overline;">1 + e&nbsp;</span> &middot; cos(&theta; / 2))
-<span style='float: right; margin-right: 10px'>(2)</span></ul></p>
+or&shy;bit's ec&shy;cen&shy;tric&shy;ity e:<ul style='padding-left: 60px; list-style: disc outside none'>	E =
+atan2(&radic;<span style="text-decoration:overline;">1 - e&nbsp;</span> &middot; sin(&theta; / 2), &radic;<span
+style="text-decoration:overline;">1 + e&nbsp;</span> &middot; cos(&theta; / 2))<span style='float: right; margin-right:
+10px'>(2)</span></ul></p>
 
 
-            <p>Mean anomaly M is cal&shy;cu&shy;lated from E by us&shy;ing Ke&shy;pler's equa&shy;tion:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	M = E - e sin E
-<span style='float: right; margin-right: 10px'>(3)</span></ul></p>
+            <p>Mean anomaly M is cal&shy;cu&shy;lated from E by us&shy;ing Ke&shy;pler's equa&shy;tion:<ul style='padding-left: 60px;
+list-style: disc outside none'>	M = E - e sin E<span style='float: right; margin-right: 10px'>(3)</span></ul></p>
 
 
             <p>The M is triv&shy;ial to cal&shy;cu&shy;late for any de&shy;sired cal&shy;en&shy;dar date, so we want to have an
 ap&shy;prox&shy;ima&shy;tion for&shy;mula &theta; = f<sub>e</sub>(M) so that pre&shy;vi&shy;ous equa&shy;tion hold
 rea&shy;son&shy;ably well. I no&shy;ticed ex&shy;per&shy;imen&shy;tally that it would be a good ap&shy;proach to
-ap&shy;prox&shy;imate
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	f'<sub>e</sub>(M) = (M - &theta;) / e
-<span style='float: right; margin-right: 10px'>(4)</span></ul>
-for e > 0, and has a some&shy;what con&shy;stant shape for small val&shy;ues of e. Then the fol&shy;low&shy;ing holds:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	&theta; = f<sub>e</sub>(M) = M - e &middot; f'<sub>e</sub>(M)
-<span style='float: right; margin-right: 10px'>(5)</span></ul></p>
+ap&shy;prox&shy;imate<ul style='padding-left: 60px; list-style: disc outside none'>	f'<sub>e</sub>(M) = (M - &theta;) /
+e<span style='float: right; margin-right: 10px'>(4)</span></ul>for e > 0, and has a some&shy;what con&shy;stant shape
+for small val&shy;ues of e. Then the fol&shy;low&shy;ing holds:<ul style='padding-left: 60px; list-style: disc outside
+none'>	&theta; = f<sub>e</sub>(M) = M - e &middot; f'<sub>e</sub>(M)<span style='float: right; margin-right:
+10px'>(5)</span></ul></p>
 
 
             <p>The ef&shy;fect of e on f'<sub>e</sub>(M) shape can be seen in Fig&shy;ure 2. Most im&shy;por&shy;tantly its
 mag&shy;ni&shy;tude is around &plusmn;2, and has val&shy;ues of ex&shy;actly zero at M = 0, M = &pi; and M = 2&pi;. Due
-to these prop&shy;er&shy;ties, it is ap&shy;prox&shy;imated by the poly&shy;no&shy;mial 
-<ul style='padding-left: 60px; list-style: disc outside none'>
-	f'<sub>e</sub>(M) &asymp; a(e) &middot; (M - pi) &middot; (M &middot; (2&pi; - M))<sup>-b(e)</sup>
-<span style='float: right; margin-right: 10px'>(6)</span></ul></p>
+to these prop&shy;er&shy;ties, it is ap&shy;prox&shy;imated by the poly&shy;no&shy;mial <ul style='padding-left: 60px;
+list-style: disc outside none'>	f'<sub>e</sub>(M) &#8594; a(e) &middot; (M - pi) &middot; (M &middot; (2&pi; -
+M))<sup>-b(e)</sup><span style='float: right; margin-right: 10px'>(6)</span></ul></p>
 
 
             <p>The shape of f'<sub>e</sub>(M) for var&shy;ious val&shy;ues of e can be seen in Fig&shy;ure 2. It is no&shy;table that
-for M &asymp; &pi; / 2 it has a value of about -2, which in&shy;di&shy;cates that &theta; > M around that re&shy;gion.
-This oc&shy;curs be&shy;cause when M &asymp; 0 the planet is clos&shy;est to the Sun, which means it has a higher
+for M &#8594; &pi; / 2 it has a value of about -2, which in&shy;di&shy;cates that &theta; > M around that re&shy;gion.
+This oc&shy;curs be&shy;cause when M &#8594; 0 the planet is clos&shy;est to the Sun, which means it has a higher
 an&shy;gu&shy;lar ve&shy;loc&shy;ity. Thus &theta; grows ini&shy;tially faster than the mean anomaly M.</p>
 
             <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
@@ -214,12 +205,12 @@ linear, and a more complex model is needed.</p>
             <p>Model ac&shy;cu&shy;racy is de&shy;ter&shy;mined by cal&shy;cu&shy;lat&shy;ing the max&shy;imum er&shy;ror from the true
 lo&shy;ca&shy;tion within the whole 360&deg; or&shy;bit. If e = 0 then the or&shy;bit would be ex&shy;actly
 cir&shy;cu&shy;lar and &theta; = M. In&shy;ter&shy;est&shy;ing cases are small val&shy;ues of e, for ex&shy;am&shy;ple
-on earth's or&shy;bit e &asymp; 0.0167. Two dif&shy;fer&shy;ent mod&shy;els are com&shy;pared in fig&shy;ures 5 and 6: a
+on earth's or&shy;bit e &#8594; 0.0167. Two dif&shy;fer&shy;ent mod&shy;els are com&shy;pared in fig&shy;ures 5 and 6: a
 sim&shy;pler model which only uses con&shy;stants a<sub>0</sub> and b<sub>0</sub> regardless of the value of e, and the
 more accurate model with e-dependent corrections.</p>
 
 
-            <p>The biggest ben&shy;efit of these cor&shy;rec&shy;tions oc&shy;cur when 0.05 < e < 0.3. When e &asymp; 0 these
+            <p>The biggest ben&shy;efit of these cor&shy;rec&shy;tions oc&shy;cur when 0.05 < e < 0.3. When e &#8594; 0 these
 corrections are small anyway, and on bigger values of e the model loses its accuracy even with these corrections. The
 ratio of simple model's maximum error and better model's error is show in Figure 4. When e = 0.1 the maximum ratio of 4
 is reached, which means that the simpler model has 300% higher maximum error than the e-corrected version.</p>
@@ -229,12 +220,12 @@ is reached, which means that the simpler model has 300% higher maximum error tha
                     <img class='figure' src='EarthOrbit_err_rate.png' alt='err_rate'/>
                 </a><br/>
                 <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
-                    <b>Figure 4</b>: The ra&shy;tio of sim&shy;pler model's er&shy;ror to e-cor&shy;rected ver&shy;sion's er&shy;ror for vary&shy;ing val&shy;ues of e. Biggest ben&shy;efit of the more ad&shy;vanced model is gained when e &asymp; 0.1.
+                    <b>Figure 4</b>: The ra&shy;tio of sim&shy;pler model's er&shy;ror to e-cor&shy;rected ver&shy;sion's er&shy;ror for vary&shy;ing val&shy;ues of e. Biggest ben&shy;efit of the more ad&shy;vanced model is gained when e &#8594; 0.1.
                 </div>
             </div>
 
             <p>Er&shy;ror rates (in de&shy;grees) and the fit&shy;ted trend curve for 0 < e < 0.1 are shown in Figure 5. Within this
-region the error seems to grow approximately linearly in respect to e, and for Earth's e &asymp; 0.0167 the maximum
+region the error seems to grow approximately linearly in respect to e, and for Earth's e &#8594; 0.0167 the maximum
 error is less than 0.1&deg;. It should be sufficient for most applications.</p>
 
             <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
@@ -246,7 +237,7 @@ error is less than 0.1&deg;. It should be sufficient for most applications.</p>
                 </div>
             </div>
 
-            <p>Er&shy;ror rates for e-val&shy;ues of up-to 10<sup>-0.5</sup> &asymp; 0.3 are show in Figure 6. In this context the
+            <p>Er&shy;ror rates for e-val&shy;ues of up-to 10<sup>-0.5</sup> &#8594; 0.3 are show in Figure 6. In this context the
 error grows in proportion to e<sup>3.09</sup>, reaching a maximum error of 6&deg; at e = 0.3. It might be too high for
 most applications, but this elliptic orbits are not common in at least our solar system. Our top-3 planets with highest
 eccentricities are Mercury (e = 0.21), Mars (e = 0.09) and Saturn (e = 0.05). Pluto has a remarkably high eccentricity
@@ -264,27 +255,17 @@ of 0.25.</p>
             <p>Af&shy;ter this model is in place, it en&shy;ables us to cal&shy;cu&shy;late Earth's lo&shy;ca&shy;tion in re&shy;spect
 to Sun in po&shy;lar co&shy;or&shy;di&shy;nates for a given times&shy;tamp. It just needs to be con&shy;verted to
 "sec&shy;onds since Jan&shy;uary 1 of this year", which is fur&shy;ther con&shy;verted to the mean anomaly M (in
-ra&shy;di&shy;ans). True anomaly &theta; is cal&shy;cu&shy;lated as
-<ul style='padding-left: 60px; list-style: disc outside none'>
-  
-	&theta; <sub>e</sub>(M) = M - e &middot; a(e) &middot; (M - pi) &middot; (M &middot; (2&pi; - M))<sup>-b(e)</sup> <br/>
-	a(e) = a<sub>0</sub> + exp(a<sub>1</sub>&middot; log(e) + a<sub>2</sub>) <br/>
-	b(e) = b<sub>0</sub> + exp(b<sub>1</sub>&middot; log(e) + b<sub>2</sub>)
-  
-<span style='float: right; margin-right: 10px'>(7)</span></ul></p>
+ra&shy;di&shy;ans). True anomaly &theta; is cal&shy;cu&shy;lated as<ul style='padding-left: 60px; list-style: disc
+outside none'>  	&theta; <sub>e</sub>(M) = M - e &middot; a(e) &middot; (M - pi) &middot; (M &middot; (2&pi; -
+M))<sup>-b(e)</sup> <br/>	a(e) = a<sub>0</sub> + exp(a<sub>1</sub>&middot; log(e) + a<sub>2</sub>) <br/>	b(e) =
+b<sub>0</sub> + exp(b<sub>1</sub>&middot; log(e) + b<sub>2</sub>)  <span style='float: right; margin-right:
+10px'>(7)</span></ul></p>
 
 
-            <p>Es&shy;ti&shy;mated pa&shy;ram&shy;eters are:
-<ul style='padding-left: 60px; list-style: disc outside none'>
-  
-	a<sub>0</sub> = 0.0804 <br/>
-	a<sub>1</sub> = 0.9869 <br/>
-	a<sub>2</sub> = 1.0123 <br/>
-	b<sub>0</sub> = -1.3848 <br/>
-	b<sub>1</sub> = 0.6143 <br/>
-	b<sub>2</sub> = -1.0715
-  
-<span style='float: right; margin-right: 10px'>(8)</span></ul></p>
+            <p>Es&shy;ti&shy;mated pa&shy;ram&shy;eters are:<ul style='padding-left: 60px; list-style: disc outside none'> 
+	a<sub>0</sub> = 0.0804 <br/>	a<sub>1</sub> = 0.9869 <br/>	a<sub>2</sub> = 1.0123 <br/>	b<sub>0</sub> = -1.3848
+<br/>	b<sub>1</sub> = 0.6143 <br/>	b<sub>2</sub> = -1.0715  <span style='float: right; margin-right:
+10px'>(8)</span></ul></p>
 
 
             <p>The next step would be to es&shy;ti&shy;mate the lo&shy;cal co&shy;or&shy;di&shy;nate sys&shy;tem from lat&shy;itude,
@@ -427,6 +408,12 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
             
                 <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
                         <tr>
+                            <td><a title="Chess video search engine" href="agadmator.html" 
+                                    >Chess video search engine</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2021&nbsp;Jun<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Satellite crash course" href="satellites.html" 
                                     >Satellite crash course</a></td>
                                 <td style="text-align: right">
@@ -450,12 +437,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2017&nbsp;Mar<span style="color: gray">)</span></td>
                         </tr>
-                        <tr>
-                            <td><a title="Mustache templates in Clojure" href="cljmustache.html" 
-                                    >Mustache templates in Clojure</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>2017&nbsp;Jan<span style="color: gray">)</span></td>
-                        </tr>
                 </table>
             
             
@@ -478,7 +459,7 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             <td><a title="Computer Vision" href="tag_computer_vision.html" 
                                     >Computer Vision</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>7<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>8<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Elasticsearch" href="tag_elasticsearch.html" 
@@ -493,14 +474,14 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="JVM" href="tag_jvm.html" 
-                                    >JVM</a></td>
+                            <td><a title="Data Structures" href="tag_data_structures.html" 
+                                    >Data Structures</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="Blog" href="tag_blog.html" 
-                                    >Blog</a></td>
+                            <td><a title="JVM" href="tag_jvm.html" 
+                                    >JVM</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
                         </tr>
@@ -523,6 +504,18 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
+                            <td><a title="Python" href="language_python.html" 
+                                    >Python</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Clojure" href="language_clojure.html" 
+                                    >Clojure</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Bash" href="language_bash.html" 
                                     >Bash</a></td>
                                 <td style="text-align: right">
@@ -533,18 +526,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                     >PHP</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Python" href="language_python.html" 
-                                    >Python</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Clojure" href="language_clojure.html" 
-                                    >Clojure</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="CUDA" href="language_cuda.html" 
@@ -572,10 +553,10 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             <b><a title="Bash" href='language_bash.html'>Bash</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="PHP" href='language_php.html'>PHP</a></b>
+                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
+                            <b><a title="PHP" href='language_php.html'>PHP</a></b>
                         </td>
                 </tr>
                     <tr>
@@ -590,17 +571,17 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;C++&quot; and tag &quot;Computer Vision&quot;" href='language_cpp_and_tag_computer_vision.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Computer Vision&quot;" href='language_clojure_and_tag_computer_vision.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -627,12 +608,12 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F86868">
-                                <a title="Language &quot;PHP&quot; and tag &quot;GitHub&quot;" href='language_php_and_tag_github.html'>3</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;Python&quot; and tag &quot;GitHub&quot;" href='language_python_and_tag_github.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;PHP&quot; and tag &quot;GitHub&quot;" href='language_php_and_tag_github.html'>3</a>
                                 
                             </td>
                     </tr>
@@ -656,12 +637,12 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Databases&quot;" href='language_bash_and_tag_databases.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Databases&quot;" href='language_php_and_tag_databases.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F86868">
                                 <a title="Language &quot;Python&quot; and tag &quot;Databases&quot;" href='language_python_and_tag_databases.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Databases&quot;" href='language_php_and_tag_databases.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -714,13 +695,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>4</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Nginx&quot;" href='language_python_and_tag_nginx.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -743,12 +724,41 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
+                                
+                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Elasticsearch&quot;" href='language_php_and_tag_elasticsearch.html'>1</a>
                                 
                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Data Structures" href='tag_data_structures.html'>Data S</a></b>
+                        </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structures&quot;" href='language_matlab_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Data Structures&quot;" href='language_cpp_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Data Structures&quot;" href='language_clojure_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Data Structures&quot;" href='language_python_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Data Structures&quot;" href='language_php_and_tag_data_structures.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -772,13 +782,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;JVM&quot;" href='language_python_and_tag_jvm.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -801,13 +811,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Docker&quot;" href='language_python_and_tag_docker.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -841,35 +851,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Data Structure" href='tag_data_structure.html'>Data S</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structure&quot;" href='language_matlab_and_tag_data_structure.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Data Structure&quot;" href='language_cpp_and_tag_data_structure.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Data Structure&quot;" href='language_php_and_tag_data_structure.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Blog" href='tag_blog.html'>Blog</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -888,13 +869,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Blog&quot;" href='language_php_and_tag_blog.html'>2</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Blog&quot;" href='language_php_and_tag_blog.html'>2</a>
+                                
                             </td>
                     </tr>
                     <tr>
@@ -917,9 +898,38 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Hyphenation&quot;" href='language_php_and_tag_hyphenation.html'>2</a>
                                 
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -936,35 +946,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1033,13 +1014,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Applied mathematics&quot;" href='language_python_and_tag_applied_mathematics.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -1052,6 +1033,35 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1091,38 +1101,9 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Architecture&quot;" href='language_bash_and_tag_architecture.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Architecture&quot;" href='language_python_and_tag_architecture.html'>1</a>
                                 
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1149,13 +1130,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Spark&quot;" href='language_python_and_tag_spark.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                     </tr>
                     <tr>
@@ -1178,8 +1159,37 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Regular Expressions&quot;" href='language_php_and_tag_regular_expressions.html'>2</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1207,41 +1217,12 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
                                 
                             </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Encryption&quot;" href='language_php_and_tag_encryption.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
                                 
                             </td>
                     </tr>
@@ -1294,13 +1275,13 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;PHP&quot; and tag &quot;Git&quot;" href='language_php_and_tag_git.html'>1</a>
+                                
                             </td>
                     </tr>
                     <tr>
@@ -1323,39 +1304,10 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Business Intelligence&quot;" href='language_python_and_tag_business_intelligence.html'>1</a>
                                 
                             </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Quadtree" href='tag_quadtree.html'>Quadtr</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Quadtree&quot;" href='language_matlab_and_tag_quadtree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Quadtree&quot;" href='language_cpp_and_tag_quadtree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
@@ -1363,16 +1315,8 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="K-d Tree" href='tag_k-d_tree.html'>K-d Tr</a></b>
+                                <b><a title="Autoencoder" href='tag_autoencoder.html'>Autoen</a></b>
                         </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;K-d Tree&quot;" href='language_matlab_and_tag_k-d_tree.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;K-d Tree&quot;" href='language_cpp_and_tag_k-d_tree.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
@@ -1380,39 +1324,18 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Delaynay Triangulation" href='tag_delaynay_triangulation.html'>Delayn</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_matlab_and_tag_delaynay_triangulation.html'>1</a>
-                                
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Delaynay Triangulation&quot;" href='language_cpp_and_tag_delaynay_triangulation.html'>1</a>
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Autoencoder&quot;" href='language_clojure_and_tag_autoencoder.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Autoencoder&quot;" href='language_python_and_tag_autoencoder.html'>1</a>
                                 
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1430,64 +1353,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;Thrust&quot;" href='language_cpp_and_tag_thrust.html'>1</a>
                                 
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
-                                
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Astronomy" href='tag_astronomy.html'>Astron</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1537,7 +1402,7 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
+                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1551,9 +1416,67 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
+                            <td style="text-align: center; background-color: #F8F8F8">
                                 
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Astronomy" href='tag_astronomy.html'>Astron</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1595,7 +1518,7 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                                <b><a title="NAT" href='tag_nat.html'>NAT</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1610,7 +1533,7 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                                 <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1632,93 +1555,6 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Backups" href='tag_backups.html'>Backup</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Mustache" href='tag_mustache.html'>Mustac</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1769,14 +1605,72 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="SURF" href='tag_surf.html'>SURF</a></b>
+                                <b><a title="Backups" href='tag_backups.html'>Backup</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="AWS" href='tag_aws.html'>AWS</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Pthreads" href='tag_pthreads.html'>Pthrea</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1806,6 +1700,35 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;C++&quot; and tag &quot;SIFT&quot;" href='language_cpp_and_tag_sift.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="SURF" href='tag_surf.html'>SURF</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2030,68 +1953,10 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Trie" href='tag_trie.html'>Trie</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;PHP&quot; and tag &quot;Trie&quot;" href='language_php_and_tag_trie.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Receiver Operating Characteristics" href='tag_receiver_operating_characteristics.html'>Receiv</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Matlab&quot; and tag &quot;Receiver Operating Characteristics&quot;" href='language_matlab_and_tag_receiver_operating_characteristics.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Machine Learning" href='tag_machine_learning.html'>Machin</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2146,10 +2011,10 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a></b>
+                                <b><a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -2175,10 +2040,39 @@ ap&shy;par&shy;ent al&shy;ti&shy;tude and az&shy;imuth can be eas&shy;ily cal&sh
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a></b>
+                                <b><a title="Machine Learning" href='tag_machine_learning.html'>Machin</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
