@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>
+        Niko's Project Corner
+    </title>
+    <meta name="description" content="Niko Nyrhil&auml;'s blog">
+    <meta name="author" content="Niko Nyrhil&auml;">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="layout.css">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    
+    <link rel="stylesheet" href="blog_main.css">
+
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="jquery.lightbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="lightbox.css" media="screen" />
+
+    <script type="text/javascript">
+        $(function() {
+            $('a.lightbox').lightbox({
+                containerResizeSpeed: 2000
+            });
+        });
+    </script>
+</head>
+<body>
+<img class="bg" src="background.jpg" alt="background"/>
+<div class="container" style="background-color: rgba(255, 255, 255, 0.85)">
+    <div class="sixteen columns">
+        <h1 style="margin: 20px; text-align: center">
+            <a href="index.html" style="color: black; text-decoration: none">Niko's Project Corner</a>
+        </h1>
+    </div>
+    <div class="two-thirds column">
+
+
+        <h3 style='margin-bottom: 4px; padding-bottom: 4px'>Language Keras and tag Computer Vision at other sites</h3>
+        <ul style='list-style-type: none; padding:0; margin-left:10px'>
+                <li><b><a href='http://en.wikipedia.org/wiki/Special:Search/Language%20Keras%20and%20tag%20Computer%20Vision' class='external' target='_blank'>Language Keras and tag Computer Vision in Wikipedia</a></b></li>
+                <li><b><a href='http://www.google.com/search?q=Language%20Keras%20and%20tag%20Computer%20Vision' class='external' target='_blank'>Language Keras and tag Computer Vision in Google</a></b></li>
+        </ul>
+        <hr width='50%' align='left' style='margin-bottom: 32px'/>
+
+    <table style="width: 98%" class=no_padding>
+            <tr>
+                <td style="vertical-align: top" colspan=2>
+                    <h3><a href='helsinkideblur.html' title="Helsinki Deblur Challenge 2021">Helsinki Deblur Challenge 2021</a></h3>
+                    <span style='color: gray'>(</span>8th December 2021<span style='color: gray'>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align: justify; vertical-align: top'>
+                    <p>The <a href='https://www.fips.fi/' class='external' target='_blank'>Finnish In&shy;verse Prob&shy;lems So&shy;ci&shy;ety</a> (FIPS) or&shy;ga&shy;nized the <a href='https://fips.fi/HDC2021.php' class='external' target='_blank'>Helsinki De&shy;blur Chal&shy;lenge 2021</a> dur&shy;ing the sum&shy;mer and fall of 2021. The chal&shy;lenge is to "de&shy;blur" (<a href='https://en.wikipedia.org/wiki/Deconvolution' class='external' target='_blank'>de&shy;con&shy;volve</a>) im&shy;ages of a known amount of blur, and run the re&shy;sult&shy;ing im&shy;age through and <a href='https://en.wikipedia.org/wiki/Optical_character_recognition' class='external' target='_blank'>OCR</a> al&shy;go&shy;rithm. De&shy;blur-re&shy;sults are scored based on how well the <a href='https://pypi.org/project/pytesseract/' class='external' target='_blank'>pytesser&shy;act</a> OCR al&shy;go&shy;rithm is able to read the text. They also kindly pro&shy;vided un&shy;blurred ver&shy;sions of the pic&shy;tures, so we can train neu&shy;ral net&shy;works us&shy;ing any su&shy;per&shy;vised learn&shy;ing meth&shy;ods at hand. The net&shy;work de&shy;scribed in this ar&shy;ti&shy;cle isn't of&shy;fi&shy;cially reg&shy;is&shy;tered to the con&shy;test, but since the eval&shy;ua&shy;tion dataset is also pub&shy;lic we can run the statis&shy;tics our&shy;selves. Hy&shy;per&shy;pa&shy;ram&shy;eter tun&shy;ing got a lot more dif&shy;fi&shy;cult once it started tak&shy;ing 12 - 24 hours to train the model. I might re-visit this pro&shy;ject later, but here its sta&shy;tus de&shy;scribed as of De&shy;cem&shy;ber 2021. Had the cur&shy;rent best net&shy;work been sub&shy;mit&shy;ted to the chal&shy;lenge, it would have ranked 7th out of the 10 (nine plus this one) par&shy;tic&shy;ipants. There is al&shy;ready a long list of known pos&shy;si&shy;ble im&shy;prove&shy;ments at the end of this ar&shy;ti&shy;cle, so stay tuned for fu&shy;ture ar&shy;ti&shy;cles.</p>
+                    <table style='margin-left: 32px;' class=no_padding>
+                        <tr>
+                            <td><b>Languages:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a  href='language_python.html'>Python</a></span>
+                            
+                                <span style='margin-left: 8px'><a  href='language_keras.html'>Keras</a></span>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td><b>Tags:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a  href='tag_computer_vision.html'>Computer Vision</a></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="text-align: right; vertical-align: top">
+                    <a href='helsinkideblur.html'>
+                        <div style='margin-left: 32px; margin-top: 14px'>
+                            <img src='helsinkideblur_thumbnail.jpg' alt="" width=64 height=64 style='
+                                box-shadow:  2px 3px 6px #224;
+                            '/>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+    </table>
+
+
+    </div>
+    
+    <div class="one-third column" style="background-color: rgba(240, 240, 255, 0.9)">
+        
+
+            
+                    <table style="margin-top: 16px; width: 100%" class=no_padding><tr><td>
+                        <h2 style="padding-left: 10px">
+                            <a title="Download all articles" href="index.html">Home</a>
+                            <a href="https://cdn.nikonyrh.org/blog/Combined.pdf" title="Download all articles">
+                                <img src="pdf.png" alt="Download all articles" style="float: right" class="pdf"/>
+                            </a>
+                        </h2>
+                    </td></tr></table>
+            
+            
+                <h3 class=navi>Navigation</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Home" href="index.html" 
+                                    >Home</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Home page<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="About" href="about.html" 
+                                    >About</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About me<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Platform" href="blogplatform.html" 
+                                    >Platform</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About this blog<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>External</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="LinkedIn" href="http://fi.linkedin.com/pub/niko-nyrhil%C3%A4/73/995/3a0?trk=shareTw" 
+                                    target="_blank" class="external" >LinkedIn</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Niko Nyrhilä<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="GitHub" href="https://github.com/nikonyrh" 
+                                    target="_blank" class="external" >GitHub</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>nikonyrh<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Stackoverflow" href="http://stackexchange.com/users/4601094/nikonyrh?tab=accounts" 
+                                    target="_blank" class="external" >Stackoverflow</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>nikonyrh<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most recent</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Helsinki Deblur Challenge 2021" href="helsinkideblur.html" 
+                                    >Helsinki Deblur Challenge 2021</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2021&nbsp;Dec<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most frequent <a href='all_tags.html'>tags</a></h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Computer Vision" href="tag_computer_vision.html" 
+                                    >Computer Vision</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>1<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most frequent <a href='all_languages.html'>languages</a></h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Keras" href="language_keras.html" 
+                                    >Keras</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>1<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Python" href="language_python.html" 
+                                    >Python</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>1<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+
+            <h3 class=navi>Co-occurrence matrix</h3>
+            <table style="margin-left: auto; margin-right: auto; width: 95%">
+                <tr>
+                    <td></td>
+                        <td style="text-align: center">
+                            <b><a title="Keras" href='language_keras.html'>Kera</a></b>
+                        </td>
+                        <td style="text-align: center">
+                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
+                        </td>
+                </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Computer Vision" href='tag_computer_vision.html'>Comput</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F80000">
+                                <a title="Language &quot;Keras&quot; and tag &quot;Computer Vision&quot;" href='language_keras_and_tag_computer_vision.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F80000">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>1</a>
+                                
+                            </td>
+                    </tr>
+            </table>
+    </div>
+</div>
+<img src="https://counter.nikonyrh.org/blog/language_keras_and_tag_computer_vision.html.gif" alt=""/>
+</body>
+</html>
+
+
