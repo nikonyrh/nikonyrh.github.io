@@ -55,6 +55,61 @@
     <table style="width: 98%" class=no_padding>
             <tr>
                 <td style="vertical-align: top" colspan=2>
+                    <h3><a href='nginxbridge.html' title="Nginx docker image for easy file access via HTTP">Nginx docker image for easy file access via HTTP</a></h3>
+                    <span style='color: gray'>(</span>16th April 2016<span style='color: gray'>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align: justify; vertical-align: top'>
+                    <p>Of&shy;ten I find my&shy;self hav&shy;ing a SSH con&shy;nec&shy;tion to a re&shy;mote server, and I'd like to re&shy;trieve some files to my own ma&shy;chine. Com&shy;mon meth&shy;ods for this in&shy;clude Win&shy;dows/Samba share, SSHFS and up&shy;load to cloud (which isn't triv&shy;ial to do via plain cURL). Here an easy-to-use al&shy;ter&shy;na&shy;tive is de&shy;scribed: a sin&shy;gle line com&shy;mand to load and run a docker im&shy;age which con&shy;tains a pre-con&shy;fig&shy;ured Ng&shy;inx in&shy;stance. Then files can be ac&shy;cessed via plain HTTP at the user-as&shy;signed port (as&shy;sum&shy;ing fire&shy;wall isn't block&shy;ing it).</p>
+                    <table style='margin-left: 32px;' class=no_padding>
+                        <tr>
+                            <td><b>Languages:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a  href='language_bash.html'>Bash</a></span>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td><b>Tags:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a  href='tag_docker.html'>Docker</a></span>
+                            
+                                <span style='margin-left: 8px'><a  href='tag_spark.html'>Spark</a></span>
+                            
+                                <span style='margin-left: 8px'><a  href='tag_nginx.html'>Nginx</a></span>
+                            
+                                <span style='margin-left: 8px'><a  href='tag_github.html'>GitHub</a></span>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td><b>GitHub:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a target="_blank" href='https://github.com/nikonyrh/docker-scripts'>nikonyrh/docker-scripts</a></span>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td><b>DockerHub:</b></td>
+                            <td>
+                                <span style='margin-left: 8px'><a target="_blank" href='https://hub.docker.com/r/nikonyrh/nginx_bridge/'>nikonyrh/nginx_bridge</a></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="text-align: right; vertical-align: top">
+                    <a href='nginxbridge.html'>
+                        <div style='margin-left: 32px; margin-top: 14px'>
+                            <img src='nginxbridge_thumbnail.jpg' alt="" width=64 height=64 style='
+                                box-shadow:  2px 3px 6px #224;
+                            '/>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top" colspan=2>
                     <h3><a href='analyticsplatform.html' title="Scalable analytics with Docker, Spark and Python">Scalable analytics with Docker, Spark and Python</a></h3>
                     <span style='color: gray'>(</span>23rd December 2015<span style='color: gray'>)</span>
                 </td>
@@ -626,43 +681,6 @@
                     </a>
                 </td>
             </tr>
-            <tr>
-                <td style="vertical-align: top" colspan=2>
-                    <h3><a href='stresstester.html' title="HTTP API load tester">HTTP API load tester</a></h3>
-                    <span style='color: gray'>(</span>3rd November 2013<span style='color: gray'>)</span>
-                </td>
-            </tr>
-            <tr>
-                <td style='text-align: justify; vertical-align: top'>
-                    <p>When de&shy;vel&shy;op&shy;ing REST&shy;ful APIs, it is im&shy;por&shy;tant to know how many re&shy;quests per min&shy;ute the end point is able to serve. Be&shy;cause of my in&shy;ter&shy;est in Ng&shy;inx, FastCGI and multi-threaded C+++, I de&shy;cided to de&shy;velop my own in-broser HTTP load tester which sup&shy;ports easy con&shy;fig&shy;ura&shy;tion, any num&shy;ber of par&shy;al&shy;lel load-gen&shy;er&shy;at&shy;ing worker threads and real-time graph&shy;ing based on jQuery pow&shy;ered High&shy;Charts li&shy;brary.</p>
-                    <table style='margin-left: 32px;' class=no_padding>
-                        <tr>
-                            <td><b>Languages:</b></td>
-                            <td>
-                                <span style='margin-left: 8px'><a  href='language_cpp.html'>C++</a></span>
-                            </td>
-                        </tr>
-                    
-                        <tr>
-                            <td><b>Tags:</b></td>
-                            <td>
-                                <span style='margin-left: 8px'><a  href='tag_fastcgi.html'>FastCGI</a></span>
-                            
-                                <span style='margin-left: 8px'><a  href='tag_jquery.html'>jQuery</a></span>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="text-align: right; vertical-align: top">
-                    <a href='stresstester.html'>
-                        <div style='margin-left: 32px; margin-top: 14px'>
-                            <img src='stresstester_thumbnail.jpg' alt="" width=64 height=64 style='
-                                box-shadow:  2px 3px 6px #224;
-                            '/>
-                        </div>
-                    </a>
-                </td>
-            </tr>
     </table>
 
         <p style="text-align: center; margin-top: 0px">[
@@ -745,6 +763,12 @@
             
                 <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
                         <tr>
+                            <td><a title="Image and video clustering with an autoencoder" href="videoclustering.html" 
+                                    >Image and video clustering w...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2022&nbsp;Jan<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Helsinki Deblur Challenge 2021" href="helsinkideblur.html" 
                                     >Helsinki Deblur Challenge 2021</a></td>
                                 <td style="text-align: right">
@@ -768,12 +792,6 @@
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2018&nbsp;Apr<span style="color: gray">)</span></td>
                         </tr>
-                        <tr>
-                            <td><a title="Benchmarking Elasticsearch and MS SQL on NYC Taxis" href="benchmarktaxiridesessql.html" 
-                                    >Benchmarking Elasticsearch a...</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>2017&nbsp;May<span style="color: gray">)</span></td>
-                        </tr>
                 </table>
             
             
@@ -790,7 +808,7 @@
                             <td><a title="Computer Vision" href="tag_computer_vision.html" 
                                     >Computer Vision</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>9<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Databases" href="tag_databases.html" 
@@ -844,7 +862,7 @@
                             <td><a title="Python" href="language_python.html" 
                                     >Python</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>7<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>8<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Clojure" href="language_clojure.html" 
@@ -865,8 +883,8 @@
                             &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="CUDA" href="language_cuda.html" 
-                                    >CUDA</a></td>
+                            <td><a title="Keras" href="language_keras.html" 
+                                    >Keras</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>3<span style="color: gray">)</span></td>
                         </tr>
@@ -916,8 +934,8 @@
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>2</a>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>3</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
