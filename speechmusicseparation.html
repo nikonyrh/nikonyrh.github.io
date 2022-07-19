@@ -212,7 +212,7 @@ fig&shy;ures 2 and 3.</p>
 
             <p>The model's sum&shy;mary is shown be&shy;low:</p>
 
-            <ul class=verbatim><li class=verbatim>___________________________________________________________________________________</li><li class=verbatim>Layer (type)            Output Shape         Params Connected to</li><li class=verbatim>===================================================================================</li><li class=verbatim>input_187 (InputLayer)          [(None, 29400, 1)]   0                                            </li><li class=verbatim>tf.math.reduce_std_15 (TFOpLamb (None,)              0           input_187[0][0]                  </li><li class=verbatim>tf.math.maximum_12 (TFOpLambda) (None,)              0           tf.math.reduce_std...</li><li class=verbatim>tf.__operators__.getitem_802 (S (None, 1, 1)         0           tf.math.maximum_12...</li><li class=verbatim>tf.math.truediv_10 (TFOpLambda) (None, 29400, 1)     0           input_187[0][0]                  </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>conv1d_547 (Conv1D)             (None, 28376, 120)   123120      tf.math.truediv_10...</li><li class=verbatim>batch_normalization_491 (BatchN (None, 28376, 120)   480         conv1d_547[0][0]                 </li><li class=verbatim>conv1d_548 (Conv1D)             (None, 28312, 59)    460259      batch_normalizatio...</li><li class=verbatim>batch_normalization_492 (BatchN (None, 28312, 59)    236         conv1d_548[0][0]                 </li><li class=verbatim>tf.__operators__.getitem_803 (S (None, 28312, 1)     0           input_187[0][0]                  </li><li class=verbatim>tf.concat_181 (TFOpLambda)      (None, 28312, 60)    0           batch_normalizatio...</li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>conv1d_549 (Conv1D)             (None, 28184, 60)    464460      tf.concat_181[0][0]              </li><li class=verbatim>tf.__operators__.getitem_804 (S (None, 28184, 60)    0           tf.concat_181[0][0]              </li><li class=verbatim>tf.__operators__.add_150 (TFOpL (None, 28184, 60)    0           conv1d_549[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_493 (BatchN (None, 28184, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_550 (Conv1D)             (None, 28056, 60)    464460      batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_805 (S (None, 28056, 60)    0           batch_normalizatio...</li><li class=verbatim>tf.__operators__.add_151 (TFOpL (None, 28056, 60)    0           conv1d_550[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_494 (BatchN (None, 28056, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_551 (Conv1D)             (None, 27928, 60)    464460      batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_806 (S (None, 27928, 60)    0           batch_normalizatio...</li><li class=verbatim>tf.__operators__.add_152 (TFOpL (None, 27928, 60)    0           conv1d_551[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_495 (BatchN (None, 27928, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_552 (Conv1D)             (None, 27864, 30)    117030      batch_normalizatio...</li><li class=verbatim>batch_normalization_496 (BatchN (None, 27864, 30)    120         conv1d_552[0][0]                 </li><li class=verbatim>conv1d_553 (Conv1D)             (None, 27864, 1)     31          batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_807 (S (None, 27864, 1)     0           input_187[0][0]                  </li><li class=verbatim>tf.math.multiply_22 (TFOpLambda (None, 27864, 1)     0           conv1d_553[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>tf.math.subtract_91 (TFOpLambda (None, 27864, 1)     0           tf.__operators__.g...</li><li class=verbatim>                                                                 tf.math.multiply_22[0][0]        </li><li class=verbatim>tf.concat_182 (TFOpLambda)      (None, 27864, 2)     0           tf.math.subtract_91[0][0]        </li><li class=verbatim>                                                                 tf.math.multiply_22[0][0]        </li><li class=verbatim>===================================================================================</li><li class=verbatim>Total params: 2,095,376</li><li class=verbatim>Trainable params: 2,094,598</li><li class=verbatim>Non-trainable params: 778</li></ul>
+            <ul class=verbatim><li class=verbatim>___________________________________________________________________________________</li><li class=verbatim>Layer (type)                    Output Shape         Params      Connected to</li><li class=verbatim>===================================================================================</li><li class=verbatim>input_187 (InputLayer)          [(None, 29400, 1)]   0                                            </li><li class=verbatim>tf.math.reduce_std_15 (TFOpLamb (None,)              0           input_187[0][0]                  </li><li class=verbatim>tf.math.maximum_12 (TFOpLambda) (None,)              0           tf.math.reduce_std...</li><li class=verbatim>tf.__operators__.getitem_802 (S (None, 1, 1)         0           tf.math.maximum_12...</li><li class=verbatim>tf.math.truediv_10 (TFOpLambda) (None, 29400, 1)     0           input_187[0][0]                  </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>conv1d_547 (Conv1D)             (None, 28376, 120)   123120      tf.math.truediv_10...</li><li class=verbatim>batch_normalization_491 (BatchN (None, 28376, 120)   480         conv1d_547[0][0]                 </li><li class=verbatim>conv1d_548 (Conv1D)             (None, 28312, 59)    460259      batch_normalizatio...</li><li class=verbatim>batch_normalization_492 (BatchN (None, 28312, 59)    236         conv1d_548[0][0]                 </li><li class=verbatim>tf.__operators__.getitem_803 (S (None, 28312, 1)     0           input_187[0][0]                  </li><li class=verbatim>tf.concat_181 (TFOpLambda)      (None, 28312, 60)    0           batch_normalizatio...</li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>conv1d_549 (Conv1D)             (None, 28184, 60)    464460      tf.concat_181[0][0]              </li><li class=verbatim>tf.__operators__.getitem_804 (S (None, 28184, 60)    0           tf.concat_181[0][0]              </li><li class=verbatim>tf.__operators__.add_150 (TFOpL (None, 28184, 60)    0           conv1d_549[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_493 (BatchN (None, 28184, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_550 (Conv1D)             (None, 28056, 60)    464460      batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_805 (S (None, 28056, 60)    0           batch_normalizatio...</li><li class=verbatim>tf.__operators__.add_151 (TFOpL (None, 28056, 60)    0           conv1d_550[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_494 (BatchN (None, 28056, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_551 (Conv1D)             (None, 27928, 60)    464460      batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_806 (S (None, 27928, 60)    0           batch_normalizatio...</li><li class=verbatim>tf.__operators__.add_152 (TFOpL (None, 27928, 60)    0           conv1d_551[0][0]                 </li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>batch_normalization_495 (BatchN (None, 27928, 60)    240         tf.__operators__.a...</li><li class=verbatim>conv1d_552 (Conv1D)             (None, 27864, 30)    117030      batch_normalizatio...</li><li class=verbatim>batch_normalization_496 (BatchN (None, 27864, 30)    120         conv1d_552[0][0]</li><li class=verbatim>conv1d_553 (Conv1D)             (None, 27864, 1)     31          batch_normalizatio...</li><li class=verbatim>tf.__operators__.getitem_807 (S (None, 27864, 1)     0           input_187[0][0]</li><li class=verbatim>tf.math.multiply_22 (TFOpLambda (None, 27864, 1)     0           conv1d_553[0][0]</li><li class=verbatim>                                                                 tf.__operators__.g...</li><li class=verbatim>tf.math.subtract_91 (TFOpLambda (None, 27864, 1)     0           tf.__operators__.g...</li><li class=verbatim>                                                                 tf.math.multiply_22[</li><li class=verbatim>tf.concat_182 (TFOpLambda)      (None, 27864, 2)     0           tf.math.subtract_91[</li><li class=verbatim>                                                                 tf.math.multiply_22[</li><li class=verbatim>===================================================================================</li><li class=verbatim>Total params: 2,095,376</li><li class=verbatim>Trainable params: 2,094,598</li><li class=verbatim>Non-trainable params: 778</li></ul>
 
             <p>The used er&shy;ror ma&shy;tric was just the plain MSE, which doesn't cor&shy;re&shy;sponds well on how the
 gen&shy;er&shy;ated sig&shy;nal sounds to a hu&shy;man ear. A bet&shy;ter stan&shy;dard would be the <a
@@ -355,6 +355,17 @@ derivates through it.</p>
                 <tr>
                     <td style="vertical-align: top">
                             <ul style="list-style: disc outside none"><li>
+                                <a href="puzzles.html">Matching puzzle pieces together</a>, 2022 Jul<br/>
+                                (Matching: Keras, Python)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="puzzles.html"><img src="puzzles_thumbnail.jpg" alt="Puzzles" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
                                 <a href="videoclustering.html">Image and video clustering with an autoencoder</a>, 2022 Jan<br/>
                                 (Matching: Keras, Python)
                             </li></ul>
@@ -394,17 +405,6 @@ derivates through it.</p>
                     </td>
                     <td>
                         <a href="mapstitcher.html"><img src="mapstitcher_thumbnail.jpg" alt="MapStitcher" width=32 height=32
-                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
-                    </td>
-                <tr>
-                    <td style="vertical-align: top">
-                            <ul style="list-style: disc outside none"><li>
-                                <a href="cartracking.html">Real-time car tracking and counting</a>, 2014 Jun<br/>
-                                (Matching: FFT)
-                            </li></ul>
-                    </td>
-                    <td>
-                        <a href="cartracking.html"><img src="cartracking_thumbnail.jpg" alt="CarTracking" width=32 height=32
                             style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
                     </td>
         </table>
@@ -479,6 +479,12 @@ derivates through it.</p>
             
                 <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
                         <tr>
+                            <td><a title="Matching puzzle pieces together" href="puzzles.html" 
+                                    >Matching puzzle pieces together</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2022&nbsp;Jul<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
                             <td><a title="Single channel speech / music separation" href="speechmusicseparation.html" 
                                     >Single channel speech / musi...</a></td>
                                 <td style="text-align: right">
@@ -495,12 +501,6 @@ derivates through it.</p>
                                     >Helsinki Deblur Challenge 2021</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>2021&nbsp;Dec<span style="color: gray">)</span></td>
-                        </tr>
-                        <tr>
-                            <td><a title="Satellite crash course" href="satellites.html" 
-                                    >Satellite crash course</a></td>
-                                <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>2021&nbsp;Jun<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Chess video search engine" href="agadmator.html" 
@@ -524,7 +524,7 @@ derivates through it.</p>
                             <td><a title="Computer Vision" href="tag_computer_vision.html" 
                                     >Computer Vision</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>11<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Databases" href="tag_databases.html" 
@@ -569,16 +569,16 @@ derivates through it.</p>
                             &nbsp;<span style="color: gray">(</span>11<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="Matlab" href="language_matlab.html" 
-                                    >Matlab</a></td>
+                            <td><a title="Python" href="language_python.html" 
+                                    >Python</a></td>
                                 <td style="text-align: right">
                             &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
-                            <td><a title="Python" href="language_python.html" 
-                                    >Python</a></td>
+                            <td><a title="Matlab" href="language_matlab.html" 
+                                    >Matlab</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>9<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
                         </tr>
                         <tr>
                             <td><a title="Clojure" href="language_clojure.html" 
@@ -602,7 +602,7 @@ derivates through it.</p>
                             <td><a title="Keras" href="language_keras.html" 
                                     >Keras</a></td>
                                 <td style="text-align: right">
-                            &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
+                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
                         </tr>
                 </table>
             
@@ -621,10 +621,10 @@ derivates through it.</p>
                             <b><a title="Clojure" href='language_clojure.html'>Cloj</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="Bash" href='language_bash.html'>Bash</a></b>
+                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
                         </td>
                         <td style="text-align: center">
-                            <b><a title="Python" href='language_python.html'>Pyth</a></b>
+                            <b><a title="Bash" href='language_bash.html'>Bash</a></b>
                         </td>
                         <td style="text-align: center">
                             <b><a title="PHP" href='language_php.html'>PHP</a></b>
@@ -646,13 +646,13 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;Computer Vision&quot;" href='language_clojure_and_tag_computer_vision.html'>1</a>
                                 
                             </td>
+                            <td style="text-align: center; background-color: #F84040">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>4</a>
+                                
+                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F86868">
-                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>3</a>
-                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -675,12 +675,12 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;GitHub&quot;" href='language_clojure_and_tag_github.html'>4</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F86868">
-                                <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;Python&quot; and tag &quot;GitHub&quot;" href='language_python_and_tag_github.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F86868">
@@ -704,12 +704,12 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;Databases&quot;" href='language_clojure_and_tag_databases.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Databases&quot;" href='language_bash_and_tag_databases.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F86868">
                                 <a title="Language &quot;Python&quot; and tag &quot;Databases&quot;" href='language_python_and_tag_databases.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Databases&quot;" href='language_bash_and_tag_databases.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
@@ -762,12 +762,12 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F84040">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>4</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Nginx&quot;" href='language_python_and_tag_nginx.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F84040">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>4</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -791,13 +791,13 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;Elasticsearch&quot;" href='language_clojure_and_tag_elasticsearch.html'>3</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Elasticsearch&quot;" href='language_php_and_tag_elasticsearch.html'>1</a>
@@ -820,13 +820,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;FFT&quot;" href='language_python_and_tag_fft.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -849,13 +849,13 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;Data Structures&quot;" href='language_clojure_and_tag_data_structures.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Data Structures&quot;" href='language_python_and_tag_data_structures.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Data Structures&quot;" href='language_php_and_tag_data_structures.html'>1</a>
@@ -879,11 +879,11 @@ derivates through it.</p>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
+                                <a title="Language &quot;Python&quot; and tag &quot;JVM&quot;" href='language_python_and_tag_jvm.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;JVM&quot;" href='language_python_and_tag_jvm.html'>1</a>
+                                <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -907,12 +907,12 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F86868">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>3</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Docker&quot;" href='language_python_and_tag_docker.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>3</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1009,14 +1009,14 @@ derivates through it.</p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a></b>
+                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1038,14 +1038,14 @@ derivates through it.</p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Field Of View" href='tag_field_of_view.html'>Field</a></b>
+                                <b><a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1110,38 +1110,9 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Applied mathematics&quot;" href='language_python_and_tag_applied_mathematics.html'>1</a>
                                 
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Visual Odometry" href='tag_visual_odometry.html'>Visual</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Matlab&quot; and tag &quot;Visual Odometry&quot;" href='language_matlab_and_tag_visual_odometry.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1197,13 +1168,42 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Architecture&quot;" href='language_python_and_tag_architecture.html'>1</a>
+                                
+                            </td>
                             <td style="text-align: center; background-color: #F89090">
                                 <a title="Language &quot;Bash&quot; and tag &quot;Architecture&quot;" href='language_bash_and_tag_architecture.html'>2</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Architecture&quot;" href='language_python_and_tag_architecture.html'>1</a>
+                            <td style="text-align: center; background-color: #F8F8F8">
                                 
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Visual Odometry" href='tag_visual_odometry.html'>Visual</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Visual Odometry&quot;" href='language_matlab_and_tag_visual_odometry.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1226,12 +1226,12 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F89090">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Spark&quot;" href='language_python_and_tag_spark.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
                                 
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1284,13 +1284,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1313,13 +1313,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;PHP&quot; and tag &quot;Encryption&quot;" href='language_php_and_tag_encryption.html'>1</a>
@@ -1345,6 +1345,35 @@ derivates through it.</p>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Business Intelligence" href='tag_business_intelligence.html'>Busine</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Business Intelligence&quot;" href='language_clojure_and_tag_business_intelligence.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Business Intelligence&quot;" href='language_python_and_tag_business_intelligence.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1386,35 +1415,6 @@ derivates through it.</p>
                     </tr>
                     <tr>
                         <td>
-                                <b><a title="Business Intelligence" href='tag_business_intelligence.html'>Busine</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Clojure&quot; and tag &quot;Business Intelligence&quot;" href='language_clojure_and_tag_business_intelligence.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Business Intelligence&quot;" href='language_python_and_tag_business_intelligence.html'>1</a>
-                                
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
                                 <b><a title="Autoencoder" href='tag_autoencoder.html'>Autoen</a></b>
                         </td>
                             <td style="text-align: center; background-color: #F8F8F8">
@@ -1429,13 +1429,13 @@ derivates through it.</p>
                                 <a title="Language &quot;Clojure&quot; and tag &quot;Autoencoder&quot;" href='language_clojure_and_tag_autoencoder.html'>1</a>
                                 
                             </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
                             <td style="text-align: center; background-color: #F8C0C0">
                                 <a title="Language &quot;Python&quot; and tag &quot;Autoencoder&quot;" href='language_python_and_tag_autoencoder.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1458,13 +1458,42 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Signal Processing&quot;" href='language_python_and_tag_signal_processing.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Signal Processing&quot;" href='language_python_and_tag_signal_processing.html'>1</a>
+                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
                                 
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1523,35 +1552,6 @@ derivates through it.</p>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                <b><a title="Redis" href='tag_redis.html'>Redis</a></b>
-                        </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8F8F8">
-                                
-                                <span style="color: #BBBBBB">0</span>
-                            </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
-                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1632,13 +1632,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1661,13 +1661,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1748,13 +1748,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
@@ -1777,13 +1777,13 @@ derivates through it.</p>
                                 
                                 <span style="color: #BBBBBB">0</span>
                             </td>
-                            <td style="text-align: center; background-color: #F8C0C0">
-                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
-                                
-                            </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
                                 <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
                             </td>
                             <td style="text-align: center; background-color: #F8F8F8">
                                 
