@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>
+        Niko's Project Corner - Bruteforcing Countdown numbers game with CUDA
+    </title>
+    <meta name="description" content="Niko Nyrhil&auml;'s blog">
+    <meta name="author" content="Niko Nyrhil&auml;">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="layout.css">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    
+    <link rel="stylesheet" href="blog_main.css">
+
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="jquery.lightbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="lightbox.css" media="screen" />
+
+    <script type="text/javascript">
+        $(function() {
+            $('a.lightbox').lightbox({
+                containerResizeSpeed: 2000
+            });
+        });
+    </script>
+</head>
+<body>
+<img class="bg" src="background.jpg" alt="background"/>
+<div class="container" style="background-color: rgba(255, 255, 255, 0.85)">
+    <div class="sixteen columns">
+        <h1 style="margin: 20px; text-align: center">
+            <a href="index.html" style="color: black; text-decoration: none">Niko's Project Corner</a>
+        </h1>
+    </div>
+    <div class="two-thirds column">
+
+
+<div style='padding-left: 25px; padding-top: 24px'>
+    <div style='width: 96%'>
+        <table style="width: 98%" class=no_padding>
+            <tr><td><h2 style="margin-bottom: 20px">Bruteforcing Countdown numbers game with CUDA</h2></td>
+            <td style="text-align: right; vertical-align: top" rowspan=2>
+                    <div style='position: relative; right: -24px'>
+                        <a title="Download PDF" href='https://cdn.nikonyrh.org/blog/Countdown.pdf'>
+                            <img alt='PDF' src='pdf.png' class='pdf'/>
+                        </a>
+                    </div>
+            </td></tr>
+            <tr><td>
+                <table style="border: none; border-collapse: collapse" class="table_td_4">
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Description</span></td>
+                            <td>
+                                Speeding up an algorithm by 31000x.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Languages</span></td>
+                            <td>
+                                
+                                    <a href='language_python.html'>Python</a><br/>
+                                    <a href='language_cuda.html'>CUDA</a><br/>
+                                    <a href='language_numba.html'>Numba</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Tags</span></td>
+                            <td>
+                                
+                                    <a href='tag_applied_mathematics.html'>Ap&shy;plied math&shy;emat&shy;ics</a><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Duration</span></td>
+                            <td>
+                                Spring 2023
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style='font-weight: bold; margin-right: 10px'>Modified</span></td>
+                            <td>
+                                19th April 2023
+                            </td>
+                        </tr>
+                </table>
+            </td></tr>
+        </table>
+
+            <div style='position: relative; height: 1px'>
+                <img src='countdown_thumbnail.jpg' alt='thumbnail' style='
+                    width:      80px;
+                    height:     80px;
+                    box-shadow: 3px 4px 8px #224;
+                    position:   absolute;
+                    bottom:     8px;
+                    right:      0px;
+                    z-index:    50
+                '/>
+            </div>
+    </div>
+    <hr style="width: 96%; text-align: left"/>
+</div>
+
+<div id='content'>
+
+            <p>Youtu&shy;ber <a href='https://www.youtube.com/@AnotherRoof' class='external' target='_blank'>An&shy;other Roof</a>
+posed an in&shy;ter&shy;est&shy;ing ques&shy;tion on his video "<a href='https://youtu.be/X-7Wev90lw4?t=2259'
+class='external' target='_blank'>The Sur&shy;pris&shy;ing Maths of Britain's Old&shy;est* Game Show</a>". The
+chal&shy;lenge was stated in the video's de&shy;scrip&shy;tion: "I want to see a list of the per&shy;cent&shy;age of
+solv&shy;able games for ALL op&shy;tions of large num&shy;bers. Like I did for the 15 op&shy;tions of the form {n, n+25,
+n+50, n+75}, but for all of them. The op&shy;tions for large num&shy;bers should be four dis&shy;tinct num&shy;bers in
+the range from 11 to 100. As I said there are 2555190 such op&shy;tions so this will re&shy;quire a clever bit of code,
+but I think it’s pos&shy;si&shy;ble!". His ref&shy;er&shy;ence Python im&shy;ple&shy;men&shy;ta&shy;tion would have
+taken 1055 days (25000 hours) of CPU time (when all four large num&shy;bers are used in the game), but with CUDA and a
+RTX 4080 card it could be solved in just 0.8 hours, or 31000x faster!</p>
+
+
+            <p>Al&shy;though, there is some con&shy;fu&shy;sion since he <a href='https://youtu.be/X-7Wev90lw4?t=2281' class='external'
+target='_blank'>says</a> that his code took 90 min&shy;utes to run per cho&shy;sen four dig&shy;its, but on my
+ex&shy;per&shy;iments with i7-6700K CPU and with&shy;out any mul&shy;ti&shy;pro&shy;cess&shy;ing I mea&shy;sured it to
+take about 0.65 sec&shy;onds per a "game" (a set of six num&shy;bers). When whe choose the re&shy;main&shy;ing two small
+num&shy;bers, there are 55 dis&shy;tinct games, so it takes just 0.65 &times; 55 = 35.6 sec&shy;onds to solve for given
+four large dig&shy;its. Mul&shy;ti&shy;ply&shy;ing this by 2.56 mil&shy;lion brings us to 1055 days, or 2.9 years. I
+guess he took into con&shy;sid&shy;er&shy;ation also the games with one, two or three large num&shy;bers se&shy;lected
+out of the four. These have 5808, 3690 and 840 op&shy;tions for the re&shy;main&shy;ing five, four or three small
+num&shy;bers. Tak&shy;ing also these into ac&shy;count, it brings the to&shy;tal es&shy;ti&shy;mated run&shy;time to 546
+years, which is close to his es&shy;ti&shy;mate of 438 years. But these vari&shy;ants con&shy;tain lots of
+du&shy;pli&shy;cate games, and fil&shy;ter&shy;ing those out drops the num&shy;ber of games from 26606 mil&shy;lion to
+"just" 208 mil&shy;lion, or a 128x re&shy;duc&shy;tion! Then the whole cal&shy;cu&shy;la&shy;tion would take "only" 4.3
+years.</p>
+
+
+            <p>The first step is to pre-cal&shy;cu&shy;late all the ways of com&shy;bin&shy;ing the six given num&shy;bers into new
+ones with bi&shy;nary op&shy;er&shy;ations. This way they can be all checked in par&shy;al&shy;lel. That
+"per&shy;mu&shy;ta&shy;tion" table was gen&shy;er&shy;ated with the fol&shy;low&shy;ing Python code (which has
+syn&shy;tax high&shy;lights in the PDF ver&shy;sion):</p>
+
+            <ul class=verbatim><li class=verbatim>def gen_perms(ix_to, used):</li><li class=verbatim>  if ix_to == 11:</li><li class=verbatim>    yield []</li><li class=verbatim>    return</li><li class=verbatim>  </li><li class=verbatim>  unused = sorted(set(range(ix_to)) - used)</li><li class=verbatim>  </li><li class=verbatim>  for i in unused:</li><li class=verbatim>    for j in unused:</li><li class=verbatim>      # The first six numbers must be sorted in descending order!</li><li class=verbatim>      if i == j or (i < 6 and j < 6 and i > j):</li><li class=verbatim>        continue</li><li class=verbatim>      </li><li class=verbatim>      for p in gen_perms(ix_to + 1, used | {i, j}):</li><li class=verbatim>        yield [[i, j, ix_to]] + p</li><li class=verbatim> </li><li class=verbatim>perms = np.array(list(gen_perms(6, set())), dtype=np.int32)</li><li class=verbatim># perms.shape == (23040, 5, 3)</li></ul>
+
+            <p>The <span class=sourcecode>perms</span> vari&shy;able has three in&shy;te&shy;ger in&shy;dices per a
+cal&shy;cu&shy;la&shy;tion "step". Since there are six num&shy;bers, there are at most five steps in the
+cal&shy;cu&shy;la&shy;tion. On a given per&shy;mu&shy;ta&shy;tion, it lists that from which in&shy;dices the
+op&shy;er&shy;ation's val&shy;ues are taken, and to which slot the re&shy;sult is writ&shy;ten. Ac&shy;tu&shy;ally
+re&shy;sults are al&shy;ways writ&shy;ten to the first free slot, so those in&shy;dices are al&shy;ways 6, 7, 8, 9 and
+10. Ex&shy;am&shy;ple per&shy;mu&shy;ta&shy;tions are shown be&shy;low.</p>
+
+            <ul class=verbatim><li class=verbatim>array([[[ 0,  1,  6], [ 2,  3,  7], [ 4,  5,  8], [ 6,  7,  9], [ 8,  9, 10]],</li><li class=verbatim>       [[ 0,  1,  6], [ 2,  3,  7], [ 4,  5,  8], [ 6,  7,  9], [ 9,  8, 10]],</li><li class=verbatim>       [[ 0,  1,  6], [ 2,  3,  7], [ 4,  5,  8], [ 6,  8,  9], [ 7,  9, 10]],</li><li class=verbatim>       ...,</li><li class=verbatim>       [[ 4,  5,  6], [ 6,  3,  7], [ 7,  2,  8], [ 8,  0,  9], [ 9,  1, 10]],</li><li class=verbatim>       [[ 4,  5,  6], [ 6,  3,  7], [ 7,  2,  8], [ 8,  1,  9], [ 0,  9, 10]],</li><li class=verbatim>       [[ 4,  5,  6], [ 6,  3,  7], [ 7,  2,  8], [ 8,  1,  9], [ 9,  0, 10]]],</li><li class=verbatim>      dtype=int32)</li></ul>
+
+            <p>It turns out that only 44.5% of these per&shy;mu&shy;ta&shy;tions de&shy;scribe an unique way of com&shy;bin&shy;ing the
+in&shy;put num&shy;bers. These can be eas&shy;ily fil&shy;tered out by check&shy;ing what is the de&shy;pen&shy;dency
+chain of the fi&shy;nal cal&shy;cu&shy;lated num&shy;ber, which is al&shy;ways stored to the in&shy;dex 10. This still
+leaves du&shy;pli&shy;cate cal&shy;cu&shy;la&shy;tions for <a href='https://en.wikipedia.org/wiki/Commutative_property'
+class='external' target='_blank'>com&shy;mu&shy;ta&shy;tive</a> op&shy;er&shy;ations of ad&shy;di&shy;tion and
+mul&shy;ti&shy;pli&shy;ca&shy;tion, but they are fil&shy;tered out ad-hoc later in the al&shy;go&shy;rithm.</p>
+
+            <ul class=verbatim><li class=verbatim>is_unique = np.ones(perms.shape[0]).astype(bool)</li><li class=verbatim>seen_deps = { }</li> <li class=verbatim>for ix in range(perms.shape[0]):</li><li class=verbatim>  perm = perms[ix]</li><li class=verbatim>  deps = { }</li><li class=verbatim>  for i in range(5):</li><li class=verbatim>    deps[perm[i,2]] = (deps.get(perm[i,0]) or (perm[i,0],)), \</li><li class=verbatim>                      (deps.get(perm[i,1]) or (perm[i,1],))</li><li class=verbatim>  </li><li class=verbatim>  if deps[10] in seen_deps:</li><li class=verbatim>    is_unique[ix] = False</li><li class=verbatim>    seen_deps[deps[10]].append(perm)</li><li class=verbatim>  else:</li><li class=verbatim>    seen_deps[deps[10]] = [perm]</li> <li class=verbatim>perms = perms[is_unique]</li><li class=verbatim># perms.shape == (10260, 5, 3)</li></ul>
+
+            <p>Here is an ex&shy;am&shy;ple of a cal&shy;cu&shy;lated de&shy;pen&shy;dency chain:</p>
+
+            <ul class=verbatim><li class=verbatim>array([[ 4,  5,  6],</li><li class=verbatim>       [ 6,  3,  7],</li><li class=verbatim>       [ 7,  2,  8],</li><li class=verbatim>       [ 8,  1,  9],</li><li class=verbatim>       [ 9,  0, 10]], dtype=int32)</li><li class=verbatim># -></li><li class=verbatim>{6:  ((4,), (5,)),</li><li class=verbatim> 7:  (((4,), (5,)), (3,)),</li><li class=verbatim> 8:  ((((4,), (5,)), (3,)), (2,)),</li><li class=verbatim> 9:  (((((4,), (5,)), (3,)), (2,)), (1,)),</li><li class=verbatim> 10: ((((((4,), (5,)), (3,)), (2,)), (1,)), (0,))}</li></ul>
+
+            <p>Some de&shy;pen&shy;dency-chains are du&shy;pli&shy;cated up-to eight times. This is one such case:</p>
+
+            <ul class=verbatim><li class=verbatim>array([[[ 0,  1,  6], [ 2,  3,  7], [ 4,  5,  8], [ 6,  7,  9], [ 8,  9, 10]],</li><li class=verbatim>       [[ 0,  1,  6], [ 2,  3,  7], [ 6,  7,  8], [ 4,  5,  9], [ 9,  8, 10]],</li><li class=verbatim>       [[ 0,  1,  6], [ 4,  5,  7], [ 2,  3,  8], [ 6,  8,  9], [ 7,  9, 10]],</li><li class=verbatim>       [[ 2,  3,  6], [ 0,  1,  7], [ 4,  5,  8], [ 7,  6,  9], [ 8,  9, 10]],</li><li class=verbatim>       [[ 2,  3,  6], [ 0,  1,  7], [ 7,  6,  8], [ 4,  5,  9], [ 9,  8, 10]],</li><li class=verbatim>       [[ 2,  3,  6], [ 4,  5,  7], [ 0,  1,  8], [ 8,  6,  9], [ 7,  9, 10]],</li><li class=verbatim>       [[ 4,  5,  6], [ 0,  1,  7], [ 2,  3,  8], [ 7,  8,  9], [ 6,  9, 10]],</li><li class=verbatim>       [[ 4,  5,  6], [ 2,  3,  7], [ 0,  1,  8], [ 8,  7,  9], [ 6,  9, 10]]],</li><li class=verbatim>      dtype=int32)</li></ul>
+
+            <p>The next step is to im&shy;ple&shy;ment the CUDA ker&shy;nels. Their code is fairly ba&shy;sic and sim&shy;ple, and we
+didn't need to re&shy;sort to more ex&shy;oc&shy;tic con&shy;structs such as <a
+href='https://numba.readthedocs.io/en/stable/cuda/intrinsics.html' class='external' target='_blank'>atomic
+op&shy;er&shy;ations</a>, <a href='https://numba.readthedocs.io/en/stable/cuda-reference/host.html#stream-management'
+class='external' target='_blank'>streams</a> or <a
+href='https://numba.readthedocs.io/en/stable/cuda-reference/kernel.html#warp-intrinsics' class='external'
+target='_blank'>warp-based vot&shy;ing</a>. But <a
+href='https://numba.readthedocs.io/en/stable/cuda/memory.html#shared-memory-and-thread-synchronization' class='external'
+target='_blank'>shared</a> and <a href='https://numba.readthedocs.io/en/stable/cuda/memory.html#local-memory'
+class='external' target='_blank'>lo&shy;cal</a> memory is used. The <span class=sourcecode>apply_op_gpu</span> applies
+one calculation step (if it is valid), and stores it to the passed <span class=sourcecode>perm</span> array. It discards
+invalid cases, which are negative numbers, too large numbers and a division which would result in a fraction.</p>
+
+            <ul class=verbatim><li class=verbatim># Setting registers=40 to get 100</li><li class=verbatim>@cuda.jit((numba.int32[:,:], numba.int32, numba.int32, numba.int32[:]),</li><li class=verbatim>          device=True, max_registers=40)</li><li class=verbatim>def apply_op_gpu(perm, i, op, state):</li><li class=verbatim>  j = perm[i,0]</li><li class=verbatim>  k = perm[i,1]</li><li class=verbatim>  a = state[j]</li><li class=verbatim>  b = state[k]</li><li class=verbatim>  val = 0</li><li class=verbatim>  </li><li class=verbatim>  if op == 0:</li><li class=verbatim>    if j < k:  # An optimization for commutative ops</li><li class=verbatim>      val = a + b</li><li class=verbatim>  elif op == 1:</li><li class=verbatim>    val = a - b</li><li class=verbatim>  elif op == 2:</li><li class=verbatim>    if j < k:  # An optimization for commutative ops</li><li class=verbatim>      val = a * b</li><li class=verbatim>      if val > 0xFFFFFF:</li><li class=verbatim>        val = 0</li><li class=verbatim>  elif b > 0 and a >= b:  # op == 3</li><li class=verbatim>    div = a // b</li><li class=verbatim>    if div * b == a:</li><li class=verbatim>      val = div</li><li class=verbatim>  </li><li class=verbatim>  if i < 4:  # We don't need to persist the result for the last operation.</li><li class=verbatim>    state[perm[i,2]] = val</li><li class=verbatim>  </li><li class=verbatim>  return val</li></ul>
+
+            <p>The <span class=sourcecode>pos&shy;si&shy;ble_tar&shy;gets_gpu</span> is ba&shy;si&shy;cally just a nested for-loop,
+test&shy;ing each of the pos&shy;si&shy;ble 4<sup>5</sup> = 1024 operation sequences. In CUDA programming threads are
+arranged into 3D <a href='https://numba.readthedocs.io/en/stable/cuda/kernels.html#thread-positioning' class='external'
+target='_blank'>grids</a>, and here the x-axis loops over games (a set of six numbers), and y-axis loops over
+permutations. The used grid has threadblock dimensions of 1 &times; 128 &times; 1, which is a nice small multiple of 32,
+which the number of active threads in a warp. We don't need to do any out-of-bounds checking with <span
+class=sourcecode>x</span>, since it is trivially matched to the first dimension of the <span
+class=sourcecode>games</span> array. The z-axis isn't used for anything.</p>
+
+            <ul class=verbatim><li class=verbatim>@cuda.jit((numba.int32[:,:], numba.int32[:,:,:], numba.int32[:,:]),</li><li class=verbatim>          max_registers=40)</li><li class=verbatim>def possible_targets_gpu(games, perms, out):</li><li class=verbatim>  # Reachable target numbers are buffered here, before writing them</li><li class=verbatim>  # out to the global memory. Note that 100 is missing from here, even</li><li class=verbatim>  # if it is a given digit. That edge-case is handled later in the code,</li><li class=verbatim>  # which calls this kernel and aggregates the results.</li><li class=verbatim>  </li><li class=verbatim>  # Also numbers 0 - 99 and 1000 - 1023 are recorded as reachable, when possible.</li><li class=verbatim>  # These are discarded later, to keep this code a bit simpler.</li><li class=verbatim>  results = cuda.shared.array(1024, numba.int32)</li><li class=verbatim>  </li><li class=verbatim>  for block_idx_y in range(0, (1024 + cuda.blockDim.y - 1) // cuda.blockDim.y):</li><li class=verbatim>    i = block_idx_y * cuda.blockDim.y + cuda.threadIdx.y</li><li class=verbatim>    if i < 1024:</li><li class=verbatim>      results[i] = 0</li><li class=verbatim>  cuda.syncthreads()</li><li class=verbatim>  </li><li class=verbatim>  x = cuda.blockDim.x * cuda.blockIdx.x + cuda.threadIdx.x</li><li class=verbatim>  y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y</li><li class=verbatim>  </li><li class=verbatim>  # This has the six input numbers + the FOUR calculated ones (the last one</li><li class=verbatim>  # is ommitted, apply_op_gpu's return value is directly used from `val`).</li><li class=verbatim>  state = cuda.local.array(10, numba.int32)</li><li class=verbatim>  for i in range(6):</li><li class=verbatim>    state[i] = games[x,i]</li><li class=verbatim>  </li><li class=verbatim>  # This holds a single permutation, as determined by `y`.</li><li class=verbatim>  perm = cuda.local.array((5,3), numba.int32)</li><li class=verbatim>  </li><li class=verbatim>  if y < perms.shape[2]:</li><li class=verbatim>    for i in range(5):</li><li class=verbatim>        for j in range(3):</li><li class=verbatim>            # Note that `perms` has been transposed before it was copied</li><li class=verbatim>            # to the device, for better read-performance.</li><li class=verbatim>            perm[i,j] = perms[i,j,y]</li><li class=verbatim>    </li><li class=verbatim>    for op0 in range(4):</li><li class=verbatim>      val = apply_op_gpu(perm, 0, op0, state)</li><li class=verbatim>      </li><li class=verbatim>      if val <= 0:   continue</li><li class=verbatim>      if val < 1024: results[val] = 1</li><li class=verbatim>      </li><li class=verbatim>      for op1 in range(4):</li><li class=verbatim>        val = apply_op_gpu(perm, 1, op1, state)</li><li class=verbatim>        </li><li class=verbatim>        if val <= 0:   continue</li><li class=verbatim>        if val < 1024: results[val] = 1</li><li class=verbatim>        </li><li class=verbatim>        for op2 in range(4):</li><li class=verbatim>          val = apply_op_gpu(perm, 2, op2, state)</li><li class=verbatim>          </li><li class=verbatim>          if val <= 0:   continue</li><li class=verbatim>          if val < 1024: results[val] = 1</li><li class=verbatim>          </li><li class=verbatim>          for op3 in range(4):</li><li class=verbatim>            val = apply_op_gpu(perm, 3, op3, state)</li><li class=verbatim>            </li><li class=verbatim>            if val <= 0:   continue</li><li class=verbatim>            if val < 1024: results[val] = 1</li><li class=verbatim>            </li><li class=verbatim>            for op4 in range(4):</li><li class=verbatim>              val = apply_op_gpu(perm, 4, op4, state)</li><li class=verbatim>              </li><li class=verbatim>              if val <= 0:   continue</li><li class=verbatim>              if val < 1024: results[val] = 1</li><li class=verbatim>  </li><li class=verbatim>  # Wait for all threads to have finished, and persist the aggregated</li><li class=verbatim>  # results into global memory.</li><li class=verbatim>  cuda.syncthreads()</li><li class=verbatim>  </li><li class=verbatim>  for block_idx_y in range(0, (1024 + cuda.blockDim.y - 1) // cuda.blockDim.y):</li><li class=verbatim>    i = block_idx_y * cuda.blockDim.y + cuda.threadIdx.y</li><li class=verbatim>    if i < 1024 and results[i] > 0:</li><li class=verbatim>      out[x,i] = 1</li></ul>
+
+            <p>The CUDA code was pro&shy;filed with the <a href='https://developer.nvidia.com/nsight-compute' class='external'
+target='_blank'>NVIDIA Nsight Com&shy;pute</a> pro&shy;filer. It has tons of fea&shy;tures, but most
+im&shy;por&shy;tantly it can au&shy;to&shy;mat&shy;ically sug&shy;gest ac&shy;tions on how to im&shy;prove the
+per&shy;for&shy;mance. For ex&shy;am&shy;ple whether the mem&shy;ory ac&shy;cess pat&shy;tern is good (co&shy;alesced),
+is too much shared mem&shy;ory be&shy;ing used or is the ker&shy;nel us&shy;ing too many reg&shy;is&shy;ters. Some
+in&shy;sights are shown in fig&shy;ures 1 - 3. Small tweaks and tricks in&shy;creased the per&shy;for&shy;mance by 46%
+from an al&shy;ready well per&shy;form&shy;ing start&shy;ing point.</p>
+
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_cuda_occupancy.png' class='lightbox'>
+                    <img class='figure' src='Countdown_cuda_occupancy.png' alt='cuda_occupancy'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 1</b>: This re&shy;port shows that the ker&shy;nel uses suf&shy;fi&shy;ciently few reg&shy;is&shy;ters, that al&shy;most 100% oc&shy;cu&shy;pancy is achieved.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_cuda_memory_utilization.png' class='lightbox'>
+                    <img class='figure' src='Countdown_cuda_memory_utilization.png' alt='cuda_memory_utilization'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 2</b>: Mem&shy;ory anal&shy;ysis shows that this part of the hard&shy;ware isn't uti&shy;lized much, us&shy;ing only less than 20% of the the&shy;oret&shy;ical peak per&shy;for&shy;mance. Maybe we could uti&shy;lize more caching, mem&shy;oiza&shy;tion or look-up ta&shy;bles?
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_cuda_pipeline_utilization.png' class='lightbox'>
+                    <img class='figure' src='Countdown_cuda_pipeline_utilization.png' alt='cuda_pipeline_utilization'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 3</b>: The com&shy;pute work&shy;load is very im&shy;bal&shy;anced, since we are only do&shy;ing in&shy;te&shy;ger arith&shy;metics. There isn't much we can do about this, ex&shy;cept maybe do some cal&shy;cu&shy;la&shy;tions on floats and cast the re&shy;sult back to in&shy;te&shy;ger?
+                </div>
+            </div>
+
+            <p>When four large num&shy;bers are used, each set of six num&shy;bers is unique from all other sets of four large
+num&shy;bers. But this isn't the case of other op&shy;tions, for ex&shy;am&shy;ple choos&shy;ing two ran&shy;dom
+num&shy;bers from sets "14, 13, 12, 11" and "15, 14, 13, 12" both con&shy;tain the set "14, 12". We can save lots of
+time by cal&shy;cu&shy;lat&shy;ing only dis&shy;tinct games of six num&shy;bers. This gives us the fol&shy;low&shy;ing
+re&shy;sults:</p>
+
+            <ul style='padding-left: 60px; list-style: disc outside none'>    <li>One large, 0.13 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets1Large.zip' class='external'
+target='_blank'>Zipped CSV</a>, <a href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets1Large.pq'
+class='external' target='_blank'>Par&shy;quet</a></li>    <li>Two large, 2.46 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets2Large.zip' class='external'
+target='_blank'>Zipped CSV</a>, <a href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets2Large.pq'
+class='external' target='_blank'>Par&shy;quet</a></li>    <li>Three large, 65.10 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets3Large.zip' class='external'
+target='_blank'>Zipped CSV</a>, <a href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets3Large.pq'
+class='external' target='_blank'>Par&shy;quet</a></li>    <li>Four large, 140.53 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets4Large.zip' class='external'
+target='_blank'>Zipped CSV</a>, <a href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets4Large.pq'
+class='external' target='_blank'>Par&shy;quet</a></li></ul>
+
+            <p>Here the most dif&shy;fi&shy;cult games are shown for one, two, three and four large num&shy;bers. To con&shy;vert this
+into a prob&shy;abil&shy;ity, the <span class=sourcecode>n_so&shy;lu&shy;tions</span> can be di&shy;vided by 900 since
+the tar&shy;get num&shy;ber is be&shy;tween 100 and 999 (in&shy;clu&shy;sive).</p>
+
+            <ul class=verbatim><li class=verbatim># 1 large</li><li class=verbatim>  A   B   C   D  E  F  n_solutions</li><li class=verbatim> 11   3   2   2  1  1           89</li><li class=verbatim> 12   3   2   2  1  1          108</li><li class=verbatim> 13   3   2   2  1  1          114</li><li class=verbatim> 14   3   2   2  1  1          131</li><li class=verbatim> 15   3   2   2  1  1          138</li><li class=verbatim> 11   4   2   2  1  1          141</li><li class=verbatim> 16   3   2   2  1  1          154</li><li class=verbatim> 11   3   3   2  1  1          157</li><li class=verbatim> 12   4   2   2  1  1          158</li><li class=verbatim> 17   3   2   2  1  1          162</li><li class=verbatim> </li><li class=verbatim># 2 large</li><li class=verbatim>  A   B   C   D  E  F  n_solutions</li><li class=verbatim> 74  73   2   2  1  1          193</li><li class=verbatim> 68  67   2   2  1  1          194</li><li class=verbatim> 86  85   2   2  1  1          195</li><li class=verbatim> 71  70   2   2  1  1          198</li><li class=verbatim> 89  88   2   2  1  1          199</li><li class=verbatim> 80  79   2   2  1  1          200</li><li class=verbatim> 92  91   2   2  1  1          200</li><li class=verbatim> 83  82   2   2  1  1          200</li><li class=verbatim> 77  76   2   2  1  1          201</li><li class=verbatim> 95  94   2   2  1  1          201</li><li class=verbatim> </li><li class=verbatim># 3 large</li><li class=verbatim>  A   B   C   D  E  F  n_solutions</li><li class=verbatim> 67  66  65   2  1  1          116</li><li class=verbatim> 67  66  65   2  1  1          116</li><li class=verbatim> 67  66  65   2  1  1          116</li><li class=verbatim> 67  66  65   2  1  1          116</li><li class=verbatim> 59  58  57   2  1  1          117</li><li class=verbatim> 59  58  57   2  1  1          117</li><li class=verbatim> 59  58  57   2  1  1          117</li><li class=verbatim> 59  58  57   2  1  1          117</li><li class=verbatim> 65  64  63   2  1  1          118</li><li class=verbatim> 65  64  63   2  1  1          118</li><li class=verbatim> </li><li class=verbatim># 4 large</li><li class=verbatim>  A   B   C   D  E  F  n_solutions</li><li class=verbatim> 97  50  49  48  1  1           82</li><li class=verbatim> 96  49  48  47  1  1           82</li><li class=verbatim> 95  49  48  47  1  1           84</li><li class=verbatim> 99  51  50  49  1  1           84</li><li class=verbatim> 93  48  47  46  1  1           85</li><li class=verbatim> 99  50  49  48  1  1           85</li><li class=verbatim> 92  47  46  45  1  1           86</li><li class=verbatim> 98  50  49  48  1  1           86</li><li class=verbatim>100  51  50  49  1  1           86</li><li class=verbatim> 95  48  47  46  1  1           87</li></ul>
+
+            <p>Out of cu&shy;rios&shy;ity, an al&shy;ter&shy;na&shy;tive ver&shy;sion of the ker&shy;nel was also
+im&shy;ple&shy;mented. Rather than only in&shy;di&shy;cat&shy;ing which num&shy;bers are reach&shy;able by one, two,
+three, four or file bi&shy;nary op&shy;er&shy;ations, these are re&shy;ported in&shy;di&shy;vid&shy;ually. These don't
+take into ac&shy;count that the tar&shy;get num&shy;ber 100 can be al&shy;ready in the game set.</p>
+
+            <ul style='padding-left: 60px; list-style: disc outside none'>    <li>Four large, 140.53 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets4Large_nsteps.zip' class='external'
+target='_blank'>Zipped CSV</a>, <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets4Large_nsteps.pq' class='external'
+target='_blank'>Par&shy;quet</a></li></ul>
+
+            <p>Games with small&shy;est and largest num&shy;ber of reach&shy;able tar&shy;gets in ex&shy;actly three bi&shy;nary
+op&shy;er&shy;ations are listed be&shy;low. Ap&shy;par&shy;ently it is im&shy;pos&shy;si&shy;ble to reach all 900
+tar&shy;gets in this case, when four large num&shy;bers are used.</p>
+
+            <ul class=verbatim><li class=verbatim> A   B   C   D   E  F  n1   n2   n3   n4   n5  n_all</li><li class=verbatim>49  48  47  25   1  1   0    4   16   70  151    160</li><li class=verbatim>48  47  46  45   1  1   0    4   18   51  110    112</li><li class=verbatim>92  47  46  45   1  1   3    8   19   52   79     86</li><li class=verbatim>68  35  34  33   1  1   3    8   19   60  107    115</li><li class=verbatim>50  49  48  25   1  1   0    5   20   60  121    124</li><li class=verbatim>...</li><li class=verbatim>34  28  25  21  10  2  10  164  738  899  900    900</li><li class=verbatim>34  28  25  19  10  2  10  160  740  898  900    900</li><li class=verbatim>37  26  23  19  10  2  10  172  740  897  900    900</li><li class=verbatim>35  27  24  21  10  2  10  159  741  899  900    900</li><li class=verbatim>34  28  27  21  10  2  10  163  752  900  899    900</li></ul>
+
+            <p>Statis&shy;tics of these re&shy;sults are plot&shy;ted in fig&shy;ures 4 - 6. They show per&shy;centile plots and
+fre&shy;quency plots. In&shy;ter&shy;est&shy;ingly the shape of <span class=sourcecode>n2</span> and <span
+class=sourcecode>n3</span> is sim&shy;ilar at Fig&shy;ure 5, ex&shy;cept their x-axis ranges are dif&shy;fer&shy;ent.
+Also <span class=sourcecode>n5</span> and <span class=sourcecode>n_all</span> are very sim&shy;ilar, which means that
+us&shy;ing 1 - 4 op&shy;er&shy;ations doesn't bring that many new reach&shy;able tar&shy;gets. Fur&shy;ther
+pat&shy;terns and cor&shy;re&shy;la&shy;tions could be stud&shy;ied on this dataset, but that isn't the fo&shy;cus of
+this ar&shy;ti&shy;cle.</p>
+
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_4large_nstep_percentiles.png' class='lightbox'>
+                    <img class='figure' src='Countdown_4large_nstep_percentiles.png' alt='4large_nstep_percentiles'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 4</b>: Per&shy;centile plots of the num&shy;ber of reach&shy;able tar&shy;gets, when us&shy;ing us&shy;ing ex&shy;actly 1 - 5 op&shy;er&shy;ations (or any). For ex&shy;am&shy;ple the me&shy;dian for two op&shy;er&shy;ations is 119, while for n_all it is 896.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_4large_nstep_percents.png' class='lightbox'>
+                    <img class='figure' src='Countdown_4large_nstep_percents.png' alt='4large_nstep_percents'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 5</b>: Fre&shy;quen&shy;cies of the num&shy;ber of reach&shy;able tar&shy;gets, when us&shy;ing us&shy;ing ex&shy;actly 1 - 5 op&shy;er&shy;ations (or any). These plots show that what num&shy;ber of tar&shy;gets is the most com&shy;mon.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_4large_nstep_percents_log.png' class='lightbox'>
+                    <img class='figure' src='Countdown_4large_nstep_percents_log.png' alt='4large_nstep_percents_log'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 6</b>: Fre&shy;quen&shy;cies of the num&shy;ber of reach&shy;able tar&shy;gets, when us&shy;ing us&shy;ing ex&shy;actly 1 - 5 op&shy;er&shy;ations (or any). The log-scale makes it eas&shy;ier to see dif&shy;fer&shy;ences be&shy;tween small num&shy;bers, for ex&shy;am&shy;ple for one op&shy;er&shy;ation it is more com&shy;mon to have the small&shy;est num&shy;ber of tar&shy;gets (zero) than the max&shy;imum (22). And with four op&shy;er&shy;ations, there is just a prob&shy;abil&shy;ity of 0.01% of reach&shy;ing all 900 tar&shy;gets (15493 / 140.53e6). Note that 100% is 10^2, since the y-axis is in per&shy;cents.
+                </div>
+            </div>
+
+            <p>The fi&shy;nal step is to ag&shy;gre&shy;gate the re&shy;sults from in&shy;di&shy;vid&shy;ual games to&shy;gether. Since
+there are 2.56 mil&shy;lion dis&shy;tinct sets of four num&shy;bers, all of these dataframes have ex&shy;actly that many
+rows. A sep&shy;arate script was used to merge cor&shy;rect re&shy;sults from in&shy;di&shy;vid&shy;ual games to each
+sets of large num&shy;bers.</p>
+
+            <b>One caveat is that what dis&shy;tri&shy;bu&shy;tion of small num&shy;bers we are us&shy;ing?</b> Here the
+sup&shy;plied ref&shy;er&shy;ence code gen&shy;er&shy;ates cor&shy;rectly all pos&shy;si&shy;ble sets, but when
+ag&shy;gre&shy;gat&shy;ing the re&shy;sults, each of them had im&shy;plic&shy;itly an uni&shy;form
+prob&shy;abil&shy;ity. Dis&shy;crepency be&shy;tween these dis&shy;tri&shy;bu&shy;tions was con&shy;firmed by a
+sim&shy;ple sim&shy;ula&shy;tion. These are for one large num&shy;ber, so five small ones are picked:
+            <ul class=verbatim><li class=verbatim>a = np.array(BuildSets1Large([100,99,98,97]))</li><li class=verbatim>a = a[:,1:]  # Strip the large number</li><li class=verbatim>c1 = collections.Counter(tuple(sorted(np.unique(a[i],return_counts=True)[1]))</li><li class=verbatim>                         for i in range(a.shape[0]))</li><li class=verbatim> </li><li class=verbatim>[(k, c1[k] / sum(c1.values())) for k in sorted(c1.keys())]</li><li class=verbatim># -></li><li class=verbatim>[((1, 1, 1, 1, 1), 0.17355),</li><li class=verbatim> ((1, 1, 1, 2),    0.57851),</li><li class=verbatim> ((1, 2, 2),       0.24793)]</li><li class=verbatim> </li><li class=verbatim># Two cards of each small number, pick five without replacement</li><li class=verbatim>small = np.repeat(np.arange(1, 11), 2)</li><li class=verbatim>b = np.vstack([np.random.choice(small, replace=False, size=5)</li><li class=verbatim>               for _ in range(int(1e5))])</li><li class=verbatim> </li><li class=verbatim>c2 = collections.Counter(tuple(sorted(np.unique(b[i], return_counts=True)[1]))</li><li class=verbatim>                         for i in range(b.shape[0]))</li><li class=verbatim>[(k, c2[k] / sum(c2.values())) for k in sorted(c2.keys())]</li><li class=verbatim># -></li><li class=verbatim>[((1, 1, 1, 1, 1), 0.52008),</li><li class=verbatim> ((1, 1, 1, 2),    0.43363),</li><li class=verbatim> ((1, 2, 2),       0.04629)]</li></ul>
+            <b>Re&shy;sults show that 52% of the time each num&shy;ber should be unique, but with Build&shy;Sets1Large the
+prob&shy;abil&shy;ity is only 17% !</b> The same is&shy;sue oc&shy;curs with sets of two, three and four large
+nub&shy;mers as well. Sadly this was no&shy;ticed only af&shy;ter the whole ar&shy;ti&shy;cle was done, and at this
+point I don't feel like re-vis&shy;it&shy;ing all the re&shy;sults, graphs and con&shy;clu&shy;sions. Since the
+un&shy;ag&shy;gre&shy;gated data from in&shy;di&shy;vid&shy;ual games is also avail&shy;able, some&shy;one else may do
+the re-ag&shy;gre&shy;ga&shy;tion and re-anal&shy;ysis. These re&shy;sults (and source code) may be used with <a
+href='https://creativecommons.org/licenses/by/4.0/' class='external' target='_blank'>Cre&shy;ative Com&shy;mons BY
+4.0</a> li&shy;cense. Any&shy;way, the <b>in&shy;cor&shy;rectly</b> ag&shy;gre&shy;gated re&shy;sults can be
+down&shy;loaded from here:
+            <ul style='padding-left: 60px; list-style: disc outside none'>    <li>One large, 2.56 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets1Large_agg.zip' class='external'
+target='_blank'>Zipped CSV</a></li>    <li>Two large, 2.56 mil&shy;lion rows: <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets2Large_agg.zip' class='external'
+target='_blank'>Zipped CSV</a></li>    <li>Three large, 2.56 mil&shy;lion rows <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets3Large_agg.zip' class='external'
+target='_blank'>Zipped CSV</a></li>    <li>Four large, 2.56 mil&shy;lion rows <a
+href='https://s3-eu-west-1.amazonaws.com/nikonyrh-public/misc/BuildSets4Large_agg.zip' class='external'
+target='_blank'>Zipped CSV</a></li></ul>
+
+            <p>The fol&shy;low&shy;ing very large ASCII table lists eas&shy;iest 10 and hard&shy;est 10 sets of four large dig&shy;its,
+for game vari&shy;ants with one, two, three or four large num&shy;bers picked. Hope&shy;fully this isn't too
+con&shy;fus&shy;ing. The prob&shy;abil&shy;ity is ap&shy;prox&shy;imate, the ac&shy;cu&shy;rate frac&shy;tion can be
+cal&shy;cu&shy;lated from <span class=sourcecode>n_sum</span> and the num&shy;ber of dis&shy;tinct small num&shy;bers.
+For ex&shy;am&shy;ple on the top row 4686705 / (5808 * 900) = 0.8965995179063361. Ap&shy;par&shy;ently the only 100%
+win&shy;ning strat&shy;egy is to pick a suit&shy;able set of four large num&shy;bers (4.44% of all
+pos&shy;si&shy;bil&shy;ities), take all of them into the game and have any two ran&shy;dom small num&shy;bers. Then any
+tar&shy;get num&shy;ber is reach&shy;able with 100% prob&shy;abil&shy;ity.</p>
+
+            <ul class=verbatim><li class=verbatim># 1 large, 5808 distinct small numbers</li><li class=verbatim> A   B   C   D  n_min  n_median  n_max    n_sum      prob</li><li class=verbatim>16  14  12  11     89       847    900  4686705  0.896600</li><li class=verbatim>16  15  12  11     89       846    900  4688817  0.897004</li><li class=verbatim>15  14  12  11     89       846    900  4689055  0.897049</li><li class=verbatim>18  16  12  11     89       847    900  4689284  0.897093</li><li class=verbatim>18  14  12  11     89       847    900  4689522  0.897138</li><li class=verbatim>18  15  12  11     89       847    900  4691634  0.897542</li><li class=verbatim>20  16  12  11     89       846    900  4692095  0.897631</li><li class=verbatim>20  14  12  11     89       846    900  4692333  0.897676</li><li class=verbatim>20  15  12  11     89       845    900  4694445  0.898080</li><li class=verbatim>20  18  12  11     89       846    900  4694912  0.898170</li><li class=verbatim>...</li><li class=verbatim>97  95  93  83    393       894    900  5078791  0.971608</li><li class=verbatim>97  94  93  83    395       894    900  5078173  0.971490</li><li class=verbatim>97  95  94  93    393       894    900  5078041  0.971465</li><li class=verbatim>97  93  87  83    395       894    900  5077498  0.971361</li><li class=verbatim>97  93  89  83    392       894    900  5077419  0.971346</li><li class=verbatim>97  95  93  87    393       894    900  5077366  0.971336</li><li class=verbatim>97  95  93  89    392       894    900  5077287  0.971321</li><li class=verbatim>97  93  91  83    353       894    900  5076949  0.971256</li><li class=verbatim>97  95  93  91    353       894    900  5076817  0.971231</li><li class=verbatim>97  94  93  87    395       894    900  5076748  0.971217</li><li class=verbatim> </li><li class=verbatim># 2 large, 3690 distinct small numbers</li><li class=verbatim> A   B   C   D  n_min  n_median  n_max    n_sum      prob</li><li class=verbatim>24  18  16  12    473       864    900  3091209  0.930807</li><li class=verbatim>24  20  16  12    478       864    900  3093851  0.931602</li><li class=verbatim>20  18  16  12    473       867    900  3100951  0.933740</li><li class=verbatim>24  16  14  12    478       867    900  3104829  0.934908</li><li class=verbatim>24  20  18  12    508       867    900  3106884  0.935527</li><li class=verbatim>20  16  14  12    501       869    900  3108878  0.936127</li><li class=verbatim>24  16  15  12    462       869    900  3110461  0.936604</li><li class=verbatim>18  16  14  12    473       870    900  3112476  0.937210</li><li class=verbatim>24  18  14  12    502       869    900  3113607  0.937551</li><li class=verbatim>32  24  16  12    478       870    900  3114634  0.937860</li><li class=verbatim>...</li><li class=verbatim>97  75  62  13    430       899    900  3281410  0.988079</li><li class=verbatim>98  75  61  13    424       899    900  3281395  0.988074</li><li class=verbatim>97  74  61  13    421       899    900  3281379  0.988070</li><li class=verbatim>97  75  58  13    428       899    900  3281272  0.988037</li><li class=verbatim>33  29  26  23    483       899    900  3281217  0.988021</li><li class=verbatim>97  75  61  13    424       899    900  3281050  0.987970</li><li class=verbatim>88  75  61  13    424       899    900  3281037  0.987967</li><li class=verbatim>93  68  55  13    417       898    900  3280971  0.987947</li><li class=verbatim>97  74  59  13    400       899    900  3280954  0.987942</li><li class=verbatim>87  74  61  13    421       899    900  3280929  0.987934</li><li class=verbatim> </li><li class=verbatim># 3 large, 840 distinct small numbers</li><li class=verbatim>  A   B   C   D  n_min  n_median  n_max   n_sum      prob</li><li class=verbatim> 80  64  48  32    403       835    897  683959  0.904708</li><li class=verbatim> 96  64  48  32    290       840    900  687770  0.909749</li><li class=verbatim> 96  80  64  48    327       845    900  688736  0.911026</li><li class=verbatim> 96  80  64  32    290       842    900  690037  0.912747</li><li class=verbatim> 99  98  97  96    135       872    900  691180  0.914259</li><li class=verbatim> 80  72  64  32    403       852    900  692502  0.916008</li><li class=verbatim> 98  97  96  95    133       871    900  692663  0.916221</li><li class=verbatim> 94  93  92  91    130       873    900  693188  0.916915</li><li class=verbatim> 95  94  93  92    131       872    900  693653  0.917530</li><li class=verbatim> 97  96  95  94    133       871    900  693919  0.917882</li><li class=verbatim>...</li><li class=verbatim>100  58  17  11    878       900    900  755828  0.999772</li><li class=verbatim>100  58  15  11    878       900    900  755790  0.999722</li><li class=verbatim>100  47  19  15    883       900    900  755788  0.999720</li><li class=verbatim>100  57  17  11    878       900    900  755787  0.999718</li><li class=verbatim>100  62  15  11    863       900    900  755782  0.999712</li><li class=verbatim>100  61  14  11    868       900    900  755775  0.999702</li><li class=verbatim>100  58  17  13    867       900    900  755774  0.999701</li><li class=verbatim>100  37  25  22    874       900    900  755772  0.999698</li><li class=verbatim>100  53  17  14    873       900    900  755766  0.999690</li><li class=verbatim>100  37  26  23    872       900    900  755762  0.999685</li><li class=verbatim> </li><li class=verbatim># 4 large, 55 distinct small numbers</li><li class=verbatim>  A   B   C   D  n_min  n_median  n_max  n_sum      prob</li><li class=verbatim> 98  97  49  48     93       804    887  40495  0.818081</li><li class=verbatim> 99  98  50  49     91       806    890  40703  0.822283</li><li class=verbatim> 99  98  97  49    120       819    890  41211  0.832545</li><li class=verbatim> 97  96  49  48     92       822    885  41311  0.834566</li><li class=verbatim> 99  98  97  96    116       831    892  41351  0.835374</li><li class=verbatim> 95  94  48  47     92       823    883  41385  0.836061</li><li class=verbatim> 94  93  47  46     91       828    879  41402  0.836404</li><li class=verbatim> 93  92  47  46     91       835    891  41440  0.837172</li><li class=verbatim> 98  50  49  48     86       828    890  41512  0.838626</li><li class=verbatim> 92  91  46  45     95       835    889  41550  0.839394</li><li class=verbatim>...</li><li class=verbatim>100  99  98  97    900       900    900  49500  1.0</li><li class=verbatim>100  98  56  13    900       900    900  49500  1.0</li><li class=verbatim>100  94  56  13    900       900    900  49500  1.0</li><li class=verbatim>100  83  54  40    900       900    900  49500  1.0</li><li class=verbatim>100  95  56  13    900       900    900  49500  1.0</li><li class=verbatim>100  82  54  40    900       900    900  49500  1.0</li><li class=verbatim>100  81  54  40    900       900    900  49500  1.0</li><li class=verbatim>100  96  56  13    900       900    900  49500  1.0</li><li class=verbatim>100  80  54  40    900       900    900  49500  1.0</li><li class=verbatim>100  79  54  40    900       900    900  49500  1.0</li></ul>
+
+            <p>These re&shy;sults are also sum&shy;ma&shy;rized in fi&shy;ugres 7 and 8. The first one uses a log&shy;arith&shy;mic
+x-axis for the per&shy;centile (be&shy;tween 0.001 and 100%), and the sec&shy;ond one uses a log&shy;arith&shy;mic
+y-axis to show what per&shy;cent of four large op&shy;tions can reach any given num&shy;ber of so&shy;lu&shy;tions. On
+the sec&shy;ond one a scat&shy;ter plot would have been bet&shy;ter, since now zero val&shy;ues are im&shy;plic&shy;itly
+filled in as the data points are con&shy;nected by lines.</p>
+
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_percentiles.png' class='lightbox'>
+                    <img class='figure' src='Countdown_percentiles.png' alt='percentiles'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 7</b>: A per&shy;centile plot for each op&shy;tion of the num&shy;ber of large num&shy;bers in the game.
+                </div>
+            </div>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_percents.png' class='lightbox'>
+                    <img class='figure' src='Countdown_percents.png' alt='percents'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 8</b>: A per&shy;cent plot for each op&shy;tion of the num&shy;ber of large num&shy;bers in the game.
+                </div>
+            </div>
+
+            <p>A lot more anal&shy;ysis could be done. For ex&shy;am&shy;ple how does the <span class=sourcecode>prob</span>
+met&shy;ric cor&shy;re&shy;late be&shy;tween sets of one, two, three or four large num&shy;bers in the game?</p>
+
+            <ul class=verbatim><li class=verbatim># Load and join data</li><li class=verbatim>cols = ['A', 'B', 'C', 'D', 'prob']</li><li class=verbatim>dfs = {i: pd.read_csv(f'BuildSets{i}Large_agg.csv')[cols]</li><li class=verbatim>            .rename(columns={'prob': f'prob{i}'})</li><li class=verbatim>       for i in [1,2,3,4]}</li><li class=verbatim> </li><li class=verbatim>df = dfs[1]</li><li class=verbatim>for i in [2,3,4]:</li><li class=verbatim>  df = df.merge(dfs[i], on=cols[:4])</li><li class=verbatim> </li><li class=verbatim># Extract a numpy array</li><li class=verbatim>prob = df[[f'prob{i}' for i in [1,2,3,4]]].values</li><li class=verbatim>np.corrcoef(prob.T).round(3)</li><li class=verbatim> </li><li class=verbatim># -></li><li class=verbatim>array([[ 1.   ,  0.345, -0.508, -0.57 ],</li><li class=verbatim>       [ 0.345,  1.   ,  0.444,  0.213],</li><li class=verbatim>       [-0.508,  0.444,  1.   ,  0.903],</li><li class=verbatim>       [-0.57 ,  0.213,  0.903,  1.   ]])</li></ul>
+
+            <p>So do&shy;ing well in games with four large num&shy;bers do very poorly if only one large and five small num&shy;bers
+are cho&shy;sen. If the num&shy;ber of large num&shy;bers is cho&shy;sen at ran&shy;dom, then we must sort the sets of
+four large num&shy;bers by the av&shy;er&shy;age prob&shy;abil&shy;ity! So we must in&shy;clude yet an other table of
+re&shy;sults, for eas&shy;iest and most dif&shy;fi&shy;cult op&shy;tions:</p>
+
+            <ul class=verbatim><li class=verbatim>  A   B   C   D     prob1     prob2     prob3     prob4  prob_avg</li><li class=verbatim> 80  64  48  32  0.945902  0.952221  0.904708  0.843960  0.911698</li><li class=verbatim> 96  64  48  32  0.947766  0.951855  0.909749  0.857535  0.916726</li><li class=verbatim> 96  80  64  48  0.954885  0.960122  0.911026  0.843556  0.917397</li><li class=verbatim> 98  97  49  48  0.959690  0.965402  0.926544  0.818081  0.917429</li><li class=verbatim> 90  81  45  36  0.947605  0.957966  0.924418  0.841374  0.917841</li><li class=verbatim> 99  98  50  49  0.959587  0.965849  0.927534  0.822283  0.918813</li><li class=verbatim> 81  54  45  36  0.944885  0.956279  0.924218  0.852808  0.919547</li><li class=verbatim> 81  63  45  36  0.946209  0.960964  0.926060  0.845717  0.919738</li><li class=verbatim> 81  72  45  36  0.945081  0.955929  0.925996  0.852768  0.919943</li><li class=verbatim> 99  98  97  96  0.968871  0.961470  0.914259  0.835374  0.919993</li><li class=verbatim>...</li><li class=verbatim>100  93  79  67  0.967251  0.981994  0.994673  1.000000  0.985980</li><li class=verbatim>100  93  78  59  0.965477  0.983066  0.995524  1.000000  0.986017</li><li class=verbatim>100  97  83  61  0.967710  0.981558  0.994862  1.000000  0.986033</li><li class=verbatim>100  93  77  58  0.965671  0.983316  0.995153  1.000000  0.986035</li><li class=verbatim>100  93  79  59  0.966544  0.982304  0.995341  1.000000  0.986047</li><li class=verbatim>100  93  77  57  0.965633  0.983357  0.995206  1.000000  0.986049</li><li class=verbatim>100  93  77  61  0.966833  0.983481  0.993944  1.000000  0.986065</li><li class=verbatim>100  97  83  59  0.967458  0.981784  0.995116  1.000000  0.986090</li><li class=verbatim>100  93  77  53  0.965935  0.983366  0.995638  1.000000  0.986235</li><li class=verbatim>100  93  77  59  0.966582  0.983578  0.994935  1.000000  0.986274</li></ul>
+            <div style='padding-top: 32px; padding-bottom: 32px; text-align: center'>
+                <a href='Countdown_probability_correlation.png' class='lightbox'>
+                    <img class='figure' src='Countdown_probability_correlation.png' alt='probability_correlation'/>
+                </a><br/>
+                <div style='padding-top: 16px; max-width: 95%; text-align: justify; margin-left: auto; margin-right: auto'>
+                    <b>Figure 9</b>: Scat&shy;ter plots be&shy;tween "solv&shy;abil&shy;ity-prob&shy;abil&shy;ities" of games with one, two or three large, against the game with four large num&shy;bers. Some num&shy;bers are sur&shy;pris&shy;ingly good when only one of them is used, so that both prob1 and prob4 are si&shy;mul&shy;ta&shy;ne&shy;ously high.
+                </div>
+            </div>
+    
+    
+    
+
+        <hr/>
+        <h4>Related blog posts:</h4>
+        <table style="border: none; margin-left: 5%; width: 95%; margin-bottom: 20px">
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="satellites.html">Satellite crash course</a>, 2021 Jun<br/>
+                                (Matching: Applied mathematics, Python)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="satellites.html"><img src="satellites_thumbnail.jpg" alt="Satellites" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="torusgravity.html">Simulating gravitational field near a torus</a>, 2016 Apr<br/>
+                                (Matching: Applied mathematics)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="torusgravity.html"><img src="torusgravity_thumbnail.jpg" alt="TorusGravity" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="bananagrams1.html">Cheating at Bananagrams with real-time AI, part 1</a>, 2023 Apr<br/>
+                                (Matching: Python)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="bananagrams1.html"><img src="bananagrams1_thumbnail.jpg" alt="Bananagrams1" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="stablediffusionbasics.html">Introduction to Stable Diffusion's parameters</a>, 2022 Nov<br/>
+                                (Matching: Python)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="stablediffusionbasics.html"><img src="stablediffusionbasics_thumbnail.jpg" alt="StableDiffusionBasics" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+                <tr>
+                    <td style="vertical-align: top">
+                            <ul style="list-style: disc outside none"><li>
+                                <a href="earthorbit.html">Approximating planets' orbits in closed-form</a>, 2014 Oct<br/>
+                                (Matching: Applied mathematics)
+                            </li></ul>
+                    </td>
+                    <td>
+                        <a href="earthorbit.html"><img src="earthorbit_thumbnail.jpg" alt="EarthOrbit" width=32 height=32
+                            style="margin: 4px; box-shadow:  2px 3px 6px #224; margin"/></a>
+                    </td>
+        </table>
+</div>
+
+
+    </div>
+    
+    <div class="one-third column" style="background-color: rgba(240, 240, 255, 0.9)">
+        
+
+            
+                    <table style="margin-top: 16px; width: 100%" class=no_padding><tr><td>
+                        <h2 style="padding-left: 10px">
+                            <a title="Download all articles" href="index.html">Home</a>
+                            <a href="https://cdn.nikonyrh.org/blog/Combined.pdf" title="Download all articles">
+                                <img src="pdf.png" alt="Download all articles" style="float: right" class="pdf"/>
+                            </a>
+                        </h2>
+                    </td></tr></table>
+            
+            
+                <h3 class=navi>Navigation</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Home" href="index.html" 
+                                    >Home</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Home page<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="About" href="about.html" 
+                                    >About</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About me<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Platform" href="blogplatform.html" 
+                                    >Platform</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>About this blog<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>External</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="LinkedIn" href="http://fi.linkedin.com/pub/niko-nyrhil%C3%A4/73/995/3a0?trk=shareTw" 
+                                    target="_blank" class="external" >LinkedIn</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>Niko Nyrhilä<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="GitHub" href="https://github.com/nikonyrh" 
+                                    target="_blank" class="external" >GitHub</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>nikonyrh<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Stackoverflow" href="http://stackexchange.com/users/4601094/nikonyrh?tab=accounts" 
+                                    target="_blank" class="external" >Stackoverflow</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>nikonyrh<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most recent</h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Bruteforcing Countdown numbers game with CUDA" href="countdown.html" 
+                                    >Bruteforcing Countdown numbe...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2023&nbsp;Apr<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Cheating at Bananagrams with real-time AI, part 1" href="bananagrams1.html" 
+                                    >Cheating at Bananagrams with...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2023&nbsp;Apr<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Introduction to Stable Diffusion's parameters" href="stablediffusionbasics.html" 
+                                    >Introduction to Stable Diffu...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2022&nbsp;Nov<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Matching puzzle pieces together" href="puzzles.html" 
+                                    >Matching puzzle pieces together</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2022&nbsp;Jul<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Single channel speech / music separation" href="speechmusicseparation.html" 
+                                    >Single channel speech / musi...</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>2022&nbsp;Feb<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most frequent <a href='all_tags.html'>tags</a></h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Computer Vision" href="tag_computer_vision.html" 
+                                    >Computer Vision</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>13<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="GitHub" href="tag_github.html" 
+                                    >GitHub</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>12<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Databases" href="tag_databases.html" 
+                                    >Databases</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>9<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Elasticsearch" href="tag_elasticsearch.html" 
+                                    >Elasticsearch</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="FFT" href="tag_fft.html" 
+                                    >FFT</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Rendering" href="tag_rendering.html" 
+                                    >Rendering</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>5<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Applied mathematics" href="tag_applied_mathematics.html" 
+                                    >Applied mathematics</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>4<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+            
+                <h3 class=navi>Most frequent <a href='all_languages.html'>languages</a></h3>
+            
+                <table style="margin-left: 3%; margin-right: 3%; width: 94%" class=no_padding>
+                        <tr>
+                            <td><a title="Python" href="language_python.html" 
+                                    >Python</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>13<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="C++" href="language_cpp.html" 
+                                    >C++</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>11<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Matlab" href="language_matlab.html" 
+                                    >Matlab</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>10<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Keras" href="language_keras.html" 
+                                    >Keras</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Clojure" href="language_clojure.html" 
+                                    >Clojure</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="Bash" href="language_bash.html" 
+                                    >Bash</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                        <tr>
+                            <td><a title="PHP" href="language_php.html" 
+                                    >PHP</a></td>
+                                <td style="text-align: right">
+                            &nbsp;<span style="color: gray">(</span>6<span style="color: gray">)</span></td>
+                        </tr>
+                </table>
+            
+
+            <h3 class=navi>Co-occurrence matrix</h3>
+            <table style="margin-left: auto; margin-right: auto; width: 95%">
+                <tr>
+                    <td></td>
+                        <td style="text-align: center">
+                            <a title="Matlab" href='language_matlab.html'>Matl</a>
+                        </td>
+                        <td style="text-align: center">
+                            <a title="Python" href='language_python.html'>Pyth</a>
+                        </td>
+                        <td style="text-align: center">
+                            <a title="C++" href='language_cpp.html'>C++</a>
+                        </td>
+                        <td style="text-align: center">
+                            <a title="Clojure" href='language_clojure.html'>Cloj</a>
+                        </td>
+                        <td style="text-align: center">
+                            <a title="Bash" href='language_bash.html'>Bash</a>
+                        </td>
+                        <td style="text-align: center">
+                            <a title="Keras" href='language_keras.html'>Kera</a>
+                        </td>
+                </tr>
+                    <tr>
+                        <td>
+                                <a title="Computer Vision" href='tag_computer_vision.html'>Comput</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F80000">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Computer Vision&quot;" href='language_matlab_and_tag_computer_vision.html'>6</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F80000">
+                                <a title="Language &quot;Python&quot; and tag &quot;Computer Vision&quot;" href='language_python_and_tag_computer_vision.html'>6</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;Computer Vision&quot;" href='language_cpp_and_tag_computer_vision.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Computer Vision&quot;" href='language_clojure_and_tag_computer_vision.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F82020">
+                                <a title="Language &quot;Keras&quot; and tag &quot;Computer Vision&quot;" href='language_keras_and_tag_computer_vision.html'>5</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="GitHub" href='tag_github.html'>GitHub</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Python&quot; and tag &quot;GitHub&quot;" href='language_python_and_tag_github.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;GitHub&quot;" href='language_cpp_and_tag_github.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F84040">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;GitHub&quot;" href='language_clojure_and_tag_github.html'>4</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;GitHub&quot;" href='language_bash_and_tag_github.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Databases" href='tag_databases.html'>Databa</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Python&quot; and tag &quot;Databases&quot;" href='language_python_and_tag_databases.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Databases&quot;" href='language_cpp_and_tag_databases.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Databases&quot;" href='language_clojure_and_tag_databases.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Databases&quot;" href='language_bash_and_tag_databases.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Rendering" href='tag_rendering.html'>Render</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Rendering&quot;" href='language_matlab_and_tag_rendering.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;Rendering&quot;" href='language_cpp_and_tag_rendering.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Nginx" href='tag_nginx.html'>Nginx</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Nginx&quot;" href='language_python_and_tag_nginx.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F84040">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Nginx&quot;" href='language_bash_and_tag_nginx.html'>4</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Autoencoder" href='tag_autoencoder.html'>Autoen</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Python&quot; and tag &quot;Autoencoder&quot;" href='language_python_and_tag_autoencoder.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Autoencoder&quot;" href='language_clojure_and_tag_autoencoder.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Keras&quot; and tag &quot;Autoencoder&quot;" href='language_keras_and_tag_autoencoder.html'>2</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Elasticsearch" href='tag_elasticsearch.html'>Elasti</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Python&quot; and tag &quot;Elasticsearch&quot;" href='language_python_and_tag_elasticsearch.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Elasticsearch&quot;" href='language_clojure_and_tag_elasticsearch.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="FFT" href='tag_fft.html'>FFT</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;FFT&quot;" href='language_matlab_and_tag_fft.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;FFT&quot;" href='language_python_and_tag_fft.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;FFT&quot;" href='language_cpp_and_tag_fft.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Keras&quot; and tag &quot;FFT&quot;" href='language_keras_and_tag_fft.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Data Structures" href='tag_data_structures.html'>Data S</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Data Structures&quot;" href='language_matlab_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Data Structures&quot;" href='language_python_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Data Structures&quot;" href='language_cpp_and_tag_data_structures.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Data Structures&quot;" href='language_clojure_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Keras&quot; and tag &quot;Data Structures&quot;" href='language_keras_and_tag_data_structures.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="JVM" href='tag_jvm.html'>JVM</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;JVM&quot;" href='language_python_and_tag_jvm.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;JVM&quot;" href='language_clojure_and_tag_jvm.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;JVM&quot;" href='language_bash_and_tag_jvm.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Docker" href='tag_docker.html'>Docker</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Docker&quot;" href='language_python_and_tag_docker.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Docker&quot;" href='language_bash_and_tag_docker.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="FastCGI" href='tag_fastcgi.html'>FastCG</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F86868">
+                                <a title="Language &quot;C++&quot; and tag &quot;FastCGI&quot;" href='language_cpp_and_tag_fastcgi.html'>3</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Applied mathematics" href='tag_applied_mathematics.html'>Applie</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Applied mathematics&quot;" href='language_matlab_and_tag_applied_mathematics.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Python&quot; and tag &quot;Applied mathematics&quot;" href='language_python_and_tag_applied_mathematics.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Field Of View" href='tag_field_of_view.html'>Field</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Field Of View&quot;" href='language_matlab_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Field Of View&quot;" href='language_cpp_and_tag_field_of_view.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Omnidirectional Camera" href='tag_omnidirectional_camera.html'>Omnidi</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_matlab_and_tag_omnidirectional_camera.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Omnidirectional Camera&quot;" href='language_cpp_and_tag_omnidirectional_camera.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Affine Transformation" href='tag_affine_transformation.html'>Affine</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Affine Transformation&quot;" href='language_matlab_and_tag_affine_transformation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Affine Transformation&quot;" href='language_cpp_and_tag_affine_transformation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Master's Thesis" href='tag_master_s_thesis.html'>Master</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Master's Thesis&quot;" href='language_matlab_and_tag_master_s_thesis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Master's Thesis&quot;" href='language_cpp_and_tag_master_s_thesis.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Architecture" href='tag_architecture.html'>Archit</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Architecture&quot;" href='language_python_and_tag_architecture.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Architecture&quot;" href='language_bash_and_tag_architecture.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Visual Odometry" href='tag_visual_odometry.html'>Visual</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Visual Odometry&quot;" href='language_matlab_and_tag_visual_odometry.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;C++&quot; and tag &quot;Visual Odometry&quot;" href='language_cpp_and_tag_visual_odometry.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Spark" href='tag_spark.html'>Spark</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Spark&quot;" href='language_python_and_tag_spark.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Spark&quot;" href='language_bash_and_tag_spark.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Blog" href='tag_blog.html'>Blog</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Blog&quot;" href='language_clojure_and_tag_blog.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Hyphenation" href='tag_hyphenation.html'>Hyphen</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F89090">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Hyphenation&quot;" href='language_clojure_and_tag_hyphenation.html'>2</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Stack Overflow" href='tag_stack_overflow.html'>Stack</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Stack Overflow&quot;" href='language_python_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Stack Overflow&quot;" href='language_cpp_and_tag_stack_overflow.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="SQL" href='tag_sql.html'>SQL</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SQL&quot;" href='language_cpp_and_tag_sql.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;SQL&quot;" href='language_clojure_and_tag_sql.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Business Intelligence" href='tag_business_intelligence.html'>Busine</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Business Intelligence&quot;" href='language_python_and_tag_business_intelligence.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Business Intelligence&quot;" href='language_clojure_and_tag_business_intelligence.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Signal Processing" href='tag_signal_processing.html'>Signal</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Signal Processing&quot;" href='language_python_and_tag_signal_processing.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Keras&quot; and tag &quot;Signal Processing&quot;" href='language_keras_and_tag_signal_processing.html'>1</a>
+                                
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Encryption" href='tag_encryption.html'>Encryp</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Encryption&quot;" href='language_bash_and_tag_encryption.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Git" href='tag_git.html'>Git</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Git&quot;" href='language_clojure_and_tag_git.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Stable Diffusion" href='tag_stable_diffusion.html'>Stable</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Stable Diffusion&quot;" href='language_python_and_tag_stable_diffusion.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Redis" href='tag_redis.html'>Redis</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Python&quot; and tag &quot;Redis&quot;" href='language_python_and_tag_redis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Thrust" href='tag_thrust.html'>Thrust</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Thrust&quot;" href='language_cpp_and_tag_thrust.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Kibana" href='tag_kibana.html'>Kibana</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Clojure&quot; and tag &quot;Kibana&quot;" href='language_clojure_and_tag_kibana.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Astronomy" href='tag_astronomy.html'>Astron</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Astronomy&quot;" href='language_matlab_and_tag_astronomy.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Mustache" href='tag_mustache.html'>Mustac</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Mustache&quot;" href='language_cpp_and_tag_mustache.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="NAT" href='tag_nat.html'>NAT</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;NAT&quot;" href='language_bash_and_tag_nat.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="jQuery" href='tag_jquery.html'>jQuery</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;jQuery&quot;" href='language_cpp_and_tag_jquery.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="SSH" href='tag_ssh.html'>SSH</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;SSH&quot;" href='language_bash_and_tag_ssh.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Happyhttp" href='tag_happyhttp.html'>Happyh</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Happyhttp&quot;" href='language_cpp_and_tag_happyhttp.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Backups" href='tag_backups.html'>Backup</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;Backups&quot;" href='language_bash_and_tag_backups.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Pthreads" href='tag_pthreads.html'>Pthrea</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Pthreads&quot;" href='language_cpp_and_tag_pthreads.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="AWS" href='tag_aws.html'>AWS</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Bash&quot; and tag &quot;AWS&quot;" href='language_bash_and_tag_aws.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="SIFT" href='tag_sift.html'>SIFT</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SIFT&quot;" href='language_cpp_and_tag_sift.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="SURF" href='tag_surf.html'>SURF</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;SURF&quot;" href='language_cpp_and_tag_surf.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Conjugate Gradient Method" href='tag_conjugate_gradient_method.html'>Conjug</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Conjugate Gradient Method&quot;" href='language_cpp_and_tag_conjugate_gradient_method.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Kalman Filter" href='tag_kalman_filter.html'>Kalman</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Kalman Filter&quot;" href='language_cpp_and_tag_kalman_filter.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Particle Filter" href='tag_particle_filter.html'>Partic</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Particle Filter&quot;" href='language_cpp_and_tag_particle_filter.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Gradient Descent" href='tag_gradient_descent.html'>Gradie</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Gradient Descent&quot;" href='language_cpp_and_tag_gradient_descent.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Simultaneous Localization And Mapping" href='tag_simultaneous_localization_and_mapping.html'>Simult</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Simultaneous Localization And Mapping&quot;" href='language_cpp_and_tag_simultaneous_localization_and_mapping.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Robotics" href='tag_robotics.html'>Roboti</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;C++&quot; and tag &quot;Robotics&quot;" href='language_cpp_and_tag_robotics.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Principal Component Analysis" href='tag_principal_component_analysis.html'>Princi</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Principal Component Analysis&quot;" href='language_matlab_and_tag_principal_component_analysis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Receiver Operating Characteristics" href='tag_receiver_operating_characteristics.html'>Receiv</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Receiver Operating Characteristics&quot;" href='language_matlab_and_tag_receiver_operating_characteristics.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Linear Discriminant Analysis" href='tag_linear_discriminant_analysis.html'>Linear</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Linear Discriminant Analysis&quot;" href='language_matlab_and_tag_linear_discriminant_analysis.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Support Vector Machines" href='tag_support_vector_machines.html'>Suppor</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Support Vector Machines&quot;" href='language_matlab_and_tag_support_vector_machines.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Machine Learning" href='tag_machine_learning.html'>Machin</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Machine Learning&quot;" href='language_matlab_and_tag_machine_learning.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <a title="Discrete Fourier Transform" href='tag_discrete_fourier_transform.html'>Discre</a>
+                        </td>
+                            <td style="text-align: center; background-color: #F8C0C0">
+                                <a title="Language &quot;Matlab&quot; and tag &quot;Discrete Fourier Transform&quot;" href='language_matlab_and_tag_discrete_fourier_transform.html'>1</a>
+                                
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                            <td style="text-align: center; background-color: #F8F8F8">
+                                
+                                <span style="color: #BBBBBB">0</span>
+                            </td>
+                    </tr>
+            </table>
+    </div>
+</div>
+<img src="https://counter.nikonyrh.org/blog/countdown.html.gif" alt=""/>
+</body>
+</html>
+
+
